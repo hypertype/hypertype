@@ -1,11 +1,14 @@
 {
   "files": [],
   "include": [],
+  "compilerOptions": {
+    "baseUrl": ".."
+  },
   "references": [
-    { "path": "./app" },
-    { "path": "./core" },
-    { "path": "./domain" },
-    { "path": "./infr" },
-    { "path": "./ui" }
+//    { "path": "./app" },
+    { "path": "../packages/core" }
+//    { "path": "./domain" },
+//    { "path": "./infr" },
+//    { "path": "./ui" }
   ]
 }
