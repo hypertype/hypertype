@@ -30,7 +30,7 @@ module.exports = env => ({
         test: /\.ts/,
         loader: 'awesome-typescript-loader',
         options: {
-          configFileName: './configs/tsconfig.json',
+          configFileName: './configs/tsconfig.base.json',
         }
       },
     ]

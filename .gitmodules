@@ -1,0 +1,19 @@
+[submodule "app"]
+	path = packages/app
+	url = git@github.com:hypertype/app
+
+[submodule "core"]
+	path = packages/core
+	url = git@github.com:hypertype/core
+
+[submodule "domain"]
+	path = packages/domain
+	url = git@github.com:hypertype/domain
+
+[submodule "infr"]
+	path = packages/infr
+	url = git@github.com:hypertype/infr
+
+[submodule "ui"]
+	path = packages/ui
+	url = git@github.com:hypertype/ui
