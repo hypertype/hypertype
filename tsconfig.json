@@ -1,0 +1,18 @@
+{
+  "files": [],
+  "include": [],
+  "compilerOptions": {
+    "baseUrl": "..",
+    "composite": true,
+    "paths": {
+
+    }
+  },
+  "references": [
+    { "path": "../packages/app" },
+    { "path": "../packages/core" },
+    { "path": "../packages/domain" },
+    { "path": "../packages/infr" },
+    { "path": "../packages/ui" }
+  ]
+}
