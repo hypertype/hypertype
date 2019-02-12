@@ -1,10 +1,11 @@
 {
   "name": "@hypertype/hypertype",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "tsc -b --watch",
+    "publish:minor": "node bin/publish 1.2.0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -32,6 +33,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "npm-publish-scripts": "^4.1.16"
+    "npm-publish-scripts": "^4.1.16",
+    "shelljs": "^0.8.3"
   }
 }
