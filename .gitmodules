@@ -11,9 +11,19 @@
 	url = git@github.com:hypertype/domain
 
 [submodule "infr"]
+	path = packages/infr-node
+	url = git@github.com:hypertype/infr-node
+
+	
+[submodule "infr"]
+	path = packages/infr-browser
+	url = git@github.com:hypertype/infr-browser
+	
+	
+[submodule "infr"]
 	path = packages/infr
 	url = git@github.com:hypertype/infr
-
+	
 [submodule "ui"]
 	path = packages/ui
 	url = git@github.com:hypertype/ui
