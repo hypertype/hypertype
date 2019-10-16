@@ -1,6 +1,6 @@
 import {UI} from "./src/ui";
 import {Container} from "@hypertype/core";
-import HyperHTMLElement from "hyperhtml-element/esm";
+import {HyperHTMLElement} from "./src/hyperhtml.element";
 
 export * from "./src/component";
 export * from "./src/hyper.component";

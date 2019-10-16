@@ -54,9 +54,9 @@
   "devDependencies": {
     "@hypertype/core": "latest",
     "@hypertype/infr": "latest",
-    "@hypertype/tools": "^2.0.6",
+    "@hypertype/tools": "latest",
     "@hypertype/ui": "latest",
-    "@types/node": "^10.12.27",
+    "@types/node": "latest",
     "redux": "latest",
     "router5": "latest",
     "router5-plugin-browser": "latest"

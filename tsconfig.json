@@ -20,9 +20,6 @@
     { "path": "./packages/infr" },
     { "path": "./packages/infr-node" },
     { "path": "./packages/infr-browser" },
-    { "path": "./packages/ui" },
-  ],
-  "files": [
-
+    { "path": "./packages/ui" }
   ]
 }

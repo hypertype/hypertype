@@ -46,7 +46,8 @@
   },
   "devDependencies": {
     "@hypertype/core": "^3.0.1",
-    "@hypertype/tools": "^3.0.1"
+    "@hypertype/tools": "^3.0.1",
+    "@types/node": "latest"
   },
   "hypertype": {
     "lib": {

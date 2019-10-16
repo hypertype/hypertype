@@ -34,9 +34,9 @@
   "devDependencies": {
     "@hypertype/core": "latest",
     "@hypertype/tools": "latest",
-    "@types/node": "^12.7.2",
+    "@types/node": "latest",
     "hyperhtml-element": "latest",
-    "typescript": "^3.5.3"
+    "typescript": "latest"
   },
   "bundledDependencies": [
     "hyperhtml-element"

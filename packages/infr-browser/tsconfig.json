@@ -25,10 +25,7 @@
   ],
   "references": [
     {
-      "path": "../"
-    },
-    {
-      "path": "../../core"
+      "path": "../core"
     }
   ],
   "exclude": [

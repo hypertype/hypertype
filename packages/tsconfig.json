@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "pretty": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declarationMap": true,
+    "composite": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "declarationDir": "./dist",
+    "baseUrl": "..",
+    "target": "es6",
+    "module": "commonjs",
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "es2015",
+      "esnext",
+      "dom"
+    ]
+  },
+  "include": [
+    "index.ts"
+  ],
+  "exclude": [
+    "../dist",
+    "tests",
+    "../node_modules"
+  ]
+}

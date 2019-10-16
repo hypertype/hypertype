@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -b --watch",
-    "publish:minor": "node bin/publish 1.2.0",
+    "publish": "lerna publish patch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,8 +13,5 @@
   "devDependencies": {
     "lerna": "^3.16.4"
   },
-  "dependencies": {
-    "npm-publish-scripts": "^4.1.16",
-    "shelljs": "^0.8.3"
-  }
+  "dependencies": {}
 }
