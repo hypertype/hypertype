@@ -1,0 +1,19 @@
+{
+  "extends": "../../tools/tsconfig.base",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./dist/esm",
+    "target": "es2018",
+    "moduleResolution": "node",
+    "declarationDir": "./dist/typings",
+    "noEmitOnError": true,
+    "composite": true
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "tests",
+    "dist"
+  ]
+}

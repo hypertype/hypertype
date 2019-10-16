@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./dist/esm",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "es2018",
+    "moduleResolution": "node",
+    "declarationDir": "./dist/typings",
+    "noEmitOnError": false,
+    "composite": true,
+    "paths": {
+      "@hypertype/core": [
+        "../core"
+      ]
+    }
+  },
+  "references": [
+    {
+      "path": "../core"
+    }
+  ],
+  "include": ["common"]
+}

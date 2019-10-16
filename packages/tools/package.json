@@ -1,0 +1,60 @@
+{
+  "name": "@hypertype/tools",
+  "version": "3.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "hypertype": "build/bin.js"
+  },
+  "scripts": {
+    "deploy": "npm version patch && npm publish --access public"
+  },
+  "author": "",
+  "license": "ISC",
+  "files": [
+    "test",
+    "build"
+  ],
+  "bundledDependencies": [
+    "@types/chai",
+    "@types/node",
+    "chai",
+    "less",
+    "html-webpack-plugin",
+    "mocha-typescript",
+    "node-libs-browser",
+    "tsconfig-paths-webpack-plugin",
+    "webpack",
+    "webpack-bundle-analyzer",
+    "webpack-dev-server",
+    "webpack-merge",
+    "awesome-typescript-loader",
+    "less-loader",
+    "css-loader",
+    "string-loader"
+  ],
+  "devDependencies": {
+    "@testdeck/jest": "0.0.6",
+    "@types/chai": "^4.1.7",
+    "awesome-typescript-loader": "^5.2.1",
+    "chai": "^4.2.0",
+    "css-loader": "^2.1.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.1.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "mocha-typescript": "^1.1.17",
+    "node-libs-browser": "^2.2.0",
+    "string-loader": "0.0.1",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "typescript": "^3.3.3333",
+    "webpack": "^4.29.3",
+    "webpack-bundle-analyzer": "^3.1.0",
+    "webpack-dev-server": "^3.2.1",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "@types/node": "^11.11.3",
+    "typescript": "^3.5.3"
+  }
+}

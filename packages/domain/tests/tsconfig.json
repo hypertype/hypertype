@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "noEmitOnError": true,
+    "target": "es5"
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+  ]
+}

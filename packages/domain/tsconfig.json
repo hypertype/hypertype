@@ -1,0 +1,31 @@
+{
+  "extends": "../../tools/tsconfig.base",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./dist/esm",
+    "declarationDir": "./dist/typings",
+    "declaration": true,
+    "noEmitOnError": true,
+    "moduleResolution": "node",
+    "target": "es2018",
+    "composite": true,
+    "paths": {
+      "@hypertype/core": [
+        "../core"
+      ]
+    }
+  },
+  "references": [
+    {
+      "path": "../core"
+    }
+  ],
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "tests",
+    "node_modules",
+    "dist"
+  ]
+}

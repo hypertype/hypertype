@@ -1,0 +1,40 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "target": "es2018",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "rootDir": "./",
+    "outDir": "./dist/esm",
+    "declarationDir": "./dist/typings",
+    "noEmitOnError": true,
+    "composite": true,
+    "paths": {
+      "@hypertype/infr": [
+        "../"
+      ],
+      "@hypertype/core": [
+        "../../core"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "references": [
+    {
+      "path": "../"
+    },
+    {
+      "path": "../../core"
+    }
+  ],
+  "exclude": [
+    "../node",
+    "../node_modules",
+    "../dist",
+    "dist"
+  ]
+}

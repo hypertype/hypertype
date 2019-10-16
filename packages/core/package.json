@@ -1,0 +1,63 @@
+{
+  "name": "@hypertype/core",
+  "version": "3.0.0",
+  "description": "",
+  "main": "dist/esm/index.js",
+  "bundle": "dist/bundle/index.js",
+  "typings": "dist/typings/index.d.ts",
+  "scripts": {
+    "bundle": "hypertype lib",
+    "bundle:prod": "hypertype lib --prod",
+    "bundle:prod:stats": "hypertype lib --prod --stats",
+    "build": "tsc -b --watch",
+    "deploy": "npm version patch && npm publish",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hypertype/core.git"
+  },
+  "files": [
+    "dist",
+    "tsconfig.json"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hypertype/core/issues"
+  },
+  "homepage": "https://github.com/hypertype/core#readme",
+  "directories": {
+    "test": "tests"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tests/tsconfig.json"
+      }
+    }
+  },
+  "bundledDependencies": [
+    "rxjs",
+    "crc-32",
+    "reflect-metadata"
+  ],
+  "dependencies": {
+    "luxon": "^1.12.1"
+  },
+  "devDependencies": {
+    "@hypertype/tools": "^3.0.0",
+    "@types/luxon": "^1.12.0",
+    "@types/node": "^11.13.2",
+    "crc-32": "latest",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.5.2"
+  },
+  "hypertype": {
+    "lib": {
+      "index": "./index.ts"
+    }
+  }
+}

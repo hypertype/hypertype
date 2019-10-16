@@ -1,0 +1,30 @@
+{
+  "extends": "../../tools/tsconfig.base",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./dist/esm",
+    "declarationDir": "./dist/typings",
+    "noEmitOnError": true,
+    "composite": true,
+    "target": "es2018",
+    "paths": {
+      "@hypertype/core": [
+        "../core"
+      ]
+    }
+  },
+  "references": [
+    {
+      "path": "../core"
+    }
+  ],
+  "include": [
+    "node_modules/hyperhtml-element",
+    "**/*.ts",
+    "**/*.js"
+  ],
+  "exclude": [
+    "tests",
+    "dist"
+  ]
+}

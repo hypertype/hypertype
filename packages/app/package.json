@@ -1,0 +1,70 @@
+{
+  "name": "@hypertype/app",
+  "version": "2.0.11",
+  "description": "",
+  "main": "dist/esm/index.js",
+  "bundle": "dist/bundle/index.js",
+  "typings": "dist/typings/index.d.ts",
+  "scripts": {
+    "bundle": "hypertype lib --watch",
+    "bundle:prod": "hypertype lib --prod",
+    "build": "tsc -b --watch",
+    "deploy": "npm version patch && npm publish",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hypertype/app.git"
+  },
+  "files": [
+    "dist",
+    "tsconfig.json"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hypertype/app/issues"
+  },
+  "homepage": "https://github.com/hypertype/app#readme",
+  "directories": {
+    "test": "tests"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tests/tsconfig.json"
+      }
+    }
+  },
+  "bundledDependencies": [
+    "redux",
+    "router5",
+    "router5-plugin-browser"
+  ],
+  "dependencies": {},
+  "optionalDependencies": {
+    "redux-devtools-extension": "latest"
+  },
+  "peerDependencies": {
+    "@hypertype/core": "latest",
+    "@hypertype/infr": "latest",
+    "@hypertype/ui": "latest"
+  },
+  "devDependencies": {
+    "@hypertype/tools": "^2.0.6",
+    "@hypertype/core": "latest",
+    "@hypertype/infr": "latest",
+    "@hypertype/ui": "latest",
+    "@types/node": "^10.12.27",
+    "redux": "latest",
+    "router5": "latest",
+    "router5-plugin-browser": "latest"
+  },
+  "hypertype": {
+    "lib": {
+      "index": "./dist/esm/index.js"
+    }
+  }
+}
