@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/infr",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "",
   "main": "dist/esm/common/index.js",
   "module": "dist/esm/common/index.js",
@@ -45,8 +45,8 @@
     "@hypertype/core": "^1.2.1"
   },
   "devDependencies": {
-    "@hypertype/core": "^3.0.1",
-    "@hypertype/tools": "^3.0.1",
+    "@hypertype/core": "^3.0.2",
+    "@hypertype/tools": "^3.0.2",
     "@types/node": "latest"
   },
   "hypertype": {
