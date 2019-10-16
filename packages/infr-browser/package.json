@@ -1,0 +1,56 @@
+{
+  "name": "@hypertype/infr-browser",
+  "version": "2.0.5",
+  "description": "",
+  "main": "dist/esm/index.js",
+  "module": "dist/esm/index.js",
+  "bundle": "dist/bundle/index.js",
+  "typings": "dist/typings/index.d.ts",
+  "scripts": {
+    "bundle": "hypertype",
+    "build": "tsc -b --watch",
+    "deploy": "npm version patch && npm publish",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hypertype/infr.git"
+  },
+  "files": [
+    "dist",
+    "tsconfig.json"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hypertype/infr/issues"
+  },
+  "homepage": "https://github.com/hypertype/infr#readme",
+  "directories": {
+    "test": "tests"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tests/tsconfig.json"
+      }
+    }
+  },
+  "bundleDependencies": [],
+  "peerDependencies": {
+    "@hypertype/core": "latest",
+    "@hypertype/infr": "latest"
+  },
+  "devDependencies": {
+    "@hypertype/core": "^2.0.0",
+    "@hypertype/tools": "^2.0.0",
+    "@hypertype/infr": "^2.0.0"
+  },
+  "hypertype": {
+    "lib": {
+      "index": "index.ts"
+    }
+  }
+}

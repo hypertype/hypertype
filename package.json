@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "lerna": "^3.16.4"
   },
   "dependencies": {
     "npm-publish-scripts": "^4.1.16",
