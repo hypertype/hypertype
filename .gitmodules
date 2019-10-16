@@ -10,12 +10,12 @@
 	path = packages/domain
 	url = git@github.com:hypertype/domain
 
-[submodule "infr"]
+[submodule "infr-node"]
 	path = packages/infr-node
 	url = git@github.com:hypertype/infr-node
 
 	
-[submodule "infr"]
+[submodule "infr-browser"]
 	path = packages/infr-browser
 	url = git@github.com:hypertype/infr-browser
 	
