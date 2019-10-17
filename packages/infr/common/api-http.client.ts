@@ -8,7 +8,9 @@ export class ApiHttpClient extends HttpClient {
         super();
     }
 
-    send(request: HttpRequest): Promise<HttpResponse> {
+
+    end(request: HttpRequest): Promise<HttpResponse> {
+        console.log('1');
         return this.apiService.request(request.method, request.url, request.content, {
             headers: request.headers,
         }).toPromise()
