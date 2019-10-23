@@ -11,5 +11,6 @@ export class ContainerSpec {
         child.provide(container);
         expect(child.get(Container)).to.be.equal(child);
         expect(container.get(Container)).to.be.equal(container);
+        expect(container.get(Container)).to.be.equal(container);
     }
 }
