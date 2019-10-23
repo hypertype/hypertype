@@ -3,7 +3,6 @@ const webpack = require('webpack');
 
 module.exports = ({index}) => {
     const basePath = process.cwd();
-
     const pkg = require(path.join(basePath, './package'));
     const outputPath = path.join(basePath, 'dist/bundle');
     const prod = process.argv.filter(a => /--prod/.test(a)).length;

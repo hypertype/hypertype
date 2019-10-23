@@ -11,4 +11,5 @@ export * from "./src/helpers";
 export * from './helpers/events';
 
 export const wire = HyperHTMLElement.wire;
+
 export const bind = HyperHTMLElement.bind;

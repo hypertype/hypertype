@@ -6,6 +6,9 @@ const getConfig = require('./webpack.config');
 const devServer = require('webpack-dev-server');
 
 module.exports = ({html, index, publicPath, port, host, output}) => {
+    if (!publicPath) publicPath = '';
+    if (!host) host = 'localhost';
+    if (!port) port = '3200';
     const baseDir = process.cwd();
     const config = getConfig(index, "index.js", output);
     const compiler = webpack({
@@ -40,7 +43,7 @@ module.exports = ({html, index, publicPath, port, host, output}) => {
         server.listen(port, host, (err, stats) => {
             console.log(`listen on ${host}:${port}`)
         });
-    }else {
+    } else {
         runCompiler(compiler)
     }
 };
