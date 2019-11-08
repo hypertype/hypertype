@@ -1,6 +1,7 @@
 {
   "extends": "../../tools/tsconfig.base",
   "compilerOptions": {
+    "allowJs": true,
     "baseUrl": ".",
     "outDir": "./dist/esm",
     "declarationDir": "./dist/typings",

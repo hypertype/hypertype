@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/ui",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "",
   "main": "dist/index.es5.js",
   "es5": "dist/index.es5.js",
@@ -12,6 +12,7 @@
     "build:es5": "tsc -b --watch tsconfig.es5.json",
     "bundle:es5": "hypertype es5 --watch",
     "bundle:es5:prod": "hypertype es5 --prod",
+    "stats": "hypertype lib --stats",
     "build": "tsc -b --watch",
     "deploy": "npm version patch && npm publish"
   },
@@ -35,12 +36,9 @@
     "@hypertype/core": "latest",
     "@hypertype/tools": "latest",
     "@types/node": "latest",
-    "hyperhtml-element": "latest",
+    "hypertype": "0.0.0-beta.1",
     "typescript": "latest"
   },
-  "bundledDependencies": [
-    "hyperhtml-element"
-  ],
   "hypertype": {
     "lib": {
       "index": "./dist/esm/index.js",

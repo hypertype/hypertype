@@ -12,9 +12,9 @@
 //             this.serLastData = data;
 //             return JSON.stringify(data);
 //         }
-//         const diff = jsondiffpatch.diff(this.serLastData, data);
+//         const domdiff = jsondiffpatch.domdiff(this.serLastData, data);
 //         this.serLastData = data;
-//         return JSON.stringify(diff);
+//         return JSON.stringify(domdiff);
 //
 //         // return gzip(JSON.stringify(data), {to: 'string'});
 //     }

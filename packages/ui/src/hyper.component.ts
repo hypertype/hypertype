@@ -20,7 +20,7 @@ export abstract class HyperComponent<TState = any, TEvents = any> {
     Actions$: Observable<{ type: string; payload?: any }> = NEVER;
 
     protected defaultState: TState;
-    private _attributesSubject$ = new ReplaySubject<{ name, value }>();
+    // private _attributesSubject$ = new ReplaySubject<{ name, value }>();
     private _eventsSubject$ = new ReplaySubject<{ args: any; type: keyof TEvents; }>();
     private _elementSubject$: Subject<HTMLElement> = new ReplaySubject<HTMLElement>();
     private _disconnect$: Subject<void> = new Subject<void>();
@@ -28,10 +28,10 @@ export abstract class HyperComponent<TState = any, TEvents = any> {
         filter(x => !!x)
     );
     protected Events$ = this._eventsSubject$.asObservable();
-    protected Attributes$: Observable<any> = this._attributesSubject$.asObservable().pipe(
-        scan<{ name, value }, any>((acc, val) => ({...acc, [val.name]: val.value}), {}),
-        startWith({}),
-    );
+    // protected Attributes$: Observable<any> = this._attributesSubject$.asObservable().pipe(
+    //     scan<{ name, value }, any>((acc, val) => ({...acc, [val.name]: val.value}), {}),
+    //     startWith({}),
+    // );
 
     protected ClientRect$ = this.Element$.pipe(
         switchMap(el => new Observable<ClientRect>(subscr => {

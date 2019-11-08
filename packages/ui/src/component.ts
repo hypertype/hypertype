@@ -1,4 +1,4 @@
-import {HyperHTMLElement} from "./hyperhtml.element";
+import {HyperElement} from "../hyperhtml/hyper.element";
 import {Observable, ReplaySubject, Subject, takeUntil} from "@hypertype/core";
 import {UI} from "./ui";
 import {importStyle} from "./import-styles";
@@ -43,17 +43,18 @@ export const property: any = () => (target: any, key: string, properties) => {
 
 export function Component(info: {
     name: string,
-    observedAttributes?: string[],
-    booleanAttributes?: string[],
-    attributes?: string[],
+    // observedAttributes?: string[],
+    // booleanAttributes?: string[],
+    // attributes?: string[],
     template: Function,
-    style: string
+    style?: string
 }) {
     return (target) => {
         let Id = 0;
-        importStyle(info.style, target.name);
+        if (info.style)
+            importStyle(info.style, target.name);
 
-        class ProxyHTML extends HyperHTMLElement {
+        class ProxyHTML extends HyperElement {
 
             constructor() {
                 super();
@@ -65,8 +66,8 @@ export function Component(info: {
             }
 
 
-            static observedAttributes = info.observedAttributes || [];
-            static booleanAttributes = info.booleanAttributes || [];
+            // static observedAttributes = info.observedAttributes || [];
+            // static booleanAttributes = info.booleanAttributes || [];
             handlerProxy: any;
             private component: ComponentExtended<any, any>;
             private _id = Id++;
@@ -157,7 +158,7 @@ export function Component(info: {
 
 interface ComponentExtended<TState, TEvents> {
     _disconnect$: ReplaySubject<void>;
-    element: HyperHTMLElement;
+    element: HyperElement;
     _attributesSubject$: Subject<{ name, value }>;
     _eventsSubject$: Subject<{ args: any; type: string }>;
     _elementSubject$: Subject<HTMLElement>;
@@ -173,7 +174,7 @@ interface ComponentExtended<TState, TEvents> {
 
     // element: HTMLElement;
 
-    select<E extends Element = Element>(selectors: string): Observable<E | null>;
+    select<E extends HyperElement = HyperElement>(selectors: string): Observable<E | null>;
 }
 
 export type IEventHandler<TEvents> = {
