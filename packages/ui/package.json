@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/ui",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "",
   "main": "dist/index.es5.js",
   "es5": "dist/index.es5.js",
