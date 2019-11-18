@@ -2,6 +2,7 @@ import {HyperElement} from "../hyperhtml/hyper.element";
 import {Observable, ReplaySubject, Subject, takeUntil} from "@hypertype/core";
 import {UI} from "./ui";
 import {importStyle} from "./import-styles";
+import construct = Reflect.construct;
 
 const definitions: Function[] = [];
 
@@ -66,7 +67,7 @@ export function Component(info: {
             }
 
 
-            // static observedAttributes = info.observedAttributes || [];
+            static observedAttributes = Object.keys(target[propertySymbol] || {});
             // static booleanAttributes = info.booleanAttributes || [];
             handlerProxy: any;
             private component: ComponentExtended<any, any>;
@@ -138,10 +139,10 @@ export function Component(info: {
             };
 
             attributeChangedCallback(name: string, prev: string, curr: string) {
-                if (this.component[propertySymbol] && this.component[propertySymbol][name]) {
-                    this.component[propertySymbol][name].set(curr);
-                }
-                this.component._attributesSubject$.next({name, value: curr});
+                if (!this.component)
+                    return;
+                if (this.component.constructor[propertySymbol] && this.component.constructor[propertySymbol][name]) {
+                    this.component.constructor[exports.propertySymbol][name](this.component).set(curr)  }
             }
 
             disconnectedCallback() {
@@ -159,7 +160,6 @@ export function Component(info: {
 interface ComponentExtended<TState, TEvents> {
     _disconnect$: ReplaySubject<void>;
     element: HyperElement;
-    _attributesSubject$: Subject<{ name, value }>;
     _eventsSubject$: Subject<{ args: any; type: string }>;
     _elementSubject$: Subject<HTMLElement>;
     _injectedContent$: Subject<(HTMLElement | SVGElement)[]>
