@@ -6,7 +6,7 @@
   "main": "dist/bundle/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
-    "bundle": "hypertype",
+    "bundle": "hypertype lib --watch",
     "build": "tsc -b --watch",
     "deploy": "npm version patch && npm publish",
     "test": "jest"

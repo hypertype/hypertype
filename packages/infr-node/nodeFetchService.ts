@@ -20,12 +20,20 @@ export class NodeFetchService extends IRequestService {
                     ...options.headers
                 },
             }, (error, meta, body) => {
-                if (meta.status > 300) {
+                if (!meta) {
                     subscr.error({
+                        url: url,
+                        request: body,
+                        error: error,
+                        exception: body
+                    });
+                } else if (meta.status > 300) {
+                    subscr.error({
+                        url: url,
+                        request: body,
                         status: meta.status,
                         exception: body
                     });
-
                 } else if (options.responseType == "blob") {
                     subscr.next(body);
                 } else if (meta.status == 204) {

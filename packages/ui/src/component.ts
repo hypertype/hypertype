@@ -61,7 +61,7 @@ export function Component(info: {
                 super();
                 if (target[propertySymbol]) {
                     for (let key in target[propertySymbol]) {
-                        this[key] = null;
+                        this[key] = this.getAttribute(key);
                     }
                 }
             }
