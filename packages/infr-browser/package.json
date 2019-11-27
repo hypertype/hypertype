@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/infr-browser",
-  "version": "3.1.4",
+  "version": "3.1.5",
   "description": "",
   "main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
@@ -44,9 +44,9 @@
     "@hypertype/infr": "latest"
   },
   "devDependencies": {
-    "@hypertype/core": "^3.1.4",
-    "@hypertype/infr": "^3.1.4",
-    "@hypertype/tools": "^3.1.4"
+    "@hypertype/core": "^3.1.5",
+    "@hypertype/infr": "^3.1.5",
+    "@hypertype/tools": "^3.1.5"
   },
   "hypertype": {
     "lib": {
