@@ -1,10 +1,10 @@
 {
   "name": "@hypertype/tools",
-  "version": "3.1.0",
+  "version": "3.1.5",
   "description": "",
   "main": "index.js",
   "bin": {
-    "hypertype": "build/bin.js"
+    "hypertype": "bin.js"
   },
   "scripts": {
     "deploy": "npm version patch && npm publish --access public"
@@ -13,6 +13,7 @@
   "license": "ISC",
   "files": [
     "test",
+    "generate",
     "build"
   ],
   "bundledDependencies": [

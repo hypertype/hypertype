@@ -2,12 +2,22 @@
 
 const path = require('path');
 const fs = require('fs');
-const bundle = require('./bundle');
-const webBundle = require('./web-bundle');
-const nodeBundle = require('./node-bundle');
-const workerBundle = require('./worker-bundle');
-const serverBundle = require('./server-bundle');
-const testBundle = require('./test');
+const bundle = require('./build/bundle');
+const webBundle = require('./build/web-bundle');
+const nodeBundle = require('./build/node-bundle');
+const workerBundle = require('./build/worker-bundle');
+const serverBundle = require('./build/server-bundle');
+const testBundle = require('./build/test');
+const newComponent = require('./generate/component');
+
+
+
+if (process.argv[2] == 'new' && process.argv[3] == 'component') {
+    const directoryPath = process.argv[4];
+    const componentName = process.argv[5];
+    newComponent(directoryPath,componentName);
+    return;
+}
 
 const bundlers = {
     web: webBundle,
