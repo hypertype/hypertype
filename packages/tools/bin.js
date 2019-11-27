@@ -17,7 +17,6 @@ if (process.argv[2] == 'new' && process.argv[3] == 'component') {
     return;
 }
 
-
 const bundlers = {
     web: webBundle,
     node: nodeBundle,
