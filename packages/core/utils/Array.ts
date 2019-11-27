@@ -36,6 +36,14 @@ declare global {
     }
 }
 
+Array.prototype.flat = Array.prototype.flat  || function(level = 1){
+    let array = this;
+    for (;level > 0; level--) {
+        array = [].concat(...array);
+    }
+    return array;
+};
+
 Array.prototype.groupBy = function <T, K>(selector: (t: T) => K, descending?) {
     return this.reduce((result: Map<K, Array<T>>, item: T) => {
         const key = selector(item);
