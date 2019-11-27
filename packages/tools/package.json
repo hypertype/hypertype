@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "hypertype": "build/bin.js"
+    "hypertype": "bin.js"
   },
   "scripts": {
     "deploy": "npm version patch && npm publish --access public"
