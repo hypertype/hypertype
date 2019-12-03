@@ -3,7 +3,7 @@
   "version": "3.2.0",
   "description": "",
   "module": "dist/esm/index.js",
-  "main": "dist/bundle/index.js",
+  "main": "dist/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
     "bundle": "hypertype lib --watch",
