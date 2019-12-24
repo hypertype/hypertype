@@ -57,8 +57,8 @@ export class ApiService {
             url = this.ApiUrl.toString() + url;
         const res = this.http.request(method, url, body, {
             headers: {
+                'Accept': this.isBSON ? 'application/bson' : 'application/json',
                 ...(options.headers || {}),
-                'Accept': this.isBSON ? 'application/bson' : 'application/json'
             },
             params: options.params,
             responseType: options.responseType || (this.isBSON ? 'blob' : 'json')

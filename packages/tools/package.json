@@ -14,7 +14,8 @@
   "files": [
     "test",
     "generate",
-    "build"
+    "build",
+    "bin.js"
   ],
   "bundledDependencies": [
     "@types/chai",

@@ -6,7 +6,8 @@
   "main": "dist/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
-    "bundle": "hypertype lib --watch",
+    "bundle": "hypertype lib",
+    "bundle:prod": "hypertype lib --prod",
     "build": "tsc -b --watch",
     "deploy": "npm version patch && npm publish",
     "test": "jest"
@@ -58,7 +59,7 @@
   },
   "hypertype": {
     "lib": {
-      "index": "dist/esm/index.js"
+      "index": "./dist/esm/index.js"
     }
   }
 }

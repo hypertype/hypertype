@@ -10,12 +10,15 @@ export class ApiHttpClient extends HttpClient {
 
 
     end(request: HttpRequest): Promise<HttpResponse> {
-        console.log('1');
         return this.apiService.request(request.method, request.url, request.content, {
             headers: request.headers,
         }).toPromise()
             .then(res => new HttpResponse(200, 'OK', JSON.stringify(res)))
             .catch(err => new HttpResponse(err.code, err.message, err));
+    }
+
+    public send(request: HttpRequest): Promise<HttpResponse> {
+        return undefined;
     }
 
 }

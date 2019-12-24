@@ -53,7 +53,7 @@
   },
   "hypertype": {
     "lib": {
-      "index": "./index.ts"
+      "index": "./dist/esm/index.js"
     }
   }
 }
