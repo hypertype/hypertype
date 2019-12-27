@@ -3,7 +3,7 @@ import {ApiService} from "./api.service";
 import {Injectable} from "@hypertype/core";
 
 @Injectable()
-export abstract class ApiHttpClient extends HttpClient {
+export class ApiHttpClient extends HttpClient {
     constructor(private apiService: ApiService) {
         super();
     }
