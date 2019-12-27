@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/infr",
-  "version": "3.2.3",
+  "version": "3.2.4",
   "description": "",
   "main": "dist/esm/common/index.js",
   "module": "dist/esm/common/index.js",

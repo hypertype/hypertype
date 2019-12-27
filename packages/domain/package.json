@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/domain",
-  "version": "3.2.3",
+  "version": "3.2.4",
   "description": "",
   "main": "dist/esm/index.js",
   "bundle": "dist/bundle/index.js",
@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@hypertype/core": "^3.2.3",
-    "@hypertype/infr": "^3.2.3",
+    "@hypertype/infr": "^3.2.4",
     "@hypertype/tools": "^3.2.3",
     "@types/node": "latest",
     "typescript": "latest"
