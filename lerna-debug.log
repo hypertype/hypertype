@@ -1,5 +1,0 @@
-49 error Error: Command failed: git add -- packages/ui/package.json packages/tools/package.json packages/core/package.json packages/app/package.json packages/infr/package.json packages/infr-browser/package.json packages/infr-node/package.json packages/domain/package.json lerna.json
-49 error fatal: Pathspec 'packages/app/package.json' is in submodule 'packages/app'
-49 error
-49 error     at makeError (C:\Users\xamidylin\AppData\Roaming\npm\node_modules\lerna\node_modules\execa\wire.js:174:9)
-49 error     at C:\Users\xamidylin\AppData\Roaming\npm\node_modules\lerna\node_modules\execa\wire.js:278:16

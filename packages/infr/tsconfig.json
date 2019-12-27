@@ -6,19 +6,8 @@
     "emitDecoratorMetadata": true,
     "target": "es2018",
     "moduleResolution": "node",
+    "declaration": true,
     "declarationDir": "./dist/typings",
-    "noEmitOnError": false,
-    "composite": true,
-    "paths": {
-      "@hypertype/core": [
-        "../core"
-      ]
-    }
-  },
-  "references": [
-    {
-      "path": "../core"
-    }
-  ],
-  "include": ["common"]
+    "noEmitOnError": false
+  }
 }

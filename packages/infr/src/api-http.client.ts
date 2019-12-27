@@ -1,4 +1,4 @@
-import {HttpClient, HttpRequest, HttpResponse} from "./signalr";
+import {HttpClient, HttpRequest, HttpResponse} from "../signalr";
 import {ApiService} from "./api.service";
 import {Injectable} from "@hypertype/core";
 

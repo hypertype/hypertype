@@ -1,18 +1,18 @@
-import {Logger} from "./logger";
-import {ApiService, ApiUrlInjectionToken} from "./api.service";
-import {IRequestService} from "./request.service";
+import {Logger} from "./src/logger";
+import {ApiService, ApiUrlInjectionToken} from "./src/api.service";
+import {IRequestService} from "./src/request.service";
 import {Container} from "@hypertype/core";
-import {WebSocketUrlInjectionToken} from "./i-web-socket.service";
-import {AuthApiService, ITokenStore} from "./auth-api.service";
-import {ApiHttpClient} from "./api-http.client";
+import {WebSocketUrlInjectionToken} from "./src/i-web-socket.service";
+import {AuthApiService, ITokenStore} from "./src/auth-api.service";
+import {ApiHttpClient} from "./src/api-http.client";
 
-export {BaseWebSocketService} from "./base-web-socket.service";
+export {BaseWebSocketService} from "./src/base-web-socket.service";
 
-export * from './logger';
-export * from './api.service';
-export * from './request.service';
-export * from './i-web-socket.service';
-export * from './state.logger';
+export * from './src/logger';
+export * from './src/api.service';
+export * from './src/request.service';
+export * from './src/i-web-socket.service';
+export * from './src/state.logger';
 
 export const InfrContainer = new Container();
 InfrContainer.provide([

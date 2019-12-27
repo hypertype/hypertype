@@ -6,7 +6,7 @@
   },
   "references": [
 //    { "path": "./app" },
-    { "path": "../packages/core" }
+//    { "path": "../packages/core" }
 //    { "path": "./domain" },
 //    { "path": "./infr" },
 //    { "path": "./ui" }

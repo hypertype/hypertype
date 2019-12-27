@@ -4,20 +4,10 @@
     "baseUrl": ".",
     "outDir": "./dist/esm",
     "declarationDir": "./dist/typings",
+    "allowJs": true,
     "noEmitOnError": true,
-    "composite": true,
-    "target": "es2018",
-    "paths": {
-      "@hypertype/core": [
-        "../core"
-      ]
-    }
+    "target": "es2018"
   },
-  "references": [
-    {
-      "path": "../core"
-    }
-  ],
   "include": [
     "node_modules/hyperhtml-element",
     "**/*.ts",

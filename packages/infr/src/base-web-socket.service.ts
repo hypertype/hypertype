@@ -1,9 +1,9 @@
 import {filter, first, Fn, Observable, ReplaySubject, shareReplay} from "@hypertype/core";
 import {IWebSocketService} from "./i-web-socket.service";
-import {HubConnection} from "./signalr/HubConnection";
-import {IHttpConnectionOptions} from "./signalr";
-import {LogLevel} from "./signalr/contracts/ILogger";
-import {HubConnectionBuilder} from "./signalr/HubConnectionBuilder";
+import {HubConnection} from "../signalr/HubConnection";
+import {IHttpConnectionOptions} from "../signalr";
+import {LogLevel} from "../signalr/contracts/ILogger";
+import {HubConnectionBuilder} from "../signalr/HubConnectionBuilder";
 import {ApiHttpClient} from "./api-http.client";
 import {ITokenStore} from "./auth-api.service";
 

@@ -6,10 +6,10 @@
   "bundle": "dist/bundle/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
+    "build": "tsc -b --watch",
     "bundle": "hypertype lib",
     "bundle:prod": "hypertype lib --prod",
     "bundle:prod:stats": "hypertype lib --prod --stats",
-    "build": "tsc -b --watch",
     "deploy": "npm version patch && npm publish",
     "test": "jest"
   },
@@ -39,17 +39,16 @@
       }
     }
   },
-  "bundleDependencies": [],
   "peerDependencies": {
-    "@hypertype/core": "^2.0.0",
-    "@hypertype/infr": "^2.0.0"
+    "@hypertype/core": "",
+    "@hypertype/infr": ""
   },
   "devDependencies": {
     "@hypertype/core": "^3.2.3",
     "@hypertype/infr": "^3.2.5",
     "@hypertype/tools": "^3.2.3",
-    "@types/node": "latest",
-    "typescript": "latest"
+    "@types/node": "11.13.19",
+    "typescript": "^3.7.4"
   },
   "hypertype": {
     "lib": {
