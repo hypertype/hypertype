@@ -9,7 +9,7 @@ export abstract class ApiHttpClient extends HttpClient {
     }
 
 
-    end(request: HttpRequest): Promise<HttpResponse> {
+    send(request: HttpRequest): Promise<HttpResponse> {
         return this.apiService.request(request.method, request.url, request.content, {
             headers: request.headers,
         }).toPromise()
