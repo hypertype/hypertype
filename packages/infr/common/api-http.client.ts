@@ -3,7 +3,7 @@ import {ApiService} from "./api.service";
 import {Injectable} from "@hypertype/core";
 
 @Injectable()
-export class ApiHttpClient extends HttpClient {
+export abstract class ApiHttpClient extends HttpClient {
     constructor(private apiService: ApiService) {
         super();
     }
@@ -15,10 +15,6 @@ export class ApiHttpClient extends HttpClient {
         }).toPromise()
             .then(res => new HttpResponse(200, 'OK', JSON.stringify(res)))
             .catch(err => new HttpResponse(err.code, err.message, err));
-    }
-
-    public send(request: HttpRequest): Promise<HttpResponse> {
-        return undefined;
     }
 
 }
