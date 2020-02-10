@@ -6,9 +6,9 @@
   "bundle": "dist/bundle/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
+    "build": "tsc -b --watch",
     "bundle": "hypertype lib --watch",
     "bundle:prod": "hypertype lib --prod",
-    "build": "tsc -b --watch",
     "deploy": "npm version patch && npm publish",
     "test": "jest"
   },
@@ -44,22 +44,23 @@
     "router5-plugin-browser"
   ],
   "optionalDependencies": {
-    "redux-devtools-extension": "latest"
+    "redux-devtools-extension": "*"
   },
   "peerDependencies": {
-    "@hypertype/core": "latest",
-    "@hypertype/infr": "latest",
-    "@hypertype/ui": "latest"
+    "@hypertype/core": "",
+    "@hypertype/infr": "",
+    "@hypertype/ui": ""
   },
   "devDependencies": {
-    "@hypertype/core": "latest",
-    "@hypertype/infr": "latest",
-    "@hypertype/tools": "latest",
-    "@hypertype/ui": "latest",
-    "@types/node": "latest",
-    "redux": "latest",
-    "router5": "latest",
-    "router5-plugin-browser": "latest"
+    "@hypertype/core": "*",
+    "@hypertype/infr": "*",
+    "@hypertype/tools": "*",
+    "@hypertype/ui": "*",
+    "@types/node": "11.13.19",
+    "redux": "*",
+    "router5": "*",
+    "router5-plugin-browser": "*",
+    "typescript": "^3.7.4"
   },
   "hypertype": {
     "lib": {

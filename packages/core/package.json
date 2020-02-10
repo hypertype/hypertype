@@ -6,10 +6,10 @@
   "bundle": "dist/bundle/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
+    "build": "tsc -b --watch",
     "bundle": "hypertype lib",
     "bundle:prod": "hypertype lib --prod",
     "bundle:prod:stats": "hypertype lib --prod --stats",
-    "build": "tsc -b --watch",
     "deploy": "npm version patch && npm publish",
     "test": "jest"
   },
@@ -44,16 +44,16 @@
     "crc-32",
     "reflect-metadata"
   ],
-  "dependencies": {
-    "luxon": "^1.12.1"
-  },
   "devDependencies": {
     "@hypertype/tools": "^3.2.3",
     "@types/luxon": "^1.12.0",
     "@types/node": "11.13.19",
-    "crc-32": "latest",
+    "crc-32": "*",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.2"
+  },
+  "dependencies": {
+    "luxon": "^1.12.1"
   },
   "hypertype": {
     "lib": {

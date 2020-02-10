@@ -7,19 +7,8 @@
     "declaration": true,
     "noEmitOnError": true,
     "moduleResolution": "node",
-    "target": "es2018",
-    "composite": true,
-    "paths": {
-      "@hypertype/core": [
-        "../core"
-      ]
-    }
+    "target": "es2018"
   },
-  "references": [
-    {
-      "path": "../core"
-    }
-  ],
   "include": [
     "**/*.ts"
   ],

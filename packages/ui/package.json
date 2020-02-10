@@ -7,13 +7,13 @@
   "es6": "dist/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
+    "build": "tsc -b --watch",
     "bundle": "hypertype lib --watch",
     "bundle:prod": "hypertype lib --prod",
     "build:es5": "tsc -b --watch tsconfig.es5.json",
     "bundle:es5": "hypertype es5 --watch",
     "bundle:es5:prod": "hypertype es5 --prod",
     "stats": "hypertype lib --stats",
-    "build": "tsc -b --watch",
     "deploy": "npm version patch && npm publish"
   },
   "files": [
@@ -30,14 +30,14 @@
   },
   "homepage": "https://github.com/hypertype/ui#readme",
   "peerDependencies": {
-    "@hypertype/core": "latest"
+    "@hypertype/core": ""
   },
   "devDependencies": {
-    "@hypertype/core": "latest",
-    "@hypertype/tools": "latest",
-    "@types/node": "latest",
+    "@hypertype/core": "*",
+    "@hypertype/tools": "*",
+    "@types/node": "11.13.19",
     "hypertype": "0.0.0-beta.1",
-    "typescript": "latest"
+    "typescript": "^3.7.4"
   },
   "hypertype": {
     "lib": {

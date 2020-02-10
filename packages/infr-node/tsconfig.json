@@ -9,22 +9,8 @@
     "emitDecoratorMetadata": true,
     "noEmitOnError": true,
     "target": "es2018",
-    "moduleResolution": "node",
-    "composite": true,
-    "paths": {
-      "@hypertype/infr": [
-        "../"
-      ],
-      "@hypertype/core": [
-        "../../core"
-      ]
-    }
+    "moduleResolution": "node"
   },
-  "references": [
-    {
-      "path": "../core"
-    }
-  ],
   "include": [
     "**/*.ts"
   ],

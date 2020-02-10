@@ -6,8 +6,7 @@
     "target": "es2018",
     "moduleResolution": "node",
     "declarationDir": "./dist/typings",
-    "noEmitOnError": true,
-    "composite": true
+    "noEmitOnError": true
   },
   "include": [
     "**/*.ts"

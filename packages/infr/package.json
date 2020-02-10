@@ -2,14 +2,14 @@
   "name": "@hypertype/infr",
   "version": "3.2.5",
   "description": "",
-  "main": "dist/esm/common/index.js",
-  "module": "dist/esm/common/index.js",
+  "main": "dist/esm/index.js",
+  "module": "dist/esm/index.js",
   "bundle": "dist/bundle/index.js",
-  "typings": "dist/typings/common/index.d.ts",
+  "typings": "dist/typings/index.d.ts",
   "scripts": {
+    "build": "tsc -b --watch",
     "bundle": "hypertype lib",
     "bundle:prod": "hypertype lib --prod",
-    "build": "tsc -b --watch",
     "deploy": "npm version patch && npm publish",
     "test": "jest"
   },
@@ -41,18 +41,17 @@
       }
     }
   },
-  "bundleDependencies": [],
   "peerDependencies": {
-    "@hypertype/core": "^1.2.1"
+    "@hypertype/core": ""
   },
   "devDependencies": {
     "@hypertype/core": "^3.2.3",
     "@hypertype/tools": "^3.2.3",
-    "@types/node": "latest"
+    "@types/node": "11.13.19"
   },
   "hypertype": {
     "lib": {
-      "index": "./dist/esm/common/index.js"
+      "index": "./dist/esm/index.js"
     }
   }
 }

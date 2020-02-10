@@ -6,9 +6,9 @@
   "main": "dist/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
+    "build": "tsc -b --watch",
     "bundle": "hypertype lib",
     "bundle:prod": "hypertype lib --prod",
-    "build": "tsc -b --watch",
     "deploy": "npm version patch && npm publish",
     "test": "jest"
   },
@@ -44,18 +44,18 @@
     "ws"
   ],
   "peerDependencies": {
-    "@hypertype/core": "latest",
-    "@hypertype/infr": "latest"
-  },
-  "dependencies": {
-    "eventsource": "latest",
-    "fetch": "latest",
-    "ws": "^6.2.1"
+    "@hypertype/core": "",
+    "@hypertype/infr": ""
   },
   "devDependencies": {
     "@hypertype/core": "^3.2.3",
     "@hypertype/infr": "^3.2.5",
     "@hypertype/tools": "^3.2.3"
+  },
+  "dependencies": {
+    "eventsource": "*",
+    "fetch": "*",
+    "ws": "^6.2.1"
   },
   "hypertype": {
     "lib": {

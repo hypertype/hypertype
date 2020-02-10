@@ -9,24 +9,10 @@
     "rootDir": "./",
     "outDir": "./dist/esm",
     "declarationDir": "./dist/typings",
-    "noEmitOnError": true,
-    "composite": true,
-    "paths": {
-      "@hypertype/infr": [
-        "../"
-      ],
-      "@hypertype/core": [
-        "../../core"
-      ]
-    }
+    "noEmitOnError": true
   },
   "include": [
     "**/*.ts"
-  ],
-  "references": [
-    {
-      "path": "../core"
-    }
   ],
   "exclude": [
     "../node",
