@@ -11,6 +11,9 @@
   },
   "author": "",
   "license": "ISC",
+  "peerDependencies": {
+    "ttypescript": "^1.5.10"
+  },
   "devDependencies": {
     "lerna": "^3.19.0"
   },
