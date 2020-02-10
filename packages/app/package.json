@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/app",
-  "version": "3.2.2",
+  "version": "3.2.6",
   "description": "",
   "main": "dist/esm/index.js",
   "bundle": "dist/bundle/index.js",
@@ -52,10 +52,10 @@
     "@hypertype/ui": ""
   },
   "devDependencies": {
-    "@hypertype/core": "*",
-    "@hypertype/infr": "*",
-    "@hypertype/tools": "*",
-    "@hypertype/ui": "*",
+    "@hypertype/core": "^3.2.6",
+    "@hypertype/infr": "^3.2.6",
+    "@hypertype/tools": "^3.2.6",
+    "@hypertype/ui": "^3.2.6",
     "@types/node": "11.13.19",
     "redux": "*",
     "router5": "*",
