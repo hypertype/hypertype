@@ -10,8 +10,6 @@ const serverBundle = require('./build/server-bundle');
 const testBundle = require('./build/test');
 const newComponent = require('./generate/component');
 
-
-
 if (process.argv[2] == 'new' && process.argv[3] == 'component') {
     const directoryPath = process.argv[4];
     const componentName = process.argv[5];
