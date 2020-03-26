@@ -48,5 +48,6 @@
       "index": "./dist/es5/index.js",
       "target": "index.es5.js"
     }
-  }
+  },
+  "gitHead": "d541a2f174f1b7238eec048a459e0af17bf4f757"
 }

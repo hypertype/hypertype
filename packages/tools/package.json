@@ -55,5 +55,6 @@
     "webpack-bundle-analyzer": "^3.1.0",
     "webpack-dev-server": "^3.2.1",
     "webpack-merge": "^4.2.1"
-  }
+  },
+  "gitHead": "d541a2f174f1b7238eec048a459e0af17bf4f757"
 }

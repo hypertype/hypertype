@@ -23,6 +23,7 @@ const bundlers = {
     worker: workerBundle,
     server: serverBundle
 };
+
 const basePath = process.cwd();
 const pkg = require(path.join(basePath, './package'));
 const options = pkg.hypertype[process.argv[2]];
