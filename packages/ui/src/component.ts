@@ -110,7 +110,8 @@ export function Component(info: {
             }
 
             connectedCallback() {
-                this.component.State$.pipe(
+              this.component._elementSubject$.next(this);
+              this.component.State$.pipe(
                     takeUntil(this.component._disconnect$.asObservable())
                 ).subscribe(state => {
                     this.renderState(state);
@@ -118,7 +119,6 @@ export function Component(info: {
                 this.component.Actions$.pipe(
                     takeUntil(this.component._disconnect$.asObservable())
                 ).subscribe();
-                this.component._elementSubject$.next(this);
             }
 
             getEventHandler = type => mapping => {

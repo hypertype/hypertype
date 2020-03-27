@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.es5.js",
   "es5": "dist/index.es5.js",
-  "es6": "dist/index.js",
+  "es6": "dist/esm/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
     "build": "tsc -b --watch",
