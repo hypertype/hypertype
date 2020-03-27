@@ -11,7 +11,6 @@ function visitRequireNode(importNode: ts.CallExpression) {
             const absolute = join(dirname(currentFileName), file);
             return ts.updateCall(importNode, importNode.expression, undefined, [ts.createStringLiteral(absolute)]) as ts.Node;
         }
-        return ts.visitNode(importNode);
     }
     return null;
 }

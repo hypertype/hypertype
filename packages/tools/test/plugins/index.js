@@ -1,4 +1,4 @@
-const lessToStringTransformer = require("../absolute").default;
+const lessToStringTransformer = require("../../plugins/absolute").default;
 
 const path = require('path');
 const ts  = require('typescript');

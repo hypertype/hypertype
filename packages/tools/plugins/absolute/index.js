@@ -29,11 +29,11 @@ var lessToStringTransformer = function (context) {
         // if (node && node.kind == ts.SyntaxKind.ImportDeclaration) {
         //     return visitImportNode(node as ts.ImportDeclaration);
         // }
-        // if (node && ts.isCallExpression(node)) {
-        //     var result = visitRequireNode(node);
-        //     if (result)
-        //         return result;
-        // }
+        if (node && ts.isCallExpression(node)) {
+            var result = visitRequireNode(node);
+            if (result)
+                return result;
+        }
         return ts.visitEachChild(node, visitor, context);
     };
     return function (node) { return ts.visitNode(node, visitor); };

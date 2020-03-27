@@ -101,7 +101,6 @@ export function Component(info: {
                     }
                 });
                 // @ts-ignore
-                this.component._elementSubject$.next(this);
 
                 const children = [].slice.call(this.children) as (HTMLElement | SVGElement)[];
                 if (children.length)
@@ -119,6 +118,7 @@ export function Component(info: {
                 this.component.Actions$.pipe(
                     takeUntil(this.component._disconnect$.asObservable())
                 ).subscribe();
+                this.component._elementSubject$.next(this);
             }
 
             getEventHandler = type => mapping => {
