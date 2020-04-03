@@ -61,7 +61,7 @@ export function Component(info: {
                 super();
                 if (target[propertySymbol]) {
                     for (let key in target[propertySymbol]) {
-                        this[key] = this.getAttribute(key);
+                      this[key] = this.hasAttribute(key) ? this.getAttribute(key) : null;
                     }
                 }
             }
@@ -86,7 +86,7 @@ export function Component(info: {
                 if (target[propertySymbol]) {
                     for (let key in target[propertySymbol]) {
                         const desrc = target[propertySymbol][key](this.component);
-                        desrc.set(this[key]);
+                        desrc.set(this.getAttribute(key));
                         delete this[key];
                         Object.defineProperty(this, key, desrc);
                     }
