@@ -86,7 +86,7 @@ export function Component(info: {
                 if (target[propertySymbol]) {
                     for (let key in target[propertySymbol]) {
                         const desrc = target[propertySymbol][key](this.component);
-                        desrc.set(this.getAttribute(key));
+                        desrc.set(this[key] || this.getAttribute(key));
                         delete this[key];
                         Object.defineProperty(this, key, desrc);
                     }
