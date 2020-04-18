@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/app",
-  "version": "3.3.7",
+  "version": "3.3.8",
   "description": "",
   "main": "dist/esm/index.js",
   "bundle": "dist/bundle/index.js",
@@ -55,7 +55,7 @@
     "@hypertype/core": "^3.3.5",
     "@hypertype/infr": "^3.3.5",
     "@hypertype/tools": "^3.3.5",
-    "@hypertype/ui": "^3.3.7",
+    "@hypertype/ui": "^3.3.8",
     "@types/node": "11.13.19",
     "redux": "*",
     "router5": "*",
