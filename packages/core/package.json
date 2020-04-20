@@ -39,7 +39,7 @@
       }
     }
   },
-  "bundledDependencies": [
+  "bundleDependencies": [
     "rxjs",
     "crc-32",
     "reflect-metadata"
@@ -48,12 +48,12 @@
     "@hypertype/tools": "^3.3.9",
     "@types/luxon": "^1.12.0",
     "@types/node": "11.13.19",
+  },
+  "dependencies": {
+    "luxon": "^1.12.1",
     "crc-32": "*",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.2"
-  },
-  "dependencies": {
-    "luxon": "^1.12.1"
   },
   "hypertype": {
     "lib": {

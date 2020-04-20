@@ -18,7 +18,7 @@
     "build",
     "bin.js"
   ],
-  "bundledDependencies": [
+  "bundleDependencies": [
     "@types/chai",
     "@types/node",
     "chai",
@@ -36,7 +36,7 @@
     "css-loader",
     "string-loader"
   ],
-  "devDependencies": {
+  "dependencies": {
     "@testdeck/jest": "0.0.6",
     "@types/chai": "^4.1.7",
     "@types/node": "11.13.19",

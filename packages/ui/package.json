@@ -30,13 +30,15 @@
   },
   "homepage": "https://github.com/hypertype/ui#readme",
   "peerDependencies": {
-    "@hypertype/core": ""
+    "@hypertype/core": "^3.3.9",
+    "@hypertype/tools": "^3.3.9",
+    "@types/node": "11.13.19",
+    "typescript": "^3.7.4"
   },
   "devDependencies": {
     "@hypertype/core": "^3.3.9",
     "@hypertype/tools": "^3.3.9",
     "@types/node": "11.13.19",
-    "hypertype": "0.0.0-beta.1",
     "typescript": "^3.7.4"
   },
   "hypertype": {

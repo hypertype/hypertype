@@ -38,14 +38,15 @@
       }
     }
   },
-  "bundledDependencies": [
+  "bundleDependencies": [
     "eventsource",
     "fetch",
     "ws"
   ],
   "peerDependencies": {
-    "@hypertype/core": "",
-    "@hypertype/infr": ""
+    "@hypertype/core": "^3.3.9",
+    "@hypertype/infr": "^3.3.9",
+    "@hypertype/tools": "^3.3.9"
   },
   "devDependencies": {
     "@hypertype/core": "^3.3.9",
