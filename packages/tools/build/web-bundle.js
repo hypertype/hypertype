@@ -5,7 +5,7 @@ const getConfig = require('./webpack.config');
 
 module.exports = ({index, target, output}) => {
   const baseDir = process.cwd();
-  const config = getConfig(index, output, target);
+  const config = getConfig(index, target, output);
   const compiler = webpack({
     ...config,
     output: {
