@@ -1,8 +1,7 @@
-import {HyperElement} from "../hyperhtml/hyper.element";
+import {HyperElement, wire} from "../hyperhtml/hyper.element";
 import {Observable, ReplaySubject, Subject, takeUntil} from "@hypertype/core";
 import {UI} from "./ui";
 import {importStyle} from "./import-styles";
-import construct = Reflect.construct;
 
 const definitions: Function[] = [];
 
@@ -47,7 +46,7 @@ export function Component(info: {
     // observedAttributes?: string[],
     // booleanAttributes?: string[],
     // attributes?: string[],
-    template: Function,
+    template: (html, state, events) => any,
     style?: string
 }) {
     return (target) => {
@@ -82,7 +81,6 @@ export function Component(info: {
             created() {
                 // const dependencies = Reflector.paramTypes(target).map(type => Container.get(type));
                 this.component = UI.container.get(target);//new target(...dependencies);
-
                 if (target[propertySymbol]) {
                     for (let key in target[propertySymbol]) {
                         const desrc = target[propertySymbol][key](this.component);
@@ -91,7 +89,16 @@ export function Component(info: {
                         Object.defineProperty(this, key, desrc);
                     }
                 }
-                this.html = this.html.bind(this);
+                const htmlDefault = this.html.bind(this);
+                this.html = (strings: string[]| string, ...args) => {
+                  if (typeof strings == "string"){
+                    return wire(this, strings);
+                  }
+                  if (Array.isArray(strings)){
+                    return htmlDefault(strings, ...args);
+                  }
+                  return wire(strings, args.join(','));
+                }
                 // this.component.element = this;
                 // this.component.element = this;
                 this.component['id'] = this._id;
