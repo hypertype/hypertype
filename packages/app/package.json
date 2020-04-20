@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/app",
-  "version": "3.3.8",
+  "version": "3.3.9",
   "description": "",
   "main": "dist/esm/index.js",
   "bundle": "dist/bundle/index.js",
@@ -52,15 +52,15 @@
     "@hypertype/ui": ""
   },
   "dependencies": {
-	"redux": "*",
+    "redux": "*",
     "router5": "*",
     "router5-plugin-browser": "*"
   },
   "devDependencies": {
-    "@hypertype/core": "^3.3.5",
-    "@hypertype/infr": "^3.3.5",
-    "@hypertype/tools": "^3.3.5",
-    "@hypertype/ui": "^3.3.8",
+    "@hypertype/core": "^3.3.9",
+    "@hypertype/infr": "^3.3.9",
+    "@hypertype/tools": "^3.3.9",
+    "@hypertype/ui": "^3.3.9",
     "@types/node": "11.13.19",
     "typescript": "^3.7.4"
   },
