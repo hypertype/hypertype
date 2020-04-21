@@ -62,7 +62,7 @@
     "@hypertype/tools": "^3.3.10",
     "@hypertype/ui": "^3.3.10",
     "@types/node": "11.13.19",
-    "typescript": "^3.7.4"
+    "typescript": "3.7.4"
   },
   "hypertype": {
     "lib": {
