@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/ui",
-  "version": "3.3.10",
+  "version": "3.3.11",
   "description": "",
   "main": "dist/index.es5.js",
   "es5": "dist/index.es5.js",
@@ -36,8 +36,8 @@
     "typescript": "3.7.4"
   },
   "devDependencies": {
-    "@hypertype/core": "^3.3.10",
-    "@hypertype/tools": "^3.3.10",
+    "@hypertype/core": "^3.3.11",
+    "@hypertype/tools": "^3.3.11",
     "@types/node": "11.13.19",
     "typescript": "3.7.4"
   },
