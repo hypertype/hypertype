@@ -30,14 +30,14 @@
   },
   "homepage": "https://github.com/hypertype/ui#readme",
   "peerDependencies": {
-    "@hypertype/core": "^3.3.9",
-    "@hypertype/tools": "^3.3.9",
+    "@hypertype/core": "latest",
+    "@hypertype/tools": "latest",
     "@types/node": "11.13.19",
     "typescript": "3.7.4"
   },
   "devDependencies": {
-    "@hypertype/core": "^3.3.14",
-    "@hypertype/tools": "^3.3.14",
+    "@hypertype/core": "latest",
+    "@hypertype/tools": "latest",
     "@types/node": "11.13.19",
     "typescript": "3.7.4"
   },

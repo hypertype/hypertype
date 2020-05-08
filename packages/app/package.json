@@ -41,33 +41,24 @@
   "bundledDependencies": [
     "redux",
     "router5",
-    "route-node",
-    "router5-plugin-browser",
-    "router5-transition-path",
-    "symbol-observable",
-    "loose-envify"
+    "router5-plugin-browser"
   ],
   "optionalDependencies": {
     "redux-devtools-extension": "*"
   },
   "peerDependencies": {
-    "@hypertype/core": "",
-    "@hypertype/infr": "",
-    "@hypertype/ui": ""
+    "@hypertype/core": "latest",
+    "@hypertype/infr": "latest",
+    "@hypertype/ui": "latest"
   },
   "devDependencies": {
-    "@hypertype/core": "^3.3.14",
-    "@hypertype/infr": "^3.3.14",
-    "@hypertype/tools": "^3.3.14",
-    "@hypertype/ui": "^3.3.14",
+    "@hypertype/core": "latest",
+    "@hypertype/infr": "latest",
+    "@hypertype/ui": "latest",
     "@types/node": "11.13.19",
-    "loose-envify": "1.4.0",
     "redux": "4.0.5",
-    "route-node": "4.1.1",
     "router5": "8.0.1",
     "router5-plugin-browser": "8.0.1",
-    "router5-transition-path": "8.0.1",
-    "symbol-observable": "1.2.0",
     "typescript": "3.7.4"
   },
   "hypertype": {

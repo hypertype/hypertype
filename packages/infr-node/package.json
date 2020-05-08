@@ -44,14 +44,14 @@
     "ws"
   ],
   "peerDependencies": {
-    "@hypertype/core": "^3.3.9",
-    "@hypertype/infr": "^3.3.9",
-    "@hypertype/tools": "^3.3.9"
+    "@hypertype/core": "latest",
+    "@hypertype/infr": "latest",
+    "@hypertype/tools": "latest"
   },
   "devDependencies": {
-    "@hypertype/core": "^3.3.14",
-    "@hypertype/infr": "^3.3.14",
-    "@hypertype/tools": "^3.3.14"
+    "@hypertype/core": "latest",
+    "@hypertype/infr": "latest",
+    "@hypertype/tools": "latest"
   },
   "dependencies": {
     "eventsource": "*",

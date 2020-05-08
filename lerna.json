@@ -3,5 +3,5 @@
   "packages": [
     "packages/*"
   ],
-  "npmClient": "pnpm"
+  "npmClient": "npm"
 }
