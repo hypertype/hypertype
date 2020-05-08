@@ -1,0 +1,10 @@
+devDependencies:
+  '@types/node': 11.13.19
+lockfileVersion: 5.1
+packages:
+  /@types/node/11.13.19:
+    dev: true
+    resolution:
+      integrity: sha512-tLRDU1hmcWamtgRT2iVRdraAQVGFQGgtcqracSo9XyMN1VeZLSVGb8RJJxVqab7UGbijoUijGPVFMjmqzyZIUw==
+specifiers:
+  '@types/node': 11.13.19

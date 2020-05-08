@@ -1,0 +1,19 @@
+devDependencies:
+  '@types/node': 11.13.19
+  typescript: 3.7.4
+lockfileVersion: 5.1
+packages:
+  /@types/node/11.13.19:
+    dev: true
+    resolution:
+      integrity: sha512-tLRDU1hmcWamtgRT2iVRdraAQVGFQGgtcqracSo9XyMN1VeZLSVGb8RJJxVqab7UGbijoUijGPVFMjmqzyZIUw==
+  /typescript/3.7.4:
+    dev: true
+    engines:
+      node: '>=4.2.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-A25xv5XCtarLwXpcDNZzCGvW2D1S3/bACratYBx2sax8PefsFhlYmkQicKHvpYflFS8if4zne5zT5kpJ7pzuvw==
+specifiers:
+  '@types/node': 11.13.19
+  typescript: 3.7.4
