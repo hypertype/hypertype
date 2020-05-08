@@ -1,10 +1,12 @@
-dependencies:
+devDependencies:
+  '@types/node': 11.13.19
+  loose-envify: 1.4.0
   redux: 4.0.5
+  route-node: 4.1.1
   router5: 8.0.1_router5@8.0.1
   router5-plugin-browser: 8.0.1_router5@8.0.1
   router5-transition-path: 8.0.1_router5@8.0.1
-devDependencies:
-  '@types/node': 11.13.19
+  symbol-observable: 1.2.0
   typescript: 3.7.4
 lockfileVersion: 5.1
 optionalDependencies:
@@ -15,13 +17,13 @@ packages:
     resolution:
       integrity: sha512-tLRDU1hmcWamtgRT2iVRdraAQVGFQGgtcqracSo9XyMN1VeZLSVGb8RJJxVqab7UGbijoUijGPVFMjmqzyZIUw==
   /js-tokens/4.0.0:
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
   /loose-envify/1.4.0:
     dependencies:
       js-tokens: 4.0.0
-    dev: false
+    dev: true
     hasBin: true
     resolution:
       integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -29,7 +31,7 @@ packages:
     dependencies:
       search-params: 3.0.0
       tslib: 1.11.2
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-nAB6J73z2rFcQP+870OHhpkHFj5kO4rPLc2Ol4Y3Ale7F6Hk1/cPKp7cQ8RznKF8FOSvu+YR9Xc6Gafk7DlpYA==
   /redux-devtools-extension/2.13.8_redux@4.0.5:
@@ -45,7 +47,7 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       symbol-observable: 1.2.0
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==
   /route-node/4.1.1:
@@ -53,13 +55,13 @@ packages:
       path-parser: 6.1.0
       search-params: 3.0.0
       tslib: 1.11.2
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-bJVDVEQvXYqTC/LQ/2ohNZ2gPRO4+3ZvHeafuCyRZAd63qH17yspVfxOBzasE/t7SmSO30sT/yPSEMuPDGHhSQ==
   /router5-plugin-browser/8.0.1_router5@8.0.1:
     dependencies:
       router5: 8.0.1_router5@8.0.1
-    dev: false
+    dev: true
     peerDependencies:
       router5: ^8.0.0
     resolution:
@@ -67,7 +69,7 @@ packages:
   /router5-transition-path/8.0.1_router5@8.0.1:
     dependencies:
       router5: 8.0.1_router5@8.0.1
-    dev: false
+    dev: true
     peerDependencies:
       router5: ^8.0.0
     resolution:
@@ -77,23 +79,23 @@ packages:
       route-node: 4.1.1
       router5-transition-path: 8.0.1_router5@8.0.1
       symbol-observable: 1.2.0
-    dev: false
+    dev: true
     peerDependencies:
       router5: '*'
     resolution:
       integrity: sha512-LBLQAYd2ZI1FiiBqGf82oC+LRD0PUABrZqTzd6OmyK+t5N8wRs3hbIxeiy/9Zy+xI8Fdf/0WM68P41W6MH8pdQ==
   /search-params/3.0.0:
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-8CYNl/bjkEhXWbDTU/K7c2jQtrnqEffIPyOLMqygW/7/b+ym8UtQumcAZjOfMLjZKR6AxK5tOr9fChbQZCzPqg==
   /symbol-observable/1.2.0:
-    dev: false
+    dev: true
     engines:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
   /tslib/1.11.2:
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-tTSkux6IGPnUGUd1XAZHcpu85MOkIl5zX49pO+jfsie3eP0B6pyhOlLXm3cAC6T7s+euSDDUUV+Acop5WmtkVg==
   /typescript/3.7.4:
@@ -105,9 +107,12 @@ packages:
       integrity: sha512-A25xv5XCtarLwXpcDNZzCGvW2D1S3/bACratYBx2sax8PefsFhlYmkQicKHvpYflFS8if4zne5zT5kpJ7pzuvw==
 specifiers:
   '@types/node': 11.13.19
-  redux: '*'
+  loose-envify: 1.4.0
+  redux: 4.0.5
   redux-devtools-extension: '*'
-  router5: '*'
-  router5-plugin-browser: '*'
-  router5-transition-path: '*'
+  route-node: 4.1.1
+  router5: 8.0.1
+  router5-plugin-browser: 8.0.1
+  router5-transition-path: 8.0.1
+  symbol-observable: 1.2.0
   typescript: 3.7.4
