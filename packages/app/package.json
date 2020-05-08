@@ -41,7 +41,8 @@
   "bundledDependencies": [
     "redux",
     "router5",
-    "router5-plugin-browser"
+    "router5-plugin-browser",
+    "router5-transition-path"
   ],
   "optionalDependencies": {
     "redux-devtools-extension": "*"
@@ -54,7 +55,8 @@
   "dependencies": {
     "redux": "*",
     "router5": "*",
-    "router5-plugin-browser": "*"
+    "router5-plugin-browser": "*",
+    "router5-transition-path": "*"
   },
   "devDependencies": {
     "@hypertype/core": "^3.3.14",
