@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc -b --watch",
     "bundle": "hypertype lib --watch",
-    "bundle:prod": "hypertype lib --prod && tsc -b tsconfig.es5.json && hypertype es5 --prod",
+    "bundle:prod": "hypertype lib --prod",
     "build:es5": "tsc -b --watch tsconfig.es5.json",
     "bundle:es5": "hypertype es5 --watch",
     "bundle:es5:prod": "hypertype es5 --prod",
