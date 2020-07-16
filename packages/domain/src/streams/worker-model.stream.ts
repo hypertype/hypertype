@@ -12,10 +12,7 @@ export abstract class WorkerModelStream<TState, TActions> extends ModelStream<TS
         this.worker = this.createWorker(webSocketPath);
 
         // => из Worker пришел ответ -> в Browser Main
-        this.Input$ = fromEvent<MessageEvent>(this.worker, 'message').pipe(
-            map(e => e.data),
-            shareReplay(1)
-        );
+        this.Input$ = this.Subscribe();
 
         this.State$ = this.Input$.pipe(
             map(d => d.state),
@@ -24,7 +21,8 @@ export abstract class WorkerModelStream<TState, TActions> extends ModelStream<TS
         this.State$.subscribe();
     }
 
-    protected abstract createWorker(path): AbstractWorker;
+  protected abstract Subscribe(): Observable<any>;
+  protected abstract createWorker(path): AbstractWorker;
 
     protected abstract sendMessage(message, options);
 
