@@ -1,5 +1,6 @@
 import {Container, map, merge, Observable, ReplaySubject, shareReplay, tap} from "@hypertype/core";
 import {Model} from "./model";
+import {fromEvent, takeUntil} from "@hypertype/core";
 
 export class WebworkerEntry {
 
@@ -39,7 +40,9 @@ export class WebworkerEntry {
             self['onconnect'] = function (e) {
                 const port = e.ports[0];
                 port.addEventListener('message', service.onMessage);
-                service.Output$.subscribe(d => {
+                service.Output$.pipe(
+                  takeUntil(fromEvent(self, 'disconnect'))
+                ).subscribe(d => {
                     port.postMessage(d)
                 });
                 port.start();
