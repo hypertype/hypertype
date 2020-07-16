@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "3.3.17",
+  "version": "3.3.18",
   "license": "MIT",
   "module": "./dist/esm/index.js",
   "main": "./dist/index.js",
@@ -39,11 +39,10 @@
     "canvas": "^2.6.1"
   },
   "devDependencies": {
-    "luxon": "^1.24.1",
-    "@hypertype/core": "^3.3.17",
-    "@hypertype/infr": "^3.3.17",
-    "@hypertype/infr-node": "^3.3.17",
-    "@hypertype/tools": "^3.3.17",
+    "@hypertype/core": "^3.3.18",
+    "@hypertype/infr": "^3.3.18",
+    "@hypertype/infr-node": "^3.3.18",
+    "@hypertype/tools": "^3.3.18",
     "@types/express": "^4.17.0",
     "@types/node": "^10.14.19",
     "@types/redis": "^2.8.14",
@@ -56,6 +55,7 @@
     "bufferutil": "^4.0.1",
     "core-decorators": "^0.20.0",
     "express": "^4.17.1",
+    "luxon": "^1.24.1",
     "redis": "^2.8.0",
     "utf-8-validate": "^5.0.2"
   },
