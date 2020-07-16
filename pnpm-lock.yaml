@@ -9,6 +9,8 @@ dependencies:
   '@types/luxon': 1.24.1
   '@types/node': 11.13.19
   '@types/redis': 2.8.25
+  '@types/redux': 3.6.0
+  '@types/router5': 5.0.0
   '@types/sharedworker': 0.0.29
   '@types/workerpool': 2.3.1
   '@types/ws': 6.0.4
@@ -1523,6 +1525,20 @@ packages:
     dev: false
     resolution:
       integrity: sha512-e5N5Dg712aZ1CPi1Li0XalukPSWd2RTLYzmrMsQ84NkYQ7cqKHC+HroXM1WP65O1zRGfzld72/u9ikumEe+ylA==
+  /@types/redux/3.6.0:
+    dependencies:
+      redux: 4.0.5
+    deprecated: 'This is a stub types definition for Redux (https://github.com/reactjs/redux). Redux provides its own type definitions, so you don''t need @types/redux installed!'
+    dev: false
+    resolution:
+      integrity: sha1-8evh5UEVGAcuT9/KXHbhbnTBOZo=
+  /@types/router5/5.0.0:
+    dependencies:
+      router5: 8.0.1_router5@8.0.1
+    deprecated: '''router5'' provides its own types'
+    dev: false
+    resolution:
+      integrity: sha512-Q77yCR2A10qC5fg3CDCia5LVP8f7QV4k09ZDEEsalahmzVED0lijGOOItmNp6/3/kyB6XwepVmZgxio2Fu+piA==
   /@types/serve-static/1.13.4:
     dependencies:
       '@types/express-serve-static-core': 4.17.8
@@ -9826,6 +9842,8 @@ specifiers:
   '@types/luxon': ^1.12.0
   '@types/node': 11.13.19
   '@types/redis': ^2.8.14
+  '@types/redux': latest
+  '@types/router5': latest
   '@types/sharedworker': latest
   '@types/workerpool': ^2.3.1
   '@types/ws': ^6.0.2

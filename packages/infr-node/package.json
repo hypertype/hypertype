@@ -39,9 +39,6 @@
     }
   },
   "bundleDependencies": [
-    "eventsource",
-    "fetch",
-    "ws"
   ],
   "peerDependencies": {
     "@hypertype/core": "latest",

@@ -40,7 +40,6 @@
     }
   },
   "bundleDependencies": [
-    "rxjs",
     "crc-32",
     "reflect-metadata"
   ],
