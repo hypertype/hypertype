@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "3.3.20",
+  "version": "3.3.21",
   "license": "MIT",
   "module": "./dist/esm/index.js",
   "main": "./dist/index.js",
@@ -39,7 +39,7 @@
     "canvas": "^2.6.1"
   },
   "devDependencies": {
-    "@hypertype/core": "^3.3.20",
+    "@hypertype/core": "^3.3.21",
     "@hypertype/infr": "^3.3.18",
     "@hypertype/infr-node": "^3.3.20",
     "@hypertype/tools": "^3.3.20",
