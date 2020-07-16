@@ -9,6 +9,7 @@ export class SharedWorkerModelStream<TState, TActions>
 
   constructor(sharedWorkerPath: string) {
     super(sharedWorkerPath);
+    this.worker.port.start();
   }
 
   protected createWorker(path) {
@@ -20,7 +21,6 @@ export class SharedWorkerModelStream<TState, TActions>
   }
 
   protected Subscribe(): Observable<any> {
-    this.worker.port.start();
     return fromEvent<MessageEvent>(this.worker.port, 'message').pipe(
       map(e => e.data),
       shareReplay(1)
