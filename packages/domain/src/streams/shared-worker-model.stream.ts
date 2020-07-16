@@ -1,15 +1,19 @@
-import {WebWorkerModelStream} from "./web-worker-model.stream";
+import {WorkerModelStream} from "./worker-model.stream";
 
-declare var SharedWorker;
+export class SharedWorkerModelStream<TState, TActions> extends WorkerModelStream<TState, TActions> {
 
-export class SharedWorkerModelStream<TState, TActions> extends WebWorkerModelStream<TState, TActions> {
 
-    constructor(sharedWorkerPath: string) {
-        super(sharedWorkerPath);
-    }
+  protected worker : SharedWorker.SharedWorker;
 
-    protected createWorker(path) {
-        return new SharedWorker(path);
-    }
+  constructor(sharedWorkerPath: string) {
+    super(sharedWorkerPath);
+  }
 
+  protected createWorker(path) {
+    return new SharedWorker(path);
+  }
+
+  protected sendMessage(message, options) {
+    this.worker.port.postMessage(message, options);
+  }
 }

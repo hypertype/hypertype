@@ -50,6 +50,7 @@
     "@hypertype/infr": "latest",
     "@hypertype/tools": "latest",
     "@types/node": "11.13.19",
+    "@types/sharedworker": "latest",
     "typescript": "3.7.4"
   },
   "hypertype": {
@@ -57,5 +58,5 @@
       "index": "./dist/esm/index.js"
     }
   },
-  "gitHead": "d541a2f174f1b7238eec048a459e0af17bf4f757"
+  "gitHead": "5000061ccaacdb6ca23f737bcef71623e343c954"
 }

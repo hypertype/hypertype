@@ -6,7 +6,11 @@
     "target": "es2018",
     "moduleResolution": "node",
     "declarationDir": "./dist/typings",
-    "noEmitOnError": true
+    "noEmitOnError": true,
+    "typeRoots": [
+      "@types",
+      "symbol-observable"
+    ]
   },
   "include": [
     "**/*.ts"

@@ -14,12 +14,13 @@
     }
   },
   "references": [
-    { "path": "./packages/app" },
     { "path": "./packages/core" },
+    { "path": "./packages/app" },
     { "path": "./packages/domain" },
     { "path": "./packages/infr" },
     { "path": "./packages/infr-node" },
     { "path": "./packages/infr-browser" },
-    { "path": "./packages/ui" }
+    { "path": "./packages/ui" },
+    { "path": "./packages/server" }
   ]
 }

@@ -1,5 +1,8 @@
 {
   "name": "@hypertype/tools",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "3.3.17",
   "description": "",
   "main": "index.js",
@@ -19,7 +22,7 @@
     "bin.js"
   ],
   "bundleDependencies": [
-    "@babel",
+    "@babel/core",
     "@types/chai",
     "@types/node",
     "chai",
@@ -58,5 +61,5 @@
     "webpack-dev-server": "^3.2.1",
     "webpack-merge": "^4.2.1"
   },
-  "gitHead": "d541a2f174f1b7238eec048a459e0af17bf4f757"
+  "gitHead": "5000061ccaacdb6ca23f737bcef71623e343c954"
 }

@@ -51,6 +51,7 @@
     "@hypertype/tools": "latest",
     "@types/luxon": "^1.12.0",
     "@types/node": "11.13.19",
+    "symbol-observable": "^1.2.0",
     "crc-32": "*",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.2"
@@ -60,5 +61,5 @@
       "index": "./dist/esm/index.js"
     }
   },
-  "gitHead": "d541a2f174f1b7238eec048a459e0af17bf4f757"
+  "gitHead": "5000061ccaacdb6ca23f737bcef71623e343c954"
 }

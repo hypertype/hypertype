@@ -52,6 +52,7 @@
     "@hypertype/ui": "latest"
   },
   "devDependencies": {
+    "@hypertype/tools": "latest",
     "@hypertype/core": "latest",
     "@hypertype/infr": "latest",
     "@hypertype/ui": "latest",
@@ -66,5 +67,5 @@
       "index": "./dist/esm/index.js"
     }
   },
-  "gitHead": "d541a2f174f1b7238eec048a459e0af17bf4f757"
+  "gitHead": "5000061ccaacdb6ca23f737bcef71623e343c954"
 }
