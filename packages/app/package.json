@@ -57,6 +57,8 @@
     "@hypertype/tools": "latest",
     "@hypertype/ui": "latest",
     "@types/node": "11.13.19",
+    "@types/redux": "latest",
+    "@types/router5": "latest",
     "redux": "4.0.5",
     "router5": "8.0.1",
     "router5-plugin-browser": "8.0.1",

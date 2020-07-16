@@ -21,25 +21,6 @@
     "build",
     "bin.js"
   ],
-  "bundleDependencies": [
-    "@babel/core",
-    "@types/chai",
-    "@types/node",
-    "chai",
-    "less",
-    "html-webpack-plugin",
-    "mocha-typescript",
-    "node-libs-browser",
-    "tsconfig-paths-webpack-plugin",
-    "webpack",
-    "webpack-bundle-analyzer",
-    "webpack-dev-server",
-    "webpack-merge",
-    "awesome-typescript-loader",
-    "less-loader",
-    "css-loader",
-    "string-loader"
-  ],
   "dependencies": {
     "@testdeck/jest": "0.0.6",
     "@types/chai": "^4.1.7",
