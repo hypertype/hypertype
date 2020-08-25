@@ -64,5 +64,6 @@
       "index": "./dist/esm/index.js",
       "type": "node"
     }
-  }
+  },
+  "gitHead": "eef2660fa720e22277aa27b5d04ce1ee350865db"
 }
