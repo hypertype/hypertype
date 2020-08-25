@@ -2,8 +2,8 @@
   "name": "@hypertype/app",
   "version": "3.3.20",
   "description": "",
-  "main": "dist/esm/index.js",
-  "bundle": "dist/bundle/index.js",
+  "main": "dist/index.js",
+  "bundle": "dist/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
     "build": "tsc -b --watch",

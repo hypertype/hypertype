@@ -3,7 +3,7 @@ const fs = require('fs');
 
 module.exports = function newComponent(directoryPath, componentName) {
     fs.mkdirSync(path.join(directoryPath, componentName));
-    const componentNameClass = componentName[0].toUpperCase() + componentName.substr(1);
+	const componentNameClass = componentName.replace(/(^.|\-.)/g, ch => ch[ch.length - 1].toUpperCase());
     fs.writeFileSync(path.join(directoryPath, componentName, `${componentName}.style.less`),
         `ctx-${componentName} {
   display: block;

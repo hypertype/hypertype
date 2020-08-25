@@ -1,5 +1,5 @@
 import createRouter, {Options, Route, RouteNode, Router as Router5, State as RouterState} from 'router5';
-import * as browserPlugin from 'router5-plugin-browser/dist';
+import * as browserPlugin from 'router5-plugin-browser';
 import {Observable, startWith} from "@hypertype/core";
 
 export class IRouterOptions {
@@ -20,7 +20,7 @@ export class Router {
 
     constructor(routerInit: IRouterOptions) {
         this.router = createRouter(routerInit.routes, routerInit.options);
-        this.router.usePlugin(browserPlugin());
+        this.router.usePlugin((browserPlugin as any)());
         this.router.start();
         this.State$ = new Observable<RouterState>(subscr => {
             this.router.subscribe(change => subscr.next(change.route as RouterState))
