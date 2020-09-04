@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -b --watch",
-    "bundle": "lerna run bundle:prod",
+    "bundle:prod": "lerna run bundle:prod",
+    "bundle": "lerna run bundle",
     "publish": "lerna publish patch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

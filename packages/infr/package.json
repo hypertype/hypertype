@@ -42,11 +42,11 @@
     }
   },
   "peerDependencies": {
-    "@hypertype/core": "latest"
+    "@hypertype/core": "^3.4.1"
   },
   "devDependencies": {
-    "@hypertype/core": "latest",
-    "@hypertype/tools": "latest",
+    "@hypertype/core": "^3.4.1",
+    "@hypertype/tools": "^3.4.1",
     "@types/node": "11.13.19"
   },
   "hypertype": {

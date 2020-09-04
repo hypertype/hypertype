@@ -7,6 +7,8 @@ import {
   Observable,
   ReplaySubject,
   shareReplay,
+  Subject,
+  switchMap,
   takeUntil
 } from "@hypertype/core";
 import {Model} from "./model";
@@ -16,12 +18,14 @@ export class WebworkerEntry {
 
   private Responses$ = new ReplaySubject();
   private store: SharedStore;
+  private StoreHandler$ = new Subject();
 
-  public Output$: Observable<any> = merge(
-    this.model.State$.pipe(map(d => ({state: d}))),
-    this.Responses$.asObservable()
-  ).pipe(
-    filter(x => this.store != null),
+  public Output$: Observable<any> = this.StoreHandler$.pipe(
+    switchMap(x => merge(
+      this.model.State$.pipe(map(d => ({state: d}))),
+      this.Responses$.asObservable()
+    )),
+    // filter(x => this.store != null),
     map(data => this.store.Write(data)),
     shareReplay(1)
   );
@@ -68,7 +72,7 @@ export class WebworkerEntry {
   public onMessage = (e: MessageEvent) => {
     if (e.data?.input instanceof SharedArrayBuffer) {
       this.store = new SharedStore(e.data.output, e.data.input);
-      console.log('store', this, this.store);
+      this.StoreHandler$.next();
       return;
     }
     const request = this.store.Read(e.data);
