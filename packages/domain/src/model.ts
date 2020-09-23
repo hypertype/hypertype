@@ -6,7 +6,7 @@ import {
     shareReplay,
     startWith,
     Subject,
-    switchMap,
+    concatMap,
     tap
 } from "@hypertype/core";
 import {IInvoker} from "./model.stream";
@@ -24,7 +24,7 @@ export abstract class Model<TState, TActions> implements IModel<TState, TActions
 
     private InvokeSubject$ = new Subject<{ action: { path; method; args }, resolve: Function, reject: Function }>();
     private Invoke$ = this.InvokeSubject$.pipe(
-        switchMap(({action, resolve, reject}) => {
+        concatMap(({action, resolve, reject}) => {
             // console.log('action start', action.path, action.method, action.args);
             try {
                 const res: any = this.GetSubActions(...(action.path || []))[action.method](...action.args);
