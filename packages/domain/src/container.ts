@@ -1,7 +1,6 @@
-import {UrlToken} from "./streams/shared-web-worker-model.stream";
+import {UrlToken, SharedWebWorkerModelStream} from "./streams/shared-web-worker-model.stream";
 import {ModelStream} from "./model.stream";
 import {Container} from "@hypertype/core";
-import {SharedWorkerModelStream} from "./streams/shared-worker-model.stream";
 import {SimpleModelStream} from "./streams/simple-model.stream";
 import {WebSocketModelStream} from "./streams/web-socket-model.stream";
 import {ModelProxy} from "./model.proxy";
@@ -24,7 +23,7 @@ function getStreamProviders(devTools = false) {
     }
 }
 
-const WebWorkerModelStream = ('SharedArrayBuffer' in self) ? SharedWorkerModelStream : SimpleWebWorkerModelStream;
+const WebWorkerModelStream = ('SharedArrayBuffer' in self) ? SharedWebWorkerModelStream : SimpleWebWorkerModelStream;
 
 export const ProxyDomainContainer = {
     withSharedWorker(url: string = '/webworker.js', devTools = false): Container {
