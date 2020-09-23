@@ -2,7 +2,7 @@ import {Container, map, merge, Observable, ReplaySubject, shareReplay, tap} from
 import {Model} from "./model";
 import {fromEvent, takeUntil} from "@hypertype/core";
 
-export class WebworkerEntry {
+export class SimpleWebWorkerEntry {
 
     private Responses$ = new ReplaySubject();
 
@@ -21,7 +21,7 @@ export class WebworkerEntry {
 
         const aggregate = container.get<Model<any, any>>(Model);
 
-        const service = new WebworkerEntry(aggregate);
+        const service = new SimpleWebWorkerEntry(aggregate);
         if (self.postMessage) {
             self.addEventListener('message', service.onMessage);
 

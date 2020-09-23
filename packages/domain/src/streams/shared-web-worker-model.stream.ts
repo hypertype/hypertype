@@ -4,7 +4,7 @@ import {SharedStore} from "../sharedStore";
 
 export const UrlToken = new InjectionToken('webworker');
 
-export class WebWorkerModelStream<TState, TActions>
+export class SharedWebWorkerModelStream<TState, TActions>
   extends WorkerModelStream<TState, TActions> {
   private store;
 

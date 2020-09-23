@@ -1,4 +1,4 @@
-import {UrlToken, WebWorkerModelStream} from "./streams/web-worker-model.stream";
+import {UrlToken} from "./streams/shared-web-worker-model.stream";
 import {ModelStream} from "./model.stream";
 import {Container} from "@hypertype/core";
 import {SharedWorkerModelStream} from "./streams/shared-worker-model.stream";
@@ -9,6 +9,7 @@ import {Model} from "./model";
 import {DevToolModelStream} from "./streams/dev-tool-model.stream";
 import {WebsocketEntry} from "./websocket.entry";
 import {StateLogger} from "@hypertype/infr";
+import { SimpleWebWorkerModelStream } from "./streams/simple-web-worker-model.stream";
 
 
 const BaseContainer = new Container();
@@ -23,19 +24,21 @@ function getStreamProviders(devTools = false) {
     }
 }
 
+const WebWorkerModelStream = ('SharedArrayBuffer' in self) ? SharedWorkerModelStream : SimpleWebWorkerModelStream;
+
 export const ProxyDomainContainer = {
     withSharedWorker(url: string = '/webworker.js', devTools = false): Container {
         const container = new Container();
         container.provide(BaseContainer);
         if (devTools) {
             container.provide([
-                {provide: ModelStream, useClass: DevToolModelStream, deps: [SharedWorkerModelStream, StateLogger]},
-                {provide: SharedWorkerModelStream, deps: [UrlToken]},
+                {provide: ModelStream, useClass: DevToolModelStream, deps: [WebWorkerModelStream, StateLogger]},
+                {provide: WebWorkerModelStream, deps: [UrlToken]},
                 {provide: UrlToken, useValue: url},
             ]);
         } else {
             container.provide([
-                {provide: ModelStream, useClass: SharedWorkerModelStream, deps: [UrlToken]},
+                {provide: ModelStream, useClass: WebWorkerModelStream, deps: [UrlToken]},
                 {provide: UrlToken, useValue: url},
             ]);
         }

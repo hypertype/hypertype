@@ -14,7 +14,7 @@ import {
 import {Model} from "./model";
 import {SharedStore} from "./sharedStore";
 
-export class WebworkerEntry {
+export class SharedWebworkerEntry {
 
   private Responses$ = new ReplaySubject();
   private store: SharedStore;
@@ -38,7 +38,7 @@ export class WebworkerEntry {
 
     const aggregate = container.get<Model<any, any>>(Model);
 
-    const service = new WebworkerEntry(aggregate);
+    const service = new SharedWebworkerEntry(aggregate);
     if (self.postMessage) {
       self.addEventListener('message', service.onMessage);
 
