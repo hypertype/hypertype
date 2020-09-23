@@ -1,4 +1,3 @@
-import {fetchUrl} from 'fetch';
 import * as WebSocket from 'ws'
 import * as EventSource from 'eventsource';
 import {
@@ -22,7 +21,7 @@ export class NodeWebSocketService extends BaseWebSocketService {
     protected getConfig(): IHttpConnectionOptions {
         return {
             transport: HttpTransportType.WebSockets,
-            WebSocket: WebSocket,
+            WebSocket: WebSocket as any,
             EventSource: EventSource
         }
     }

@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/infr-browser",
-  "version": "3.3.18",
+  "version": "3.4.5",
   "description": "",
   "main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
@@ -40,13 +40,13 @@
     }
   },
   "peerDependencies": {
-    "@hypertype/core": "latest",
-    "@hypertype/infr": "latest"
+    "@hypertype/core": "^3.4.1",
+    "@hypertype/infr": "^3.4.1"
   },
   "devDependencies": {
-    "@hypertype/core": "latest",
-    "@hypertype/infr": "latest",
-    "@hypertype/tools": "latest",
+    "@hypertype/core": "^3.4.5",
+    "@hypertype/infr": "^3.4.5",
+    "@hypertype/tools": "^3.4.1",
     "@types/node": "11.13.19"
   },
   "hypertype": {
@@ -54,5 +54,5 @@
       "index": "./dist/esm/index.js"
     }
   },
-  "gitHead": "5000061ccaacdb6ca23f737bcef71623e343c954"
+  "gitHead": "eef2660fa720e22277aa27b5d04ce1ee350865db"
 }

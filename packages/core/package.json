@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/core",
-  "version": "3.3.21",
+  "version": "3.4.5",
   "description": "",
   "main": "dist/esm/index.js",
   "bundle": "dist/bundle/index.js",
@@ -48,7 +48,7 @@
     "luxon": "^1.12.1"
   },
   "devDependencies": {
-    "@hypertype/tools": "latest",
+    "@hypertype/tools": "^3.4.1",
     "@types/luxon": "^1.12.0",
     "@types/node": "11.13.19",
     "crc-32": "*",
@@ -61,5 +61,5 @@
       "index": "./dist/esm/index.js"
     }
   },
-  "gitHead": "5000061ccaacdb6ca23f737bcef71623e343c954"
+  "gitHead": "eef2660fa720e22277aa27b5d04ce1ee350865db"
 }
