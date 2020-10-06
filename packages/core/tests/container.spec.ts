@@ -1,5 +1,5 @@
 import {Container} from "../di/container";
-import {expect, suite, test} from "@hypertype/tools/test/index.js";
+import {expect, suite, test} from "@hypertype/tools/test";
 
 @suite
 export class ContainerSpec {
