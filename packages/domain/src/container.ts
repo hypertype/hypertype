@@ -23,7 +23,7 @@ function getStreamProviders(devTools = false) {
     }
 }
 
-const WebWorkerModelStream = ('SharedArrayBuffer' in self) ? SharedWebWorkerModelStream : SimpleWebWorkerModelStream;
+const WebWorkerModelStream = SimpleWebWorkerModelStream;//('SharedArrayBuffer' in self) ? SharedWebWorkerModelStream : SimpleWebWorkerModelStream;
 
 export const ProxyDomainContainer = {
     withSharedWorker(url: string = '/webworker.js', devTools = false): Container {
