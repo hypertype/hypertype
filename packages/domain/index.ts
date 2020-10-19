@@ -7,5 +7,5 @@ export * from './src/websocket.entry';
 export * from './src/container';
 export * from './helpers/DomainError';
 
-export const WebworkerEntry = ('SharedArrayBuffer' in self) ? SharedWebworkerEntry : SimpleWebWorkerEntry;
+export const WebworkerEntry = SimpleWebWorkerEntry;//('SharedArrayBuffer' in self) ? SharedWebworkerEntry : SimpleWebWorkerEntry;
 

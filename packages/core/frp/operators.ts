@@ -30,7 +30,9 @@ export * from "rxjs/internal/operators/takeUntil";
 export * from "rxjs/internal/operators/throttle";
 export * from "rxjs/internal/observable/fromEvent";
 export * from "rxjs/internal/scheduler/animationFrame";
-export * from "rxjs/internal/scheduler/async";
+export {
+  asyncScheduler, async
+} from "rxjs/internal/scheduler/async";
 export * from "rxjs/internal/operators/distinctUntilChanged";
 export * from "rxjs/internal/operators/switchMap";
 export * from "rxjs/internal/operators/toArray";

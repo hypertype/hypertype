@@ -1,2 +1,4 @@
 export * from "./operators";
-export * from "./switch-throttle";
+export {delayAsync} from "./delay-async";
+export {switchThrottle} from "./switch-throttle";
+export {switchDebounce} from "./switch-debounce";

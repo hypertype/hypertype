@@ -1,5 +1,5 @@
 import {utc} from "../../";
-import {expect, suite, test} from "@hypertype/tools/test/index.js";
+import {expect, suite, test} from "@hypertype/tools/test";
 
 @suite
 export class UtcSpec {

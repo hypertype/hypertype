@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/core",
-  "version": "3.4.6",
+  "version": "3.4.10",
   "description": "",
   "main": "dist/esm/index.js",
   "bundle": "dist/bundle/index.js",
@@ -9,6 +9,7 @@
     "build": "tsc -b --watch",
     "bundle": "hypertype lib",
     "bundle:prod": "hypertype lib --prod",
+    "bundle:watch": "hypertype lib --watch",
     "bundle:prod:stats": "hypertype lib --prod --stats",
     "deploy": "npm version patch && npm publish",
     "test": "jest"
@@ -31,11 +32,13 @@
     "test": "tests"
   },
   "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.(t|j)sx?$": "ts-jest"
+    },
     "globals": {
       "ts-jest": {
-        "tsConfig": "tests/tsconfig.json"
+        "tsConfig": "tests/tsconfig.json",
+        "diagnostics": false
       }
     }
   },
@@ -54,7 +57,8 @@
     "crc-32": "*",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.2",
-    "symbol-observable": "^1.2.0"
+    "symbol-observable": "^1.2.0",
+    "ts-jest": "^26.4.1"
   },
   "hypertype": {
     "lib": {
