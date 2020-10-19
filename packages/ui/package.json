@@ -2,7 +2,7 @@
   "name": "@hypertype/ui",
   "version": "3.4.6",
   "description": "",
-  "main": "dist/index.es5.js",
+  "main": "dist/index.js",
   "es5": "dist/index.es5.js",
   "es6": "dist/esm/index.js",
   "typings": "dist/typings/index.d.ts",
