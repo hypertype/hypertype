@@ -23,6 +23,8 @@ export class ModelProxy<TState, TActions extends IActions<TActions>> {
       // для примитивов
       if (typeof key !== "string")
         return () => null;
+      if (key == "then")
+        return Promise.resolve(target);
       return target[key] || (target[key] = (async (...args) => {
         try {
           const res = await this.stream.Action({
