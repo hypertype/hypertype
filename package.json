@@ -3,6 +3,7 @@
   "version": "2.1.0",
   "main": "index.js",
   "scripts": {
+    "bootstrap": "lerna bootstrap --hoist",
     "build": "tsc -b --watch",
     "bundle:prod": "lerna run bundle:prod",
     "bundle": "lerna run bundle",
