@@ -9,6 +9,7 @@
     "emitDecoratorMetadata": true,
     "noEmitOnError": true,
     "target": "es2018",
+    "types": ["node"],
     "moduleResolution": "node"
   },
   "include": [

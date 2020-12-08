@@ -8,6 +8,7 @@
     "emitDecoratorMetadata": true,
     "rootDir": "./",
     "outDir": "./dist/esm",
+    "types": [],
     "declarationDir": "./dist/typings",
     "noEmitOnError": true
   },
