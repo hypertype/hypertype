@@ -1,14 +1,11 @@
 import {
     filter,
-    first,
     map,
     NEVER,
     Observable,
     of,
     ReplaySubject,
-    scan,
     shareReplay,
-    startWith,
     Subject,
     switchMap,
     withLatestFrom

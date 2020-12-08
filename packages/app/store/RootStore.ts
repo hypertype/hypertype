@@ -1,5 +1,5 @@
 import {ObservableStore} from './ObservableStore';
-import {Action, applyMiddleware, Middleware, StoreEnhancer} from 'redux';
+import {Action, applyMiddleware, Middleware} from 'redux';
 import {ActionsObservable, createEpicMiddleware} from './redux-observable';
 import {
     catchError,

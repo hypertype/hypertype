@@ -10,7 +10,7 @@ BrowserContainer.provide([
     {provide: StateLogger, useClass: DevToolsStateLogger},
     {provide: IRequestService, useClass: FetchRequestService},
     {provide: IWebSocketService, useClass: BrowserWebSocketService},
-]);
+])
 
 export {
     FetchRequestService,
