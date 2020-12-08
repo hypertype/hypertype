@@ -11,6 +11,7 @@
     "target": "esnext",
     "moduleResolution": "node",
     "composite": true,
+    "types": ["node"],
     "lib": [
       "es2015",
       "esnext",
