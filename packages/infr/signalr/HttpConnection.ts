@@ -340,20 +340,6 @@ export class HttpConnection implements IConnection {
     }
   }
 
-  private get globalThis(){
-    switch ("object") {
-      case typeof globalThis:
-        return globalThis;
-      case typeof self:
-        return self;
-      case typeof window:
-        return window;
-      case typeof global:
-        return global;
-    }
-    throw new Error(`Cannot resolve global`);
-  }
-
   private resolveUrl(url: string): string {
     // startsWith is not supported in IE
     if (/^https?\:\/\//.test(url)) {

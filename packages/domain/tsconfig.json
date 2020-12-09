@@ -13,8 +13,7 @@
       "ESNext"
     ],
     "types": [
-      "@types/sharedworker",
-      "@types/node"
+      "@types/sharedworker"
     ]
   },
   "include": [

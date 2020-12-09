@@ -7,7 +7,6 @@
     "declarationDir": "./dist/typings",
     "noEmitOnError": true,
     "types":  [
-      "node"
     ]
   },
   "include": [

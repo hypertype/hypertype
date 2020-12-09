@@ -149,7 +149,7 @@ export function Component(info: {
                 if (!this.component)
                     return;
                 if (this.component.constructor[propertySymbol] && this.component.constructor[propertySymbol][name]) {
-                    this.component.constructor[exports.propertySymbol][name](this.component).set(curr)  }
+                    this.component.constructor[propertySymbol][name](this.component).set(curr)  }
             }
 
             disconnectedCallback() {
