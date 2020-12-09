@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc -b --watch",
     "bundle": "hypertype lib",
-    "bundle:prod": "hypertype lib --prod",
+    "prod": "hypertype lib --prod",
     "bundle:watch": "hypertype lib --watch",
     "bundle:prod:stats": "hypertype lib --prod --stats",
     "deploy": "npm version patch && npm publish",

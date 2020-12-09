@@ -5,8 +5,8 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
     "build": "tsc -b --watch",
-    "bundle:prod": "lerna run bundle:prod",
     "bundle": "lerna run bundle",
+    "prod": "tsc -b && lerna run prod",
     "publish": "lerna publish patch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
