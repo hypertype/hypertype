@@ -32,13 +32,13 @@
   "peerDependencies": {
     "@hypertype/core": "^3.4.1",
     "@hypertype/tools": "^3.4.1",
-    "@types/node": "11.13.19",
+    "@types/node": "12.19.8",
     "typescript": "3.7.4"
   },
   "devDependencies": {
     "@hypertype/core": "^3.4.22",
     "@hypertype/tools": "^3.4.22",
-    "@types/node": "11.13.19",
+    "@types/node": "12.19.8",
     "typescript": "3.7.4"
   },
   "hypertype": {

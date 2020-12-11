@@ -56,7 +56,7 @@
     "@hypertype/infr": "^3.4.22",
     "@hypertype/tools": "^3.4.22",
     "@hypertype/ui": "^3.4.22",
-    "@types/node": "11.13.19",
+    "@types/node": "12.19.8",
     "@types/redux": "latest",
     "@types/router5": "latest",
     "redux": "4.0.5",

@@ -24,7 +24,7 @@
   "dependencies": {
     "@testdeck/jest": "0.0.6",
     "@types/chai": "^4.1.7",
-    "@types/node": "11.13.19",
+    "@types/node": "12.19.8",
     "awesome-typescript-loader": "^5.2.1",
     "chai": "^4.2.0",
     "css-loader": "^2.1.1",
