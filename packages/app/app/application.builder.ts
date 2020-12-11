@@ -45,11 +45,7 @@ export class ApplicationBuilder {
   }
 
   public static withApiLogging(url: string): typeof ApplicationBuilder {
-    this.container.provide([{provide: LogApiUrl, useValue: url}, ApiLogFactory]);
-    Logger.Factory = (() => {
-      const factory = this.container.get<ApiLogFactory>(ApiLogFactory)
-      return factory.Factory();
-    }) as Factory<Logger>;
+    Logger.Factory = ApiLogFactory(this.container, url);
     return this;
   }
 }
