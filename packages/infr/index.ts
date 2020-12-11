@@ -1,4 +1,3 @@
-import {Logger} from "./src/logger";
 import {ApiService, ApiUrlInjectionToken} from "./src/api.service";
 import {IRequestService} from "./src/request.service";
 import {Container} from "@hypertype/core";
@@ -8,16 +7,15 @@ import {ApiHttpClient} from "./src/api-http.client";
 
 export {BaseWebSocketService} from "./src/base-web-socket.service";
 
-export * from './src/logger';
 export * from './src/api.service';
 export * from './src/request.service';
 export * from './src/i-web-socket.service';
 export * from './src/state.logger';
+export * from './logger/index';
 
 export const InfrContainer = new Container();
 InfrContainer.provide([
     ApiHttpClient,
-    {provide: Logger},
     {
         provide: ITokenStore, useValue: {
             get() {
