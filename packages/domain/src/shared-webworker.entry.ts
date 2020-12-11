@@ -1,6 +1,5 @@
 import {
   Container,
-  filter,
   fromEvent,
   map,
   merge,

@@ -11,9 +11,7 @@
     "baseUrl": "..",
     "target": "es2015",
     "module": "commonjs",
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "lib": [
       "es2015",
       "esnext",

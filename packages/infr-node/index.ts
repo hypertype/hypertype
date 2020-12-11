@@ -8,4 +8,4 @@ NodeContainer.provide(InfrContainer);
 NodeContainer.provide([
     {provide: IRequestService, useClass: NodeFetchService},
     {provide: IWebSocketService, useClass: NodeWebSocketService}
-]);
+])

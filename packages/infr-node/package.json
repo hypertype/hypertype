@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/infr-node",
-  "version": "3.4.12",
+  "version": "3.4.21",
   "description": "",
   "module": "dist/esm/index.js",
   "main": "dist/index.js",
@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc -b --watch",
     "bundle": "hypertype lib",
-    "bundle:prod": "hypertype lib --prod",
+    "prod": "hypertype lib --prod",
     "deploy": "npm version patch && npm publish",
     "test": "jest"
   },
@@ -45,9 +45,9 @@
     "@hypertype/tools": "^3.4.1"
   },
   "devDependencies": {
-    "@hypertype/core": "^3.4.12",
-    "@hypertype/infr": "^3.4.12",
-    "@hypertype/tools": "^3.4.6"
+    "@hypertype/core": "^3.4.21",
+    "@hypertype/infr": "^3.4.21",
+    "@hypertype/tools": "^3.4.21"
   },
   "dependencies": {
     "eventsource": "*",
@@ -59,5 +59,5 @@
       "index": "./dist/esm/index.js"
     }
   },
-  "gitHead": "eef2660fa720e22277aa27b5d04ce1ee350865db"
+  "gitHead": "eaccece841cbb7ecde27109e450a9d7aac485e64"
 }

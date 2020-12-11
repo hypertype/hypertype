@@ -27,7 +27,7 @@ InfrContainer.provide([
     {provide: ApiService, deps: [IRequestService, ApiUrlInjectionToken]},
     {provide: ApiUrlInjectionToken, useValue: 'http://localhost/api'},
     {provide: WebSocketUrlInjectionToken, useValue: 'http://localhost/inventory'},
-]);
+])
 
 export const AuthContainer = new Container();
 AuthContainer.provide(InfrContainer);
