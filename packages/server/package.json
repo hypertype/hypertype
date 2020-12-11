@@ -35,9 +35,6 @@
     "redis",
     "utf-8-validate"
   ],
-  "dependencies": {
-    "canvas": "^2.6.1"
-  },
   "devDependencies": {
     "@hypertype/core": "^3.4.22",
     "@hypertype/infr": "^3.4.22",
