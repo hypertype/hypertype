@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/app",
-  "version": "3.5.1",
+  "version": "3.5.2",
   "description": "",
   "main": "dist/index.js",
   "bundle": "dist/index.js",
@@ -52,10 +52,10 @@
     "@hypertype/ui": "^3.4.1"
   },
   "devDependencies": {
-    "@hypertype/core": "^3.5.0",
-    "@hypertype/infr": "^3.5.0",
-    "@hypertype/tools": "^3.5.0",
-    "@hypertype/ui": "^3.5.1",
+    "@hypertype/core": "^3.5.2",
+    "@hypertype/infr": "^3.5.2",
+    "@hypertype/tools": "^3.5.2",
+    "@hypertype/ui": "^3.5.2",
     "@types/node": "12.19.8",
     "@types/redux": "latest",
     "@types/router5": "latest",
