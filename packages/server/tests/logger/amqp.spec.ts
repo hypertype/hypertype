@@ -1,6 +1,6 @@
 import {Rabbit} from '../../core/logger/amqp';
 import {Exchange, Message} from 'amqp-ts';
-import {suite, test} from 'mocha-typescript';
+import {suite, test} from '@hypertype/tools/test';
 import {utc} from "@hypertype/core";
 
 @suite
