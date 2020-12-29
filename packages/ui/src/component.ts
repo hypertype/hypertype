@@ -33,11 +33,11 @@ export const property: any = () => (target: any, key: string, properties) => {
         }
     };
     // if (delete this[key]) {
-    //     Object.defineProperty(target, key, {
-    //         get(): any {
-    //             return getSubject(this).asObservable();
-    //         }
-    //     })
+    Object.defineProperty(target, key, {
+        get(): any {
+            return getSubject(this).asObservable();
+        }
+    })
     // }
 };
 
