@@ -5,7 +5,8 @@ export class SharedWorkerModelStream<TState, TActions>
   extends WorkerModelStream<TState, TActions> {
 
 
-  protected worker : SharedWorker.SharedWorker;
+  // @ts-ignore
+  protected worker : SharedWorker;
 
   constructor(sharedWorkerPath: string) {
     super(sharedWorkerPath);

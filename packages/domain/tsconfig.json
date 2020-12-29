@@ -11,9 +11,6 @@
     "lib": [
       "WebWorker",
       "ESNext"
-    ],
-    "types": [
-      "@types/sharedworker"
     ]
   },
   "include": [
