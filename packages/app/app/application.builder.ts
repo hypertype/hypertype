@@ -2,7 +2,7 @@ import {Container} from "@hypertype/core";
 import {IRouterOptions, Router} from "./router";
 import {Application} from "./application";
 import {RootStore, Store} from "../store";
-import {ApiLogFactory, ConsoleLogFactory, Factory, LogApiUrl, Logger, StateLogger} from "@hypertype/infr";
+import {ApiLogFactory, ConsoleLogFactory,  Logger, StateLogger} from "@hypertype/infr";
 
 export class ApplicationBuilder {
 
@@ -14,7 +14,6 @@ export class ApplicationBuilder {
       {provide: RootStore, useClass: RootStore, deps: [StateLogger]},
       {provide: Application, deps: [Container, RootStore]},
       {provide: Router, deps: [IRouterOptions]},
-      {provide: Logger}
     ]);
     return this.container.get<Application>(Application);
   }

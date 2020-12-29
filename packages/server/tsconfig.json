@@ -13,6 +13,7 @@
     "composite": true,
     "types": ["node"],
     "lib": [
+      "DOM"
     ],
     "paths": {
       "@gm/isomorphic-render": [

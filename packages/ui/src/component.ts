@@ -32,13 +32,13 @@ export const property: any = () => (target: any, key: string, properties) => {
             enumerable: true
         }
     };
-    if (delete this[key]) {
-        Object.defineProperty(target, key, {
-            get(): any {
-                return getSubject(this).asObservable();
-            }
-        })
-    }
+    // if (delete this[key]) {
+    //     Object.defineProperty(target, key, {
+    //         get(): any {
+    //             return getSubject(this).asObservable();
+    //         }
+    //     })
+    // }
 };
 
 export function Component(info: {

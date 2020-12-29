@@ -10,5 +10,9 @@
     "declarationDir": "./dist/typings",
     "noEmitOnError": false,
     "types": []
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

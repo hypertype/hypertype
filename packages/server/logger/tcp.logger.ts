@@ -3,12 +3,11 @@ import {Socket, createConnection} from "net";
 import * as os from "os";
 import {utc} from "@hypertype/core";
 
-export class TcpLogger extends Logger {
+export class TcpLogSender {
     private tcpClient: Socket;
     public static URL: string;
     constructor() {
-        super();
-        const [host, port] = TcpLogger.URL.split(':');
+        const [host, port] = TcpLogSender.URL.split(':');
         this.tcpClient = createConnection(+port, host);
         // this.tcpClient.connect(5045, '172.20.154.101', ()=>{
         //     console.log('tcp connected')
