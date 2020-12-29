@@ -47,7 +47,7 @@
     "@hypertype/core": "^3.4.22",
     "@hypertype/infr": "^3.4.22",
     "@hypertype/tools": "^3.4.22",
-    "@types/node": "11.13.19"
+    "@types/node": "12.19.8"
   },
   "hypertype": {
     "lib": {
