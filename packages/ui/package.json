@@ -8,7 +8,8 @@
   "typings": "dist/typings/index.d.ts",
   "scripts": {
     "build": "tsc -b --watch",
-    "bundle": "hypertype lib --watch",
+    "bundle": "hypertype lib",
+    "bundle:watch": "hypertype lib --watch",
     "prod": "hypertype lib --prod",
     "build:es5": "tsc -b --watch tsconfig.es5.json",
     "bundle:es5": "hypertype es5 --watch",

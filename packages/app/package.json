@@ -7,7 +7,8 @@
   "typings": "dist/typings/index.d.ts",
   "scripts": {
     "build": "tsc -b --watch",
-    "bundle": "hypertype lib --watch",
+    "bundle": "hypertype lib",
+    "bundle:watch": "hypertype lib --watch",
     "prod": "hypertype lib --prod",
     "deploy": "npm version patch && npm publish",
     "test": "jest"

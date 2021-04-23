@@ -11,7 +11,8 @@
   "scripts": {
     "tsc": "tsc -b --watch",
     "clean": "rm -rf dist",
-    "bundle": "hypertype node --watch",
+    "bundle": "hypertype node",
+    "bundle:watch": "hypertype node --watch",
     "prod": "hypertype node --prod",
     "deploy": "npm version patch && npm publish"
   },
