@@ -1,5 +1,5 @@
 import createRouter, {Options, Route, RouteNode, Router as Router5, State as RouterState} from 'router5';
-import * as browserPlugin from 'router5-plugin-browser';
+import browserPlugin from 'router5-plugin-browser';
 import {Observable, shareReplay, startWith} from "@hypertype/core";
 
 export class IRouterOptions {
