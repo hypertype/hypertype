@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/core",
-  "version": "3.5.2",
+  "version": "3.5.3",
   "description": "",
   "main": "dist/esm/index.js",
   "bundle": "dist/bundle/index.js",
@@ -51,7 +51,7 @@
     "luxon": "^1.12.1"
   },
   "devDependencies": {
-    "@hypertype/tools": "^3.5.2",
+    "@hypertype/tools": "^3.5.3",
     "@types/luxon": "^1.12.0",
     "@types/node": "12.19.8",
     "crc-32": "*",
