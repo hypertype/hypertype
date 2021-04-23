@@ -50,7 +50,6 @@ export class RootStore extends ObservableStore<any> {
         //         });
         //     return this.store;
         // }
-        console.log('store');
         const epicMiddleware = createEpicMiddleware();
         this.store.provide(this.combinedReducer,
             state,

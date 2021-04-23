@@ -4,8 +4,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const path = require('path');
 const merge = require('webpack-merge');
 
-module.exports = (index, target, output) => {
-    const prod = process.argv.filter(a => /--prod/.test(a)).length;
+module.exports = (index, filename, output, target) => {
+    const prod = process.argv.filter(a => /--prod/.test(a)).length > 0;
     const baseDir = process.cwd();
     const pkg = require(path.join(baseDir, 'package.json'));
     let cfg = {};
@@ -14,17 +14,20 @@ module.exports = (index, target, output) => {
         console.log(`use config override from ${path.join(baseDir, 'webpack.config.js')}`);
     } catch (e) {
     }
-    const mainEs = /es5/.test(target) ? 'es5' : 'es6';
-    const moduleEs = /es5/.test(target) ? 'module' : 'module-es6';
+    const mainEs = 'es6';
+    const moduleEs = 'module';
+    const mainFields = prod ? [mainEs, 'main', moduleEs] : [moduleEs, mainEs, 'main'];
+    if (target !== 'node')
+      mainFields.unshift('browser');
     return merge({
         entry: {
             index: index,
         },
         output: {
-            path: path.join(baseDir, output || "dist"),
-            filename: (target || "index.js")
+            path: path.join(baseDir, output || "dist", prod ? "prod" : ""),
+            filename: (filename || "index.js")
         },
-        target: 'web',
+        target: target || 'web',
         node: {
             process: true,
             os: true
@@ -34,10 +37,10 @@ module.exports = (index, target, output) => {
         externals: Object.keys(pkg.peerDependencies || []),
         resolve: {
             extensions: ['.ts', '.js', '.html', '.json'],
-            mainFields: prod ? [mainEs, 'main', moduleEs] : [moduleEs, mainEs, 'main'],
-            plugins: prod ? [] : [
+            mainFields: mainFields,
+            plugins: [
                 new TsconfigPathsPlugin({
-                    mainFields: prod ? [mainEs, 'main', moduleEs] : [moduleEs, mainEs, 'main'],
+                    mainFields: mainFields,
                 })
             ],
         },

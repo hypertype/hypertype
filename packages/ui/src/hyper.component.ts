@@ -14,7 +14,7 @@ import {
 export abstract class HyperComponent<TState = any, TEvents = any> {
 
     State$: Observable<TState> = of(null);
-    Actions$: Observable<{ type: string; payload?: any }> = NEVER;
+    Actions$: Observable<any> = NEVER;
 
     protected defaultState: TState;
     // private _attributesSubject$ = new ReplaySubject<{ name, value }>();

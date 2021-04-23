@@ -3,10 +3,9 @@ const runCompiler = require('./run.compiler');
 const getConfig = require('./webpack.config');
 
 module.exports = ({index, output, target}) => {
-  const config = getConfig(index, target, output);
+  const config = getConfig(index, target, output, 'node');
   const compiler = webpack({
     ...config,
-    target: 'node',
     node: {
       __dirname: false,
       dns: 'empty',

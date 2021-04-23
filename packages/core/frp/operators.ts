@@ -22,6 +22,7 @@ export * from "rxjs/internal/operators/debounceTime";
 export * from "rxjs/internal/operators/mergeMap";
 export * from "rxjs/internal/operators/pairwise";
 export * from "rxjs/internal/operators/shareReplay";
+export * from "rxjs/internal/operators/share";
 export * from "rxjs/internal/operators/throttleTime";
 export * from "rxjs/internal/operators/withLatestFrom";
 export * from "rxjs/internal/observable/from";
