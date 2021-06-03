@@ -11,6 +11,37 @@ import {
 } from "@hypertype/core";
 import {IInvoker} from "./model.stream";
 
+/**
+ * Сравнивает два объекта, учитывает DateTime, Duration, array, object
+ * @param a
+ * @param b
+ * @returns {boolean}
+ */
+export function compare(a,b){
+  if (["string", "number", "boolean", "function"].includes(typeof a))
+    return a === b;
+  if (a === b)
+    return  true;
+  if (a == null && b == null)
+    return true;
+  if (a == null || b == null)
+    return false;
+  if (a.equals && b.equals)
+    return a.equals(b);
+  if (Array.isArray(a) && Array.isArray(b)){
+    return a.length === b.length &&
+      a.every((x,i) => compare(x,b[i]));
+  }
+  if (typeof a === "object" && typeof b === "object"){
+    const aKeys = Object.getOwnPropertyNames(a);
+    const bKeys = Object.getOwnPropertyNames(b);
+    if (!compare(aKeys, bKeys))
+      return false;
+    return aKeys.every(key => compare(a[key], b[key]));
+  }
+  return false;
+}
+
 export abstract class Model<TState, TActions> implements IModel<TState, TActions> {
 
   protected StateSubject$: Subject<void> = new Subject<void>();
@@ -18,7 +49,7 @@ export abstract class Model<TState, TActions> implements IModel<TState, TActions
   public State$: Observable<TState> = this.StateSubject$.asObservable().pipe(
     startWith(null as void),
     map(() => this.ToJSON()),
-    distinctUntilChanged(null, Fn.crc32),
+    distinctUntilChanged(compare),
     shareReplay(1),
   );
 
@@ -34,8 +65,9 @@ export abstract class Model<TState, TActions> implements IModel<TState, TActions
         reject(e);
         // throw e;
       }
+      if (!action.method.startsWith('Get'))
+        this.Update();
     }),
-    tap(() => this.Update())
   ).subscribe();
 
   public Invoke: IInvoker<TActions> = action => {
