@@ -28,7 +28,7 @@ export abstract class WorkerModelStream<TState, TActions> extends ModelStream<TS
 
     // => из Browser Main отправляю задание -> в Worker
     public Action: IInvoker<TActions> = (action: IAction<TActions>) => {
-        const id = +performance.now();
+        const id = `${+performance.now()}.${action.method}.${Math.random()}`;
         this.sendMessage({
             ...action,
             _id: id
