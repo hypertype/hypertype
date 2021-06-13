@@ -1,14 +1,4 @@
-import {
-  concatMap,
-  distinctUntilChanged,
-  Fn,
-  map,
-  Observable,
-  shareReplay,
-  startWith,
-  Subject,
-  tap
-} from "@hypertype/core";
+import {concatMap, distinctUntilChanged, map, Observable, shareReplay, startWith, Subject} from "@hypertype/core";
 import {IInvoker} from "./model.stream";
 
 /**
@@ -17,22 +7,22 @@ import {IInvoker} from "./model.stream";
  * @param b
  * @returns {boolean}
  */
-export function compare(a,b){
+export function compare(a, b) {
   if (["string", "number", "boolean", "function"].includes(typeof a))
     return a === b;
   if (a === b)
-    return  true;
+    return true;
   if (a == null && b == null)
     return true;
   if (a == null || b == null)
     return false;
   if (a.equals && b.equals)
     return a.equals(b);
-  if (Array.isArray(a) && Array.isArray(b)){
+  if (Array.isArray(a) && Array.isArray(b)) {
     return a.length === b.length &&
-      a.every((x,i) => compare(x,b[i]));
+      a.every((x, i) => compare(x, b[i]));
   }
-  if (typeof a === "object" && typeof b === "object"){
+  if (typeof a === "object" && typeof b === "object") {
     const aKeys = Object.getOwnPropertyNames(a);
     const bKeys = Object.getOwnPropertyNames(b);
     if (!compare(aKeys, bKeys))
@@ -55,18 +45,35 @@ export abstract class Model<TState, TActions> implements IModel<TState, TActions
 
   private InvokeSubject$ = new Subject<{ action: { path; method; args }, resolve: Function, reject: Function }>();
   private Invoke$ = this.InvokeSubject$.pipe(
+    /**
+     * Идея в сериализации а-ля ReadCommitted:
+     * Обновления идут по очереди, не мешая друг другу и обновляют стейт.
+     * Get-запросы не создают очередь, а только ждут обновления, которые уже в очереди.
+     * В идеале нужно группировать Get-запросы и ждать Promise.all(getRequests) иначе возможна проблема:
+     * В процессе выполнения Get-запроса пришел Action, который изменил состояние
+     *      => Get использует неконсистентное состояние.
+     *      Поэтому все Get должны в начале прочесть все нужные данные, а уже потом делать дела
+     */
     concatMap(async ({action, resolve, reject}) => {
       // console.log('action start', action.path, action.method, action.args);
       try {
-        const result: any = await this.GetSubActions(...(action.path || []))[action.method](...action.args);
-        resolve(result);
+        if (!action.method.startsWith('Get')) {
+          const result: any = await this.GetSubActions(...(action.path || []))[action.method](...action.args);
+          resolve(result);
+          this.Update();
+        } else {
+          const promiseOrResult = this.GetSubActions(...(action.path || []))[action.method](...action.args);
+          if (promiseOrResult instanceof Promise) {
+            promiseOrResult.then(x => resolve(x)).catch(x => reject(x));
+          } else {
+            resolve(promiseOrResult);
+          }
+        }
       } catch (e) {
         console.error(e);
         reject(e);
         // throw e;
       }
-      if (!action.method.startsWith('Get'))
-        this.Update();
     }),
   ).subscribe();
 

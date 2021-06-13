@@ -9,6 +9,7 @@ import {DevToolModelStream} from "./streams/dev-tool-model.stream";
 import {WebsocketEntry} from "./websocket.entry";
 import {StateLogger} from "@hypertype/infr";
 import { SimpleWebWorkerModelStream } from "./streams/simple-web-worker-model.stream";
+import {SharedWorkerModelStream} from "./streams/shared-worker-model.stream";
 
 
 const BaseContainer = new Container();
@@ -31,8 +32,8 @@ export const ProxyDomainContainer = {
         container.provide(BaseContainer);
         if (devTools) {
             container.provide([
-                {provide: ModelStream, useClass: DevToolModelStream, deps: [WebWorkerModelStream, StateLogger]},
-                {provide: WebWorkerModelStream, deps: [UrlToken]},
+                {provide: ModelStream, useClass: DevToolModelStream, deps: [SharedWorkerModelStream, StateLogger]},
+                {provide: SharedWorkerModelStream, deps: [UrlToken]},
                 {provide: UrlToken, useValue: url},
             ]);
         } else {
