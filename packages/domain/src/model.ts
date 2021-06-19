@@ -106,6 +106,9 @@ export abstract class Model<TState, TActions> implements IModel<TState, TActions
       return null;
     if (!path.length)
       return state;
+    if (state instanceof Map){
+      return this.GetSubState(state.get(path[0]), ...path.slice(1));
+    }
     if (Array.isArray(state))
       return this.GetSubState(state.find(s => s.Id == path[0]), ...path.slice(1));
     return this.GetSubState(state[path[0]], ...path.slice(1));
