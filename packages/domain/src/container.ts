@@ -10,6 +10,8 @@ import {WebsocketEntry} from "./websocket.entry";
 import {StateLogger} from "@hypertype/infr";
 import { SimpleWebWorkerModelStream } from "./streams/simple-web-worker-model.stream";
 import {SharedWorkerModelStream} from "./streams/shared-worker-model.stream";
+import {ChildWindowModelStream} from './streams/child-window-model.stream';
+import {ParentWindowStreamProxy} from './parent-window-stream.proxy';
 
 
 const BaseContainer = new Container();
@@ -60,6 +62,25 @@ export const ProxyDomainContainer = {
             ]);
         }
         return container;
+    },
+    withParentWindowStreamProxy(): Container{
+      const isParentWindow = !globalThis.opener;
+      const container = new Container();
+      container.provide([
+        isParentWindow
+          ? {provide: ParentWindowStreamProxy, deps: [WebWorkerModelStream]}
+          : {provide: ParentWindowStreamProxy, useValue: 'none'}
+      ]);
+      return container;
+    },
+    withChildWindowStream(): Container {
+      const container = new Container();
+      container.provide(BaseContainer);
+      container.provide([
+        {provide: ModelStream, useClass: DevToolModelStream, deps: [ChildWindowModelStream, StateLogger]},
+        {provide: ChildWindowModelStream},
+      ]);
+      return container;
     },
     withSimple(devTools = false): Container {
         const container = new Container();

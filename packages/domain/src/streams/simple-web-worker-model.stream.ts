@@ -10,12 +10,12 @@ export class SimpleWebWorkerModelStream<TState, TActions>
     return fromEvent<MessageEvent>(this.worker, 'message').pipe(
       map(e => e.data),
       shareReplay(1)
-    );;
+    );
   }
 
   protected worker: Worker;
 
-  protected sendMessage(message, options) {
+  public sendMessage(message, options) {
     this.worker.postMessage(message, options);
   }
 

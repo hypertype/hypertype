@@ -1,5 +1,5 @@
-import {IAction, IInvoker, ModelStream} from "../model.stream";
-import {filter, first, Fn, fromEvent, map, mergeMap, Observable, of, shareReplay, throwError} from "@hypertype/core";
+import {getMessageId, IAction, IInvoker, ModelStream} from "../model.stream";
+import {filter, first, Fn, map, mergeMap, Observable, of, throwError} from "@hypertype/core";
 declare const OffscreenCanvas;
 
 export abstract class WorkerModelStream<TState, TActions> extends ModelStream<TState, TActions> {
@@ -11,7 +11,7 @@ export abstract class WorkerModelStream<TState, TActions> extends ModelStream<TS
         super();
         this.worker = this.createWorker(webSocketPath);
 
-        // => из Worker пришел ответ -> в Browser Main
+        // => из Worker пришло сообщение -> в Browser Main
         this.Input$ = this.Subscribe();
 
         this.State$ = this.Input$.pipe(
@@ -26,9 +26,9 @@ export abstract class WorkerModelStream<TState, TActions> extends ModelStream<TS
 
     protected abstract sendMessage(message, options);
 
-    // => из Browser Main отправляю задание -> в Worker
+    // => из Browser Main отправляю сообщение -> в Worker
     public Action: IInvoker<TActions> = (action: IAction<TActions>) => {
-        const id = `${+performance.now()}.${action.method}.${Math.random()}.${(action.path??[]).join('.')}`;
+        const id = getMessageId(action);
         this.sendMessage({
             ...action,
             _id: id

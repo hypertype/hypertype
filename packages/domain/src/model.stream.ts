@@ -19,3 +19,9 @@ export type IAction<TActions> = {
     method: keyof TActions,
     args: any[]
 }
+
+
+export const getMessageId = (action: IAction<any>) =>
+  `${+performance.now()}.${action.method as string}.${Math.random()}.${(action.path ?? []).join('.')}`
+;
+
