@@ -1,13 +1,11 @@
-import {filter, Fn, fromEvent, map, tap} from '@hypertype/core';
-import {SimpleWebWorkerModelStream} from './streams/simple-web-worker-model.stream';
-
-declare const OffscreenCanvas;
+import {filter, Fn, fromEvent, map, share, Subject, tap} from '@hypertype/core';
+import {ModelStream} from './model.stream';
 
 export class ParentWindowStreamProxy {
   private children = [];
+  private removerSubj = new Subject<string>();
 
-  constructor(private workerModelStream: SimpleWebWorkerModelStream<any, any>) {
-    const hasOffscreenCanvas = 'OffscreenCanvas' in globalThis;
+  constructor(private modelStream: ModelStream<any, any>) {
 
     // => из Child-окна пришло сообщение в Родительское окно. Проксирую сообщение -> в Воркер
     fromEvent<MessageEvent>(globalThis, 'message').pipe(
@@ -15,7 +13,7 @@ export class ParentWindowStreamProxy {
       filter(event => event.origin === globalThis.origin),
       map(event => event.data),
       filter(Fn.Ib),
-      map(data => {
+      map(data => { // Отработка специальных команд для Родительского окна
         switch (data.type) {
           case 'beforeunload':
             this.removeChild(data.childWindowId)
@@ -26,36 +24,51 @@ export class ParentWindowStreamProxy {
       }),
       filter(Fn.Ib),
       tap(data => console.log(`ParentWindowStreamProxy.onMessage`, data)),
-      tap(data => this.workerModelStream.sendMessage(
-        data,
-        hasOffscreenCanvas
-          ? data.args.filter(a => (a instanceof OffscreenCanvas))
-          : []
-      )),
+      tap(data => this.modelStream.Action(data)),
     ).subscribe();
 
     // => из Воркера пришло сообщение в Родительское окно. Проксирую сообщение -> в Child-окна
-    this.workerModelStream.Input$.pipe(
+    this.modelStream.Input$.pipe(
       filter(() => this.children.length > 0),
       tap(message => {
         console.log(`workerModelStream.Input$`, message)
-        this.children.forEach(child => postMessage(child, message));
+        this.broadcast(message);
       }),
+    ).subscribe();
+
+    fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
+      tap(() => this.broadcast({type: 'close'})),
     ).subscribe();
   }
 
-  setChild(childWindow): void {
+  broadcast(message, options?): void {
+    this.children.forEach(child => postMessage(child, message, options));
+  }
+
+  addChild(window): boolean {
     if (this.children.find(x => (
-      x === childWindow ||
-      x.child.id === childWindow.child.id))
+      x === window ||
+      x.child.id === window.child.id))
     )
-      return;
-    this.children.push(childWindow);
+      return false;
+    this.children.push(window);
+    return true;
   }
 
   removeChild(id: string): void {
-    this.children.removeAll(x => x.child.id === id);
+    const removedIds = [];
+    this.children.removeAll(x => {
+      const isExist = x.child.id === id;
+      if (isExist)
+        removedIds.push(id);
+      return isExist;
+    });
+    removedIds.forEach(x => this.removerSubj.next(x));
   }
+
+  removed$ = this.removerSubj.asObservable().pipe(
+    share(),
+  );
 
 }
 

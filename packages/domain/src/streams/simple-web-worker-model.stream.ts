@@ -15,7 +15,7 @@ export class SimpleWebWorkerModelStream<TState, TActions>
 
   protected worker: Worker;
 
-  public sendMessage(message, options) {
+  protected sendMessage(message, options) {
     this.worker.postMessage(message, options);
   }
 
