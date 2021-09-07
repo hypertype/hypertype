@@ -3,7 +3,7 @@ import {ModelStream} from './model.stream';
 
 export class ParentWindowStreamProxy {
   private children = [];
-  private removerSubj = new Subject<string>();
+  private removedChildIdSubj = new Subject<string>();
 
   constructor(private modelStream: ModelStream<any, any>) {
 
@@ -36,6 +36,8 @@ export class ParentWindowStreamProxy {
       }),
     ).subscribe();
 
+    // пользователь решил перезагрузить/закрыть Родительское окно =>
+    // надо закрыть все Child-окна, т.к. они не могут корректно работать без Родительского окна
     fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
       tap(() => this.broadcast({type: 'close'})),
     ).subscribe();
@@ -63,10 +65,10 @@ export class ParentWindowStreamProxy {
         removedIds.push(id);
       return isExist;
     });
-    removedIds.forEach(x => this.removerSubj.next(x));
+    removedIds.forEach(x => this.removedChildIdSubj.next(x));
   }
 
-  removed$ = this.removerSubj.asObservable().pipe(
+  removedChildId$ = this.removedChildIdSubj.asObservable().pipe(
     share(),
   );
 
