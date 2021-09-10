@@ -1,11 +1,15 @@
-import {filter, Fn, fromEvent, map, share, Subject, tap} from '@hypertype/core';
+import {filter, first, Fn, fromEvent, map, Observable, share, shareReplay, Subject, switchMap, tap} from '@hypertype/core';
+import {TChildWindowRequest} from './streams/child-window-model.stream';
 import {ModelStream} from './model.stream';
 
 export class ParentWindowStreamProxy {
   private children = [];
   private removedChildIdSubj = new Subject<string>();
+  private modelStreamState$: Observable<any>;
 
   constructor(private modelStream: ModelStream<any, any>) {
+    this.modelStreamState$ = this.modelStream.State$.pipe(shareReplay(1));
+    this.modelStreamState$.subscribe();
 
     // => из Child-окна пришло сообщение в Родительское окно. Проксирую сообщение -> в Воркер
     fromEvent<MessageEvent>(globalThis, 'message').pipe(
@@ -13,17 +17,21 @@ export class ParentWindowStreamProxy {
       filter(event => event.origin === globalThis.origin),
       map(event => event.data),
       filter(Fn.Ib),
-      map(data => { // Отработка специальных команд для Родительского окна
-        switch (data.type) {
+      tap(data => console.log(`ParentWindowStreamProxy.onMessage`, data)),
+      switchMap(async data => { // Отработка специальных команд для Родительского окна
+        const {type, childId} = data;
+        switch (type as TChildWindowRequest) {
+          case 'get-state':
+            this.sendToChild(childId, {state: await this.lastState()});
+            break;
           case 'beforeunload':
-            this.removeChild(data.childWindowId)
+            this.removeChild(childId)
             break;
           default:
             return data;
         }
       }),
       filter(Fn.Ib),
-      tap(data => console.log(`ParentWindowStreamProxy.onMessage`, data)),
       tap(data => this.modelStream.Action(data)),
     ).subscribe();
 
@@ -47,11 +55,14 @@ export class ParentWindowStreamProxy {
     this.children.forEach(child => postMessage(child, message, options));
   }
 
+  sendToChild(id: string, message, options?) {
+    const window = this.childById(id);
+    if (window)
+      postMessage(window, message, options)
+  }
+
   addChild(window): boolean {
-    if (this.children.find(x => (
-      x === window ||
-      x.child.id === window.child.id))
-    )
+    if (this.childByObj(window))
       return false;
     this.children.push(window);
     return true;
@@ -72,8 +83,28 @@ export class ParentWindowStreamProxy {
     share(),
   );
 
+
+//region Support
+
+  childById(id: string) {
+    return this.children.find(x => x.child.id === id);
+  }
+
+  childByObj(obj) {
+    return this.children.find(x => (
+      x === obj ||
+      x.child.id === obj.child.id));
+  }
+
+  lastState(): Promise<any> {
+    return this.modelStreamState$.pipe(first()).toPromise();
+  }
+
+//endregion
+
 }
 
 function postMessage(child, message, options?): void {
+  console.log(`postMessage`, message);
   child.postMessage(message, globalThis.origin, options)
 }

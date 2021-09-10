@@ -2,6 +2,7 @@ import {filter, first, Fn, fromEvent, map, mergeMap, Observable, of, shareReplay
 import {getMessageId, IAction, IInvoker, ModelStream} from '../model.stream';
 
 declare const OffscreenCanvas;
+export type TChildWindowRequest = 'get-state' | 'beforeunload';
 
 /**
  * Идея: в открепленном окне(Child-окно) нет воркера.
@@ -35,6 +36,8 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
       filter(event => event.origin === globalThis.origin),
       map(event => event.data),
       filter(Fn.Ib),
+      tap(data => console.log(`ChildWindowModelStream.onMessage`, data)),
+      filter(data => !data.childId || data.childId === this.id),
       tap(data => { // Отработка специальных команд для Child-окна
         switch (data.type) {
           case 'close':
@@ -45,7 +48,6 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
         }
       }),
       filter(Fn.Ib),
-      tap(data => console.log(`ChildWindowModelStream.onMessage`, data)),
       shareReplay(1)
     );
 
@@ -56,14 +58,18 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
     this.State$.subscribe();
 
     fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
-      tap(() => this.sendMessage({
-        type: 'beforeunload',
-        childWindowId: this.id
-      })),
+      tap(() => this.requestToParent('beforeunload')),
     ).subscribe();
+
+    this.requestToParent('get-state'); // запрошу инициализационный стейт
+  }
+
+  requestToParent(type: TChildWindowRequest) {
+    this.sendMessage({type, childId: this.id});
   }
 
   private sendMessage(message, options?): void {
+    console.log(`postMessage`, message);
     this.parentWindow.postMessage(message, globalThis.origin, options);
   }
 
