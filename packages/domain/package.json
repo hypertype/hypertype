@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/domain",
-  "version": "3.6.6",
+  "version": "3.6.7",
   "description": "",
   "main": "dist/esm/index.js",
   "bundle": "dist/bundle/index.js",
