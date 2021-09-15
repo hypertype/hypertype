@@ -39,7 +39,7 @@ export class ParentWindowStreamProxy {
     this.modelStream.Input$.pipe(
       filter(() => this.children.length > 0),
       tap(message => {
-        console.log(`workerModelStream.Input$`, message)
+        console.log(`modelStream.Input$`, message)
         this.broadcast(message);
       }),
     ).subscribe();
@@ -62,7 +62,7 @@ export class ParentWindowStreamProxy {
   }
 
   addChild(window): boolean {
-    if (this.childByObj(window))
+    if (this.childByObj(window) || this.childById(window.child.id))
       return false;
     this.children.push(window);
     return true;
@@ -91,9 +91,7 @@ export class ParentWindowStreamProxy {
   }
 
   childByObj(obj) {
-    return this.children.find(x => (
-      x === obj ||
-      x.child.id === obj.child.id));
+    return this.children.find(x => x === obj);
   }
 
   lastState(): Promise<any> {
