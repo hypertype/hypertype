@@ -3,6 +3,17 @@ import {getMessageId, IAction, IInvoker, ModelStream} from '../model.stream';
 
 declare const OffscreenCanvas;
 export type TChildWindowRequest = 'get-state' | 'beforeunload';
+export type TChild = 'chart';
+export type TWindowContainer =
+  'detached' | // в отдельном окне
+  'windowed';  // в окне карты
+
+export interface IChildWindowMetadata {
+  id: string;
+  type: TChild;
+  containerType: TWindowContainer;
+}
+
 
 /**
  * Идея: в открепленном окне(Child-окно) нет воркера.
@@ -21,7 +32,7 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
     return globalThis.child.id;
   }
 
-  get type(): string {
+  get type(): TChild {
     return globalThis.child.type;
   }
 

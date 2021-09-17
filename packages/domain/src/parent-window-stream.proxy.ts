@@ -1,5 +1,5 @@
 import {filter, first, Fn, fromEvent, map, Observable, share, shareReplay, Subject, switchMap, tap} from '@hypertype/core';
-import {TChildWindowRequest} from './streams/child-window-model.stream';
+import {IChildWindowMetadata, TChildWindowRequest} from './streams/child-window-model.stream';
 import {ModelStream} from './model.stream';
 
 export class ParentWindowStreamProxy {
@@ -61,7 +61,7 @@ export class ParentWindowStreamProxy {
       postMessage(window, message, options)
   }
 
-  addChild(window): boolean {
+  addChild(window: {child: IChildWindowMetadata}): boolean {
     if (this.childByObj(window) || this.childById(window.child.id))
       return false;
     this.children.push(window);
