@@ -17,7 +17,7 @@ export class ParentWindowStreamProxy {
       filter(event => event.origin === globalThis.origin),
       map(event => event.data),
       filter(Fn.Ib),
-      tap(data => console.log(`ParentWindowStreamProxy.onMessage`, data)),
+      tap(data => this.log(`Parent.onMessage`, data)),
       switchMap(async data => { // Отработка специальных команд для Родительского окна
         const {type, childId} = data;
         switch (type as TChildWindowRequest) {
@@ -39,7 +39,7 @@ export class ParentWindowStreamProxy {
     this.modelStream.Input$.pipe(
       filter(() => this.children.length > 0),
       tap(message => {
-        console.log(`modelStream.Input$`, message)
+        this.log('ModelStream.Input$', message)
         this.broadcast(message);
       }),
     ).subscribe();
@@ -52,16 +52,16 @@ export class ParentWindowStreamProxy {
   }
 
   broadcast(message, options?): void {
-    this.children.forEach(child => postMessage(child, message, options));
+    this.children.forEach(window => this.postMessage(window, message, options));
   }
 
   sendToChild(id: string, message, options?) {
     const window = this.childById(id);
     if (window)
-      postMessage(window, message, options)
+      this.postMessage(window, message, options)
   }
 
-  addChild(window: {child: IChildWindowMetadata}): boolean {
+  addChild(window: { child: IChildWindowMetadata }): boolean {
     if (this.childByObj(window) || this.childById(window.child.id))
       return false;
     this.children.push(window);
@@ -98,11 +98,20 @@ export class ParentWindowStreamProxy {
     return this.modelStreamState$.pipe(first()).toPromise();
   }
 
+  postMessage(window, message, options?): void {
+    this.log(`Child.postMessage`, message);
+    window.postMessage(message, globalThis.origin, options)
+  }
+
+  isDebug() {
+    return globalThis.isDebugParentWindow;
+  }
+
+  log(...args) {
+    if (this.isDebug())
+      console.log(...args)
+  }
+
 //endregion
 
-}
-
-function postMessage(child, message, options?): void {
-  console.log(`postMessage`, message);
-  child.postMessage(message, globalThis.origin, options)
 }
