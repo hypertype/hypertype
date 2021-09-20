@@ -7,6 +7,11 @@ export type TChild = 'chart';
 export type TWindowContainer =
   'detached' | // в отдельном окне
   'windowed';  // в окне карты
+export type TDetachState =
+  'initial' |  // еще не было ни detach ни attach
+  'detached' | // откреплен
+  'attached';  // прикреплен обратно
+
 
 export interface IChildWindowMetadata {
   id: string;

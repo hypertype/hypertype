@@ -1,10 +1,15 @@
 import {filter, first, Fn, fromEvent, map, Observable, share, shareReplay, Subject, switchMap, tap} from '@hypertype/core';
-import {IChildWindowMetadata, TChildWindowRequest} from './streams/child-window-model.stream';
+import {IChildWindowMetadata, TChild, TChildWindowRequest} from './streams/child-window-model.stream';
 import {ModelStream} from './model.stream';
+
+interface IRemovedChild {
+  id: string;
+  type: TChild;
+}
 
 export class ParentWindowStreamProxy {
   private children = [];
-  private removedChildIdSubj = new Subject<string>();
+  private removedChildSubj: Subject<IRemovedChild> = new Subject();
   private modelStreamState$: Observable<any>;
 
   constructor(private modelStream: ModelStream<any, any>) {
@@ -69,45 +74,46 @@ export class ParentWindowStreamProxy {
   }
 
   removeChild(id: string): void {
-    const removedIds = [];
+    const removed = new Map<string, TChild>();
     this.children.removeAll(x => {
       const isExist = x.child.id === id;
       if (isExist)
-        removedIds.push(id);
+        removed.set(id, x.child.type);
       return isExist;
     });
-    removedIds.forEach(x => this.removedChildIdSubj.next(x));
+    for (const [id, type] of removed.entries())
+      this.removedChildSubj.next({id, type})
   }
 
-  removedChildId$ = this.removedChildIdSubj.asObservable().pipe(
+  removedChild$: Observable<IRemovedChild> = this.removedChildSubj.asObservable().pipe(
     share(),
   );
 
 
 //region Support
 
-  childById(id: string) {
+  private childById(id: string) {
     return this.children.find(x => x.child.id === id);
   }
 
-  childByObj(obj) {
+  private childByObj(obj) {
     return this.children.find(x => x === obj);
   }
 
-  lastState(): Promise<any> {
+  private lastState(): Promise<any> {
     return this.modelStreamState$.pipe(first()).toPromise();
   }
 
-  postMessage(window, message, options?): void {
-    this.log(`Child.postMessage`, message);
+  private postMessage(window, message, options?): void {
+    this.log('Child.postMessage', message);
     window.postMessage(message, globalThis.origin, options)
   }
 
-  isDebug() {
+  private isDebug() {
     return globalThis.isDebugParentWindow;
   }
 
-  log(...args) {
+  private log(...args) {
     if (this.isDebug())
       console.log(...args)
   }
