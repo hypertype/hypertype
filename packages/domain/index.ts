@@ -7,7 +7,7 @@ export {ParentWindowStreamProxy} from './src/parent-window-stream.proxy';
 export * from './src/websocket.entry';
 export * from './src/container';
 export * from './helpers/DomainError';
-export {TWindowContainer, TChild, TDetachState, IChildWindowMetadata} from './src/contract';
+export {TChild, TDetachState, IChildWindowMetadata} from './src/contract';
 
 export const WebworkerEntry = SimpleWebWorkerEntry;//('SharedArrayBuffer' in self) ? SharedWebworkerEntry : SimpleWebWorkerEntry;
 

@@ -1,10 +1,10 @@
 import {filter, first, Fn, fromEvent, map, Observable, share, shareReplay, Subject, switchMap, tap} from '@hypertype/core';
-import {IChildWindowMetadata, IRemovedChild, TChild, TChildWindowRequest} from './contract';
+import {IChildWindowMetadata, TChildWindowRequest} from './contract';
 import {ModelStream} from './model.stream';
 
 export class ParentWindowStreamProxy {
   private children = [];
-  private removedChildSubj: Subject<IRemovedChild> = new Subject();
+  private removedChildSubj: Subject<IChildWindowMetadata> = new Subject();
   private modelStreamState$: Observable<any>;
 
   constructor(private modelStream: ModelStream<any, any>) {
@@ -69,18 +69,18 @@ export class ParentWindowStreamProxy {
   }
 
   removeChild(id: string): void {
-    const removed = new Map<string, TChild>();
+    const removed = new Map<string, IChildWindowMetadata>();
     this.children.removeAll(x => {
       const isExist = x.child.id === id;
       if (isExist)
-        removed.set(id, x.child.type);
+        removed.set(id, x.child);
       return isExist;
     });
-    for (const [id, type] of removed.entries())
-      this.removedChildSubj.next({id, type})
+    for (const childMetadata of removed.values())
+      this.removedChildSubj.next(childMetadata)
   }
 
-  removedChild$: Observable<IRemovedChild> = this.removedChildSubj.asObservable().pipe(
+  removedChild$: Observable<IChildWindowMetadata> = this.removedChildSubj.asObservable().pipe(
     share(),
   );
 

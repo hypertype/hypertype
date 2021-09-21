@@ -6,23 +6,14 @@ export type TChild = 'chart';
 export interface IChildWindowMetadata {
   id: string;
   type: TChild;
-  containerType: TWindowContainer;
-}
-
-export interface IRemovedChild {
-  id: string;
-  type: TChild;
+  size?: { width: number; height: number; };
+  position?: { X: number; Y: number; };
 }
 
 export type TDetachState =
   'initial' |  // еще не было ни detach ни attach
   'detached' | // откреплен
-  'attached'   // прикреплен обратно
-  ;
-
-export type TWindowContainer =
-  'detached' | // в отдельном окне
-  'windowed';  // в окне карты
+  'attached';  // прикреплен обратно
 
 export type TChildWindowRequest = 'get-state' | 'beforeunload';
 export type TParentWindowRequest = 'close';
