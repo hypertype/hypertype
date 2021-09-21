@@ -1,24 +1,7 @@
 import {filter, first, Fn, fromEvent, map, mergeMap, Observable, of, shareReplay, tap, throwError} from '@hypertype/core';
+import {TChild, TChildWindowRequest, TParentWindowRequest} from '../contract';
 import {getMessageId, IAction, IInvoker, ModelStream} from '../model.stream';
-
 declare const OffscreenCanvas;
-export type TChildWindowRequest = 'get-state' | 'beforeunload';
-export type TChild = 'chart';
-export type TWindowContainer =
-  'detached' | // в отдельном окне
-  'windowed';  // в окне карты
-export type TDetachState =
-  'initial' |  // еще не было ни detach ни attach
-  'detached' | // откреплен
-  'attached';  // прикреплен обратно
-
-
-export interface IChildWindowMetadata {
-  id: string;
-  type: TChild;
-  containerType: TWindowContainer;
-}
-
 
 /**
  * Идея: в открепленном окне(Child-окно) нет воркера.
@@ -52,10 +35,10 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
       filter(event => event.origin === globalThis.origin),
       map(event => event.data),
       filter(Fn.Ib),
-      tap(data => this.log(`Child.onMessage`, data)),
+      tap(data => log(`Child.onMessage`, data)),
       filter(data => !data.childId || data.childId === this.id),
       tap(data => { // Отработка специальных команд для Child-окна
-        switch (data.type) {
+        switch (data.type as TParentWindowRequest) {
           case 'close':
             globalThis.close();
             break;
@@ -85,7 +68,7 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
   }
 
   private sendMessage(message, options?): void {
-    this.log(`Parent.postMessage`, message);
+    log(`Parent.postMessage`, message);
     this.parentWindow.postMessage(message, globalThis.origin, options);
   }
 
@@ -113,18 +96,9 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
     ).toPromise()
   };
 
+}
 
-//region Support
-
-  isDebug() {
-    return globalThis.isDebugChildWindows;
-  }
-
-  log(...args) {
-    if (this.isDebug())
-      console.log(...args)
-  }
-
-//endregion
-
+function log(...args) {
+  if (globalThis.isDebugChildWindows)
+    console.log(...args)
 }

@@ -1,11 +1,6 @@
 import {filter, first, Fn, fromEvent, map, Observable, share, shareReplay, Subject, switchMap, tap} from '@hypertype/core';
-import {IChildWindowMetadata, TChild, TChildWindowRequest} from './streams/child-window-model.stream';
+import {IChildWindowMetadata, IRemovedChild, TChild, TChildWindowRequest} from './contract';
 import {ModelStream} from './model.stream';
-
-interface IRemovedChild {
-  id: string;
-  type: TChild;
-}
 
 export class ParentWindowStreamProxy {
   private children = [];
@@ -22,7 +17,7 @@ export class ParentWindowStreamProxy {
       filter(event => event.origin === globalThis.origin),
       map(event => event.data),
       filter(Fn.Ib),
-      tap(data => this.log(`Parent.onMessage`, data)),
+      tap(data => log(`Parent.onMessage`, data)),
       switchMap(async data => { // Отработка специальных команд для Родительского окна
         const {type, childId} = data;
         switch (type as TChildWindowRequest) {
@@ -44,7 +39,7 @@ export class ParentWindowStreamProxy {
     this.modelStream.Input$.pipe(
       filter(() => this.children.length > 0),
       tap(message => {
-        this.log('ModelStream.Input$', message)
+        log('ModelStream.Input$', message)
         this.broadcast(message);
       }),
     ).subscribe();
@@ -57,13 +52,13 @@ export class ParentWindowStreamProxy {
   }
 
   broadcast(message, options?): void {
-    this.children.forEach(window => this.postMessage(window, message, options));
+    this.children.forEach(window => postMessage(window, message, options));
   }
 
   sendToChild(id: string, message, options?) {
     const window = this.childById(id);
     if (window)
-      this.postMessage(window, message, options)
+      postMessage(window, message, options)
   }
 
   addChild(window: { child: IChildWindowMetadata }): boolean {
@@ -104,20 +99,16 @@ export class ParentWindowStreamProxy {
     return this.modelStreamState$.pipe(first()).toPromise();
   }
 
-  private postMessage(window, message, options?): void {
-    this.log('Child.postMessage', message);
-    window.postMessage(message, globalThis.origin, options)
-  }
-
-  private isDebug() {
-    return globalThis.isDebugParentWindow;
-  }
-
-  private log(...args) {
-    if (this.isDebug())
-      console.log(...args)
-  }
-
 //endregion
 
+}
+
+function postMessage(window, message, options?): void {
+  log('Child.postMessage', message);
+  window.postMessage(message, globalThis.origin, options);
+}
+
+function log(...args) {
+  if (globalThis.isDebugParentWindow === true)
+    console.log(...args)
 }
