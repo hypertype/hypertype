@@ -7,7 +7,7 @@ export * from './src/websocket.entry';
 export * from './src/container';
 export * from './helpers/DomainError';
 export {ParentWindowStore} from './src/parent-window.store';
-export {TDetachState, IChildWindowMetadata} from './src/contract';
+export {TDetachState} from './src/contract';
 
 export const WebworkerEntry = SimpleWebWorkerEntry;//('SharedArrayBuffer' in self) ? SharedWebworkerEntry : SimpleWebWorkerEntry;
 
