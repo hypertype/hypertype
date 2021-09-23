@@ -11,7 +11,8 @@ import {StateLogger} from "@hypertype/infr";
 import { SimpleWebWorkerModelStream } from "./streams/simple-web-worker-model.stream";
 import {SharedWorkerModelStream} from "./streams/shared-worker-model.stream";
 import {ChildWindowModelStream} from './streams/child-window-model.stream';
-import {ParentWindowStreamProxy} from './parent-window-stream.proxy';
+import {EMPTY_PARENT_WINDOW_STREAM_PROXY, ParentWindowStreamProxy} from './parent-window-stream.proxy';
+import {ParentWindowStore} from './parent-window.store';
 
 
 const BaseContainer = new Container();
@@ -64,13 +65,16 @@ export const ProxyDomainContainer = {
         return container;
     },
     withParentWindowStreamProxy(): Container{
-      const isParentWindow = !globalThis.opener;
       const container = new Container();
+      const isParentWindow = !globalThis.opener;
       container.provide([
         isParentWindow
           ? {provide: ParentWindowStreamProxy, deps: [WebWorkerModelStream]}
-          : {provide: ParentWindowStreamProxy, useValue: 'none'}
+          : {provide: ParentWindowStreamProxy, useValue: EMPTY_PARENT_WINDOW_STREAM_PROXY}
       ]);
+      container.provide([
+        {provide: ParentWindowStore, deps: [ParentWindowStreamProxy]}
+      ])
       return container;
     },
     withChildWindowStream(): Container {

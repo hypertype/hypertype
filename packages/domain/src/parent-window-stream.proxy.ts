@@ -2,6 +2,8 @@ import {filter, first, Fn, fromEvent, map, Observable, share, shareReplay, Subje
 import {IChildWindowMetadata, TChildWindowRequest} from './contract';
 import {ModelStream} from './model.stream';
 
+export const EMPTY_PARENT_WINDOW_STREAM_PROXY = 'empty' as any;
+
 export class ParentWindowStreamProxy {
   private children = [];
   private removedChildSubj: Subject<IChildWindowMetadata> = new Subject();
@@ -21,10 +23,10 @@ export class ParentWindowStreamProxy {
       switchMap(async data => { // Отработка специальных команд для Родительского окна
         const {type, childId} = data;
         switch (type as TChildWindowRequest) {
-          case 'get-state':
+          case 'connected':
             this.sendToChild(childId, {state: await this.lastState()});
             break;
-          case 'beforeunload':
+          case 'disconnected':
             this.removeChild(childId)
             break;
           default:

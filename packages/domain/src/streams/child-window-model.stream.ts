@@ -1,6 +1,6 @@
 import {filter, first, Fn, fromEvent, map, mergeMap, Observable, of, shareReplay, tap, throwError} from '@hypertype/core';
-import {TChild, TChildWindowRequest, TParentWindowRequest} from '../contract';
 import {getMessageId, IAction, IInvoker, ModelStream} from '../model.stream';
+import {TChildWindowRequest, TParentWindowRequest} from '../contract';
 declare const OffscreenCanvas;
 
 /**
@@ -20,7 +20,7 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
     return globalThis.child.id;
   }
 
-  get type(): TChild {
+  get type(): string {
     return globalThis.child.type;
   }
 
@@ -56,11 +56,11 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
     );
     this.State$.subscribe();
 
-    fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
-      tap(() => this.requestToParent('beforeunload')),
-    ).subscribe();
+    this.requestToParent('connected'); // запрошу инициализационный стейт
 
-    this.requestToParent('get-state'); // запрошу инициализационный стейт
+    fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
+      tap(() => this.requestToParent('disconnected')),
+    ).subscribe();
   }
 
   requestToParent(type: TChildWindowRequest) {
