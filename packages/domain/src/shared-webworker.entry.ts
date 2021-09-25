@@ -11,7 +11,7 @@ import {
   takeUntil
 } from "@hypertype/core";
 import {Model} from "./model";
-import {SharedStore} from "./sharedStore";
+import {SharedStore} from "./shared.store";
 
 export class SharedWebworkerEntry {
 

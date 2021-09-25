@@ -64,22 +64,25 @@ export class ParentWindowStreamProxy {
   }
 
   addChild(window: { child: IChildWindowMetadata }): boolean {
-    if (this.childByObj(window) || this.childById(window.child.id))
+    if (this.childByObj(window) || this.childById(window.child.id)) {
+      console.error('window already exists in stream proxy');
       return false;
+    }
     this.children.push(window);
     return true;
   }
 
   removeChild(id: string): void {
-    const removed = new Map<string, IChildWindowMetadata>();
+    let removed: IChildWindowMetadata[] = [];
     this.children.removeAll(x => {
       const isExist = x.child.id === id;
       if (isExist)
-        removed.set(id, x.child);
+        removed.push(x.child);
       return isExist;
     });
-    for (const childMetadata of removed.values())
-      this.removedChildSubj.next(childMetadata)
+    if (removed.length > 1)
+      console.error(`window "${id}" was duplicated`);
+    this.removedChildSubj.next(removed[0]);
   }
 
   removedChild$: Observable<IChildWindowMetadata> = this.removedChildSubj.asObservable().pipe(

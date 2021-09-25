@@ -3,8 +3,6 @@
 export interface IChildWindowMetadata {
   id: string;
   type: string;
-  size?: { width: number; height: number; };
-  position?: { X: number; Y: number; };
 }
 
 export type TDetachState =

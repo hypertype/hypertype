@@ -12,6 +12,7 @@
     "bundle:watch": "hypertype lib --watch",
     "bundle:prod:stats": "hypertype lib --prod --stats",
     "deploy": "npm version patch && npm publish",
+    "manual": "tsc -b && hypertype lib && hypertype lib --prod",
     "test": "jest"
   },
   "repository": {

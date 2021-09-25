@@ -1,6 +1,6 @@
 import {fromEvent, InjectionToken, map, Observable, shareReplay} from "@hypertype/core";
 import {WorkerModelStream} from "./worker-model.stream";
-import {SharedStore} from "../sharedStore";
+import {SharedStore} from "../shared.store";
 
 export const UrlToken = new InjectionToken('webworker');
 
