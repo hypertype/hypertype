@@ -7,8 +7,8 @@ export interface IChildWindowMetadata {
 
 export type TDetachState =
   'initial' |  // еще не было ни detach ни attach
-  'detached' | // откреплен
-  'attached';  // прикреплен обратно
+  'detached' | // откреплено
+  'attached';  // прикреплено обратно
 
 export type TChildWindowRequest = 'connected' | 'disconnected';
 export type TParentWindowRequest = 'close';

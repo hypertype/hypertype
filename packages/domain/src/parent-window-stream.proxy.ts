@@ -8,6 +8,7 @@ export class ParentWindowStreamProxy {
   private children = [];
   private removedChildSubj: Subject<IChildWindowMetadata> = new Subject();
   private modelStreamState$: Observable<any>;
+  public enabledToInformAboutRemove = true;
 
   constructor(private modelStream: ModelStream<any, any>) {
     this.modelStreamState$ = this.modelStream.State$.pipe(shareReplay(1));
@@ -49,7 +50,10 @@ export class ParentWindowStreamProxy {
     // пользователь решил перезагрузить/закрыть Родительское окно =>
     // надо закрыть все Child-окна, т.к. они не могут корректно работать без Родительского окна
     fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
-      tap(() => this.broadcast({type: 'close'})),
+      tap(() => {
+        this.enabledToInformAboutRemove = false; // т.к. TDetachState должно обрабатываться в пользовательском коде
+        this.broadcast({type: 'close'});
+      }),
     ).subscribe();
   }
 
@@ -80,12 +84,17 @@ export class ParentWindowStreamProxy {
         removed.push(x.child);
       return isExist;
     });
+    if (removed.length === 0) {
+      console.error(`window "${id}" not found`);
+      return;
+    }
     if (removed.length > 1)
-      console.error(`window "${id}" was duplicated`);
+      console.error(`window "${id}" duplicated ${removed.length} times`);
     this.removedChildSubj.next(removed[0]);
   }
 
   removedChild$: Observable<IChildWindowMetadata> = this.removedChildSubj.asObservable().pipe(
+    filter(() => this.enabledToInformAboutRemove),
     share(),
   );
 

@@ -36,7 +36,8 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
       map(event => event.data),
       filter(Fn.Ib),
       tap(data => log(`Child.onMessage`, data)),
-      filter(data => !data.childId || data.childId === this.id),
+      filter(data => !data.childId || data.childId === this.id),       // сообщение индивидуально этому окну
+      filter(data => !data.childType || data.childType === this.type), // сообщение для типа окон как у этого окна
       tap(data => { // Отработка специальных команд для Child-окна
         switch (data.type as TParentWindowRequest) {
           case 'close':
