@@ -52,7 +52,7 @@ export class ParentWindowStreamProxy {
     fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
       tap(() => {
         this.enabledToInformAboutRemove = false; // т.к. TDetachState должно обрабатываться в пользовательском коде
-        this.broadcast({type: 'close'});
+        this.closeChildren();
       }),
     ).subscribe();
   }
@@ -61,14 +61,14 @@ export class ParentWindowStreamProxy {
     this.children.forEach(window => postMessage(window, message, options));
   }
 
-  sendToChild(id: string, message, options?) {
-    const window = this.childById(id);
+  sendToChild(childId: string, message, options?) {
+    const window = this.childById(childId);
     if (window)
       postMessage(window, message, options)
   }
 
   addChild(window: { child: IChildWindowMetadata }): boolean {
-    if (this.childByObj(window) || this.childById(window.child.id)) {
+    if (this.childByObj(window) || this.childById(window.child.childId)) {
       console.error('window already exists in stream proxy');
       return false;
     }
@@ -76,20 +76,20 @@ export class ParentWindowStreamProxy {
     return true;
   }
 
-  removeChild(id: string): void {
+  removeChild(childId: string): void {
     let removed: IChildWindowMetadata[] = [];
     this.children.removeAll(x => {
-      const isExist = x.child.id === id;
+      const isExist = x.child.childId === childId;
       if (isExist)
         removed.push(x.child);
       return isExist;
     });
     if (removed.length === 0) {
-      console.error(`window "${id}" not found`);
+      console.error(`window "${childId}" not found`);
       return;
     }
     if (removed.length > 1)
-      console.error(`window "${id}" duplicated ${removed.length} times`);
+      console.error(`window "${childId}" duplicated ${removed.length} times`);
     this.removedChildSubj.next(removed[0]);
   }
 
@@ -98,11 +98,15 @@ export class ParentWindowStreamProxy {
     share(),
   );
 
+  closeChildren(metadata: Partial<IChildWindowMetadata> = {}): void {
+    this.broadcast({type: 'close', ...metadata});
+  }
+
 
 //region Support
 
-  private childById(id: string) {
-    return this.children.find(x => x.child.id === id);
+  private childById(childId: string) {
+    return this.children.find(x => x.child.childId === childId);
   }
 
   private childByObj(obj) {

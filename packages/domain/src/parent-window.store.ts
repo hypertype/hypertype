@@ -15,39 +15,39 @@ export class ParentWindowStore {
   }
 
   /**
-   * Добавляет окно в streamProxy
+   * Добавляет окно в streamProxy.
    * @param window
-   * @param data
+   * @param metadata
    * @return onRemovedFn | undefined - в случае успешного добавления окна возвращает промис,
-   *                                   сигнализирующий, что открепленное окно удалено из streamProxy
+   *                                   сигнализирующий, что открепленное окно удалено из streamProxy.
    */
-  addChild(window, data: IChildWindowMetadata): Promise<IChildWindowMetadata> | undefined {
+  addChild(window, metadata: IChildWindowMetadata): Promise<IChildWindowMetadata> | undefined {
     if (!this.isReady)
       return;
-    window['child'] = data;
+    window['child'] = metadata;
     if (!this.streamProxy.addChild(window as any))
       return;
     return this.streamProxy.removedChild$.pipe(
-      filter(x => x.id === data.id),
+      filter(x => x.childId === metadata.childId),
       first(),
     ).toPromise();
   }
 
   /**
-   * Закрывает Child-окно(а) и удаляет его из streamProxy
-   * @param enabledToInformAboutRemove - если true, тогда proxy отправит сообщение, когда Child-окно будет удалено
-   * @param childType                  - один из типов Child-окна
+   * Закрывает Child-окно(а) и удаляет его из streamProxy.
+   * @param informAboutRemove - если true, тогда proxy отправит сообщение, когда Child-окно будет удалено;
+   * @param metadata          - информация об удалямом окне(ах).
+   * @param timeout           - если informAboutRemove === false, тогда proxy сможет информировать о следующем удаленном Child-окне через указанный timeout.
    */
-  closeChild(enabledToInformAboutRemove: boolean, childType?: string): void {
-    if (enabledToInformAboutRemove) {
-      this.streamProxy.broadcast({type: 'close', childType});
-    } else {
+  closeChildren(informAboutRemove: boolean, metadata?: Partial<IChildWindowMetadata>, timeout = 500): void {
+    if (!this.isReady)
+      return;
+    if (informAboutRemove)
+      this.streamProxy.closeChildren(metadata);
+    else {
       this.streamProxy.enabledToInformAboutRemove = false;
-      this.streamProxy.broadcast({type: 'close', childType});
-      setTimeout(                                                 // подождать, пока Child-окно пришлет 'disconnected'
-        () => this.streamProxy.enabledToInformAboutRemove = true, // и включить обратно информирование об удалении
-        500 // по-идее этого должно хватить
-      );
+      this.streamProxy.closeChildren(metadata);
+      setTimeout(() => this.streamProxy.enabledToInformAboutRemove = true, timeout);
     }
   }
 

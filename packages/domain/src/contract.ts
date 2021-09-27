@@ -1,8 +1,8 @@
 //region Родительское окно <-> Child-окна
 
 export interface IChildWindowMetadata {
-  id: string;
-  type: string;
+  childId: string;
+  childType: string;
 }
 
 export type TDetachState =
@@ -10,7 +10,7 @@ export type TDetachState =
   'detached' | // откреплено
   'attached';  // прикреплено обратно
 
-export type TChildWindowRequest = 'connected' | 'disconnected';
 export type TParentWindowRequest = 'close';
+export type TChildWindowRequest = 'connected' | 'disconnected';
 
 //endregion

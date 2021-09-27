@@ -1,6 +1,7 @@
 import {filter, first, Fn, fromEvent, map, mergeMap, Observable, of, shareReplay, tap, throwError} from '@hypertype/core';
 import {getMessageId, IAction, IInvoker, ModelStream} from '../model.stream';
 import {TChildWindowRequest, TParentWindowRequest} from '../contract';
+
 declare const OffscreenCanvas;
 
 /**
@@ -16,12 +17,12 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
     return globalThis.opener;
   }
 
-  get id(): string {
-    return globalThis.child.id;
+  get childId(): string {
+    return globalThis.child.childId;
   }
 
-  get type(): string {
-    return globalThis.child.type;
+  get childType(): string {
+    return globalThis.child.childType;
   }
 
   constructor() {
@@ -36,8 +37,8 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
       map(event => event.data),
       filter(Fn.Ib),
       tap(data => log(`Child.onMessage`, data)),
-      filter(data => !data.childId || data.childId === this.id),       // сообщение индивидуально этому окну
-      filter(data => !data.childType || data.childType === this.type), // сообщение для типа окон как у этого окна
+      filter(data => !data.childType || data.childType === this.childType), // сообщение для типа окон как у этого окна
+      filter(data => !data.childId || data.childId === this.childId),       // сообщение индивидуально этому окну
       tap(data => { // Отработка специальных команд для Child-окна
         switch (data.type as TParentWindowRequest) {
           case 'close':
@@ -65,7 +66,7 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
   }
 
   requestToParent(type: TChildWindowRequest) {
-    this.sendMessage({type, childId: this.id});
+    this.sendMessage({type, childId: this.childId});
   }
 
   private sendMessage(message, options?): void {
