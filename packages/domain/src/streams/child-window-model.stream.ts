@@ -1,7 +1,6 @@
-import {filter, first, Fn, fromEvent, map, mergeMap, Observable, of, shareReplay, tap, throwError} from '@hypertype/core';
+import {delayAsync, filter, first, Fn, fromEvent, map, mergeMap, Observable, of, shareReplay, switchMap, tap, throwError} from '@hypertype/core';
 import {getMessageId, IAction, IInvoker, ModelStream} from '../model.stream';
 import {TChildWindowRequest, TParentWindowRequest} from '../contract';
-
 declare const OffscreenCanvas;
 
 /**
@@ -13,23 +12,30 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
   public Input$: Observable<any>;
   public State$: Observable<TState>;
 
+  public childId: string;
+  public childType: string;
+
   get parentWindow() {
     return globalThis.opener;
-  }
-
-  get childId(): string {
-    return globalThis.child.childId;
-  }
-
-  get childType(): string {
-    return globalThis.child.childType;
   }
 
   constructor() {
     super();
     if (!this.parentWindow)
       throw new Error(`parent window is missing`);
-    this.hasOffscreenCanvas = 'OffscreenCanvas' in globalThis
+    this.hasOffscreenCanvas = 'OffscreenCanvas' in globalThis;
+
+    console.log(`child metadata on init`, [globalThis?.child.childId, globalThis?.child.childType]);
+    const actionsOnReady = of(1).pipe(
+      switchMap(() => this.waitForReady()),
+      tap(() => {
+        this.childId = globalThis.child.childId;     // сохраню в локальные переменные,
+        this.childType = globalThis.child.childType; // т.к. при закрытии эти данные могут быть недоступны.
+        console.log(`child metadata when ready`, [this.childId, this.childType]);
+        this.requestToParent('connected'); // запрошу инициализационный стейт
+      }),
+    );
+    actionsOnReady.subscribe();
 
     // => из Родительского окна пришло сообщение -> в Child-окно
     this.Input$ = fromEvent<MessageEvent>(globalThis, 'message').pipe(
@@ -57,8 +63,6 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
       filter(Fn.Ib),
     );
     this.State$.subscribe();
-
-    this.requestToParent('connected'); // запрошу инициализационный стейт
 
     fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
       tap(() => this.requestToParent('disconnected')),
@@ -97,6 +101,26 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
       first()
     ).toPromise()
   };
+
+
+  private waitForReady(durationMinutes = 0.5): Promise<void> {
+    const isReady = () => !!globalThis.child;
+    return new Promise(async (resolve, reject) => {
+      if (isReady())
+        resolve();
+      for (let i = 0; i < 12 * durationMinutes; i++) {
+        await delayAsync(5_000);
+        if (isReady())
+          break;
+      }
+      if (isReady())
+        resolve();
+      else {
+        console.error(`init params in "globalThis.child" not fount, waited for ${durationMinutes} minutes`);
+        reject();
+      }
+    });
+  }
 
 }
 

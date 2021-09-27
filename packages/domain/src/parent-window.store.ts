@@ -27,8 +27,9 @@ export class ParentWindowStore {
     window['child'] = metadata;
     if (!this.streamProxy.addChild(window as any))
       return;
+    const {childId} = metadata;
     return this.streamProxy.removedChild$.pipe(
-      filter(x => x.childId === metadata.childId),
+      filter(x => x.childId === childId),
       first(),
     ).toPromise();
   }
