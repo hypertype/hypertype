@@ -14,7 +14,7 @@ export class ParentWindowStreamProxy {
     this.modelStreamState$ = this.modelStream.State$.pipe(shareReplay(1));
     this.modelStreamState$.subscribe();
 
-    // => из Child-окна пришло сообщение в Родительское окно. Проксирую сообщение -> в Воркер
+    // => из Child-окна пришло сообщение в Родительское окно. Проксировать сообщение -> в Воркер
     fromEvent<MessageEvent>(globalThis, 'message').pipe(
       filter(() => this.children.length > 0),
       filter(event => event.origin === globalThis.origin),
@@ -38,7 +38,7 @@ export class ParentWindowStreamProxy {
       tap(data => this.modelStream.Action(data)),
     ).subscribe();
 
-    // => из Воркера пришло сообщение в Родительское окно. Проксирую сообщение -> в Child-окна
+    // => из Воркера пришло сообщение в Родительское окно. Проксировать сообщение -> в Child-окна
     this.modelStream.Input$.pipe(
       filter(() => this.children.length > 0),
       tap(message => {
@@ -48,10 +48,10 @@ export class ParentWindowStreamProxy {
     ).subscribe();
 
     // пользователь решил перезагрузить/закрыть Родительское окно =>
-    // надо закрыть все Child-окна, т.к. они не могут корректно работать без Родительского окна
+    // надо закрыть все Child-окна, т.к. они не могут корректно работать без Родительского окна.
     fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
       tap(() => {
-        this.enabledToInformAboutRemove = false; // т.к. TDetachState должно обрабатываться в пользовательском коде
+        this.enabledToInformAboutRemove = false; // т.к. TDetachState должен обрабатываться в пользовательском коде
         this.closeChildren();
       }),
     ).subscribe();
@@ -64,7 +64,9 @@ export class ParentWindowStreamProxy {
   sendToChild(childId: string, message, options?) {
     const window = this.childById(childId);
     if (window)
-      postMessage(window, message, options)
+      postMessage(window, message, options);
+    else
+      console.error(`window "${childId}" not found on send to child`);
   }
 
   addChild(window: { child: IChildWindowMetadata }): boolean {
@@ -85,7 +87,7 @@ export class ParentWindowStreamProxy {
       return isExist;
     });
     if (removed.length === 0) {
-      console.error(`window "${childId}" not found`);
+      console.error(`window "${childId}" not found on remove`);
       return;
     }
     if (removed.length > 1)

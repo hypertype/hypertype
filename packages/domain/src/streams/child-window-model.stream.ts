@@ -25,18 +25,6 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
       throw new Error(`parent window is missing`);
     this.hasOffscreenCanvas = 'OffscreenCanvas' in globalThis;
 
-    console.log(`child metadata on init`, [globalThis?.child.childId, globalThis?.child.childType]);
-    const actionsOnReady = of(1).pipe(
-      switchMap(() => this.waitForReady()),
-      tap(() => {
-        this.childId = globalThis.child.childId;     // сохраню в локальные переменные,
-        this.childType = globalThis.child.childType; // т.к. при закрытии эти данные могут быть недоступны.
-        console.log(`child metadata when ready`, [this.childId, this.childType]);
-        this.requestToParent('connected'); // запрошу инициализационный стейт
-      }),
-    );
-    actionsOnReady.subscribe();
-
     // => из Родительского окна пришло сообщение -> в Child-окно
     this.Input$ = fromEvent<MessageEvent>(globalThis, 'message').pipe(
       filter(event => event.origin === globalThis.origin),
@@ -67,6 +55,18 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
     fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
       tap(() => this.requestToParent('disconnected')),
     ).subscribe();
+
+
+    // необходимо гарантировать, что у Child-окна появились метаданные.
+    const actionsOnMetadataReady = of(1).pipe(
+      switchMap(() => this.waitForMetadataReady()),
+      tap(() => {
+        this.childId = globalThis.child.childId;     // для надежности
+        this.childType = globalThis.child.childType; // сохранить в локальные переменные.
+        this.requestToParent('connected'); // запросить инициализационный стейт
+      }),
+    );
+    actionsOnMetadataReady.subscribe();
   }
 
   requestToParent(type: TChildWindowRequest) {
@@ -103,8 +103,12 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
   };
 
 
-  private waitForReady(durationMinutes = 0.5): Promise<void> {
-    const isReady = () => !!globalThis.child;
+  private waitForMetadataReady(durationMinutes = 0.25): Promise<void> {
+    const isReady = () =>
+      !!globalThis.child
+      && !!globalThis.child.childId
+      && !!globalThis.child.childType
+    ;
     return new Promise(async (resolve, reject) => {
       if (isReady())
         resolve();
@@ -116,7 +120,7 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
       if (isReady())
         resolve();
       else {
-        console.error(`init params in "globalThis.child" not fount, waited for ${durationMinutes} minutes`);
+        console.error(`metadata in globalThis.child "${JSON.stringify(globalThis.child)}" not fount. Waited for ${durationMinutes * 60} seconds.`);
         reject();
       }
     });
