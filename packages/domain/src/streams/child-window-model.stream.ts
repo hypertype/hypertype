@@ -120,7 +120,7 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
       if (isReady())
         resolve();
       else {
-        console.error(`metadata in globalThis.child "${JSON.stringify(globalThis.child)}" not fount. Waited for ${durationMinutes * 60} seconds.`);
+        logError(`Metadata in globalThis.child "${JSON.stringify(globalThis.child)}" not fount. Waited for ${durationMinutes * 60} seconds.`);
         reject();
       }
     });
@@ -129,6 +129,10 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
 }
 
 function log(...args) {
-  if (globalThis.isDebugChildWindows)
-    console.log(...args)
+  if (globalThis.isDebugChildWindows === true)
+    console.log('[child]', ...args)
+}
+
+function logError(...args) {
+  console.error('[child]', ...args);
 }
