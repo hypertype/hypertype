@@ -130,9 +130,9 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
 
 function log(...args) {
   if (globalThis.isDebugChildWindows === true)
-    console.log('[child]', ...args)
+    console.log('[child-stream]', ...args)
 }
 
 function logError(...args) {
-  console.error('[child]', ...args);
+  console.error('[child-stream]', ...args);
 }
