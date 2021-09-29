@@ -1,5 +1,5 @@
 import {concatMap, distinctUntilChanged, map, Observable, shareReplay, startWith, Subject} from "@hypertype/core";
-import {IInvoker} from "./model.stream";
+import {IAction, IInvoker} from "./model.stream";
 
 /**
  * Сравнивает два объекта, учитывает DateTime, Duration, array, object
@@ -38,12 +38,24 @@ export abstract class Model<TState, TActions> implements IModel<TState, TActions
 
   public State$: Observable<TState> = this.StateSubject$.asObservable().pipe(
     startWith(null as void),
-    map(() => this.ToJSON()),
+    map(() => ({
+      ...this.ToJSON(),
+      lastUpdate: this.lastUpdate
+    })),
     distinctUntilChanged(compare),
     shareReplay(1),
   );
 
-  private InvokeSubject$ = new Subject<{ action: { path; method; args }, resolve: Function, reject: Function }>();
+  private lastUpdate: string;
+  /**
+   * Включает фильтрацию устаревших обновлений домена:
+   * Клиент быстро отправляет 3-4 action в домен, ответ на первое приходит с задержкой.
+   * Стейт на клиенте уже учитывает эти экшены, а из домена пришел учитывающий только одно из них
+   * @protected
+   */
+  protected useLastUpdate = false;
+
+  private InvokeSubject$ = new Subject<{ action: IAction<any>, resolve: Function, reject: Function }>();
   private Invoke$ = this.InvokeSubject$.pipe(
     /**
      * Идея в сериализации а-ля ReadCommitted:
@@ -60,6 +72,9 @@ export abstract class Model<TState, TActions> implements IModel<TState, TActions
         if (!action.method.startsWith('Get')) {
           const result: any = await this.GetSubActions(...(action.path || []))[action.method](...action.args);
           resolve(result);
+          if (this.useLastUpdate) {
+            this.lastUpdate = action.lastUpdate;
+          }
           this.Update();
         } else {
           const promiseOrResult = this.GetSubActions(...(action.path || []))[action.method](...action.args);
@@ -106,7 +121,7 @@ export abstract class Model<TState, TActions> implements IModel<TState, TActions
       return null;
     if (!path.length)
       return state;
-    if (state instanceof Map){
+    if (state instanceof Map) {
       return this.GetSubState(state.get(path[0]), ...path.slice(1));
     }
     if (Array.isArray(state))

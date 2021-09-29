@@ -57,6 +57,7 @@
     "crc-32": "*",
     "reflect-metadata": "^0.1.13",
     "rxjs": "6.6.3",
+    "ulid": "^2.3.0",
     "symbol-observable": "^1.2.0",
     "ts-jest": "^26.4.1"
   },

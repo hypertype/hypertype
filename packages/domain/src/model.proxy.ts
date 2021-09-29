@@ -1,9 +1,11 @@
-import {distinctUntilChanged, map, Observable, shareReplay, startWith, Subject, switchMap} from "@hypertype/core";
+import {distinctUntilChanged, filter, map, Observable, shareReplay, startWith, Subject, switchMap} from "@hypertype/core";
 import {ModelStream} from "./model.stream";
 import {IActions} from "./model";
+import { Fn } from "@hypertype/core";
 
 export class ModelProxy<TState, TActions extends IActions<TActions>> {
 
+  private static lastUpdate: string;
   private ActionSubject = new Subject();
 
   private ShareState$ = this.stream.State$.pipe(
@@ -15,6 +17,11 @@ export class ModelProxy<TState, TActions extends IActions<TActions>> {
     switchMap(_ => this.ShareState$),
     distinctUntilChanged(),
     map(state => this.GetSubState(state, this.path)),
+    filter(state => {
+      if (!state.lastUpdate)
+        return true;
+      return state.lastUpdate >= ModelProxy.lastUpdate;
+    }),
     shareReplay(1),
   );
 
@@ -27,10 +34,12 @@ export class ModelProxy<TState, TActions extends IActions<TActions>> {
         return undefined;
       return target[key] || (target[key] = (async (...args) => {
         try {
+          ModelProxy.lastUpdate = Fn.ulid();
           const res = await this.stream.Action({
             path: this.path,
             method: key,
-            args: args
+            args: args,
+            lastUpdate: ModelProxy.lastUpdate,
           });
           return res;
         } catch (e) {
