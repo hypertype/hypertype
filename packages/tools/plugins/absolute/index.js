@@ -6,7 +6,7 @@ function visitRequireNode(importNode) {
     if (importNode.expression.kind == ts.SyntaxKind.Identifier &&
         importNode.expression.escapedText == "require") {
         var file = importNode.arguments[0].text;
-        if (/\.(less|css|scss|sass)/.test(file)) {
+        if (/\.(less|css|scss|sass|svg|png|html)/.test(file)) {
             var currentFileName = importNode.getSourceFile().fileName;
             var absolute = path_1.join(path_1.dirname(currentFileName), file);
             return ts.updateCall(importNode, importNode.expression, undefined, [ts.createStringLiteral(absolute)]);
