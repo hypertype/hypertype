@@ -31,12 +31,14 @@ module.exports = ({html, index, publicPath, port, host, output}) => {
     if (process.argv.indexOf('--run') >= 0) {
         console.log(`starting web server...`);
         const server = new devServer(compiler, {
-            contentBase: path.join(baseDir, 'dist'),
             port: port,
-            publicPath: publicPath,
+            static: {
+              directory: path.join(baseDir, 'dist'),
+              publicPath: publicPath,
+            },
             historyApiFallback: {
                 rewrites: [
-                    {from: /.*/, to: `${publicPath}/index.html`},
+                    {from: /./, to: `/index.html`},
                 ]
             }
         },);
