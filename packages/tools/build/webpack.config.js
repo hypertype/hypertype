@@ -61,7 +61,7 @@ module.exports = (index, filename, output, target) => {
         },
         {
           test: /\.(html|svg)$/,
-          loader: 'string-loader',
+          loader: 'raw-loader',
         },
         {
           test: /\.ts/,

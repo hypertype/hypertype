@@ -6,46 +6,47 @@ const getConfig = require('./webpack.config');
 const devServer = require('webpack-dev-server');
 
 module.exports = ({html, index, publicPath, port, host, output}) => {
-    if (!publicPath) publicPath = '';
-    if (!host) host = 'localhost';
-    if (!port) port = '3200';
-    const baseDir = process.cwd();
-    const config = getConfig(index, "index.js", output);
-    const compiler = webpack({
-        ...config,
-        externals: [],
-        output: {
-            ...config.output,
-            publicPath: publicPath
-        },
-        plugins: [
-            new HtmlWebpackPlugin({
-                template: html,
-                base: {
-                    href: publicPath
-                }
-            }),
-            ...config.plugins
-        ],
+  if (!publicPath) publicPath = '';
+  if (!host) host = 'localhost';
+  if (!port) port = '3200';
+  const baseDir = process.cwd();
+  const config = getConfig(index, "index.js", output);
+  const compiler = webpack({
+    ...config,
+    externals: [],
+    output: {
+      ...config.output,
+      publicPath: publicPath
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        minify: false,
+        template: html,
+        base: {
+          href: publicPath
+        }
+      }),
+      ...config.plugins
+    ],
+  });
+  if (process.argv.indexOf('--run') >= 0) {
+    console.log(`starting web server...`);
+    const server = new devServer(compiler, {
+      port: port,
+      static: {
+        directory: path.join(baseDir, 'dist'),
+        publicPath: publicPath,
+      },
+      historyApiFallback: {
+        rewrites: [
+          {from: /./, to: `/index.html`},
+        ]
+      }
+    },);
+    server.listen(port, host, (err, stats) => {
+      console.log(`listen on ${host}:${port}`)
     });
-    if (process.argv.indexOf('--run') >= 0) {
-        console.log(`starting web server...`);
-        const server = new devServer(compiler, {
-            port: port,
-            static: {
-              directory: path.join(baseDir, 'dist'),
-              publicPath: publicPath,
-            },
-            historyApiFallback: {
-                rewrites: [
-                    {from: /./, to: `/index.html`},
-                ]
-            }
-        },);
-        server.listen(port, host, (err, stats) => {
-            console.log(`listen on ${host}:${port}`)
-        });
-    } else {
-        runCompiler(compiler)
-    }
+  } else {
+    runCompiler(compiler)
+  }
 };
