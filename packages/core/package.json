@@ -45,7 +45,8 @@
   "bundleDependencies": [
     "rxjs",
     "crc-32",
-    "reflect-metadata"
+    "reflect-metadata",
+    "ulid"
   ],
   "peerDependencies": {
     "luxon": "^1.12.1"
