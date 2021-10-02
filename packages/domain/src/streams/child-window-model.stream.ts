@@ -146,8 +146,9 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
   private isRefreshPage(keyboardEvent): boolean {
     if (!keyboardEvent)
       return false;
-    const {code, ctrlKey} = keyboardEvent;
-    return code === 'F5' || (code === 'KeyR' && ctrlKey === true);
+    const {code, ctrlKey, metaKey} = keyboardEvent;
+    return code === 'F5' ||
+      (code === 'KeyR' && (ctrlKey || metaKey)); // на mac cmd+R
   }
 
 //endregion
