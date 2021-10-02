@@ -16,8 +16,6 @@ export class ParentWindowStore {
 
   /**
    * Добавляет окно в streamProxy.
-   * @param window
-   * @param metadata
    * @return onRemovedFn | undefined - в случае успешного добавления окна возвращает промис,
    *                                   сигнализирующий, что открепленное окно удалено из streamProxy.
    */
@@ -26,7 +24,6 @@ export class ParentWindowStore {
       return;
     if (!this.streamProxy.addChild(window, {...metadata}))
       return;
-    window['child'] = {...metadata};
     const {childId} = metadata;
     return this.streamProxy.removedChild$.pipe(
       filter(x => x.childId === childId),

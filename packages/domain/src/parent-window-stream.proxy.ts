@@ -59,7 +59,7 @@ export class ParentWindowStreamProxy {
 
   addChild(window, metadata: IChildWindowMetadata): boolean {
     if (this.childByObj(window) || this.childById(metadata.childId)) {
-      logError('window already exists in stream proxy');
+      logError('child window already exists in stream proxy');
       return false;
     }
     this.children.set(metadata, window);
@@ -67,9 +67,9 @@ export class ParentWindowStreamProxy {
   }
 
   removeChild(childId: string): void {
-    const metadata = this.metadataById(childId);
+    const metadata = this.childMetadataById(childId);
     if (!metadata) {
-      logError(`window "${childId}" not found on removing child`);
+      logError(`child window by id "${childId}" not found on removing child`);
       return;
     }
     this.children.delete(metadata);
@@ -93,7 +93,7 @@ export class ParentWindowStreamProxy {
   sendToChild(childId: string, message, options?) {
     const window = this.childById(childId);
     if (!window) {
-      logError(`window "${childId}" not found on sending to child`);
+      logError(`child window by id "${childId}" not found on sending to child`);
       return;
     }
     postMessage(window, message, options);
@@ -102,12 +102,12 @@ export class ParentWindowStreamProxy {
 
 //region Support
 
-  private metadataById(childId: string): IChildWindowMetadata | undefined {
+  private childMetadataById(childId: string): IChildWindowMetadata | undefined {
     return Array.from(this.children.keys()).find(metadata => metadata.childId === childId);
   }
 
   private childById(childId: string) {
-    const metadata = this.metadataById(childId);
+    const metadata = this.childMetadataById(childId);
     if (metadata)
       return this.children.get(metadata);
   }

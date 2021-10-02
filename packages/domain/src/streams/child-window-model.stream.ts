@@ -1,6 +1,6 @@
-import {delayAsync, filter, first, Fn, fromEvent, map, mergeMap, Observable, of, shareReplay, switchMap, tap, throwError} from '@hypertype/core';
+import {delayAsync, filter, first, Fn, fromEvent, map, mergeMap, Observable, of, shareReplay, startWith, switchMap, tap, throwError, withLatestFrom} from '@hypertype/core';
+import {IChildWindowMetadata, TChildWindowRequest, TParentWindowRequest} from '../contract';
 import {getMessageId, IAction, IInvoker, ModelStream} from '../model.stream';
-import {TChildWindowRequest, TParentWindowRequest} from '../contract';
 declare const OffscreenCanvas;
 
 /**
@@ -53,20 +53,28 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
     this.State$.subscribe();
 
     fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
-      tap(() => this.requestToParent('disconnected')),
+      withLatestFrom(
+        fromEvent<any>(globalThis.document, 'keydown').pipe(
+          startWith(null),
+        ),
+      ),
+      tap(([, keyboardEvent]) => {
+        if (!this.isRefreshPage(keyboardEvent))
+          this.requestToParent('disconnected');
+      }),
     ).subscribe();
 
-
     // необходимо гарантировать, что у Child-окна появились метаданные.
-    const actionsOnMetadataReady = of(1).pipe(
+    const onMetadataReady$ = of(1).pipe(
       switchMap(() => this.waitForMetadataReady()),
       tap(() => {
-        this.childId = globalThis.child.childId;     // для надежности
-        this.childType = globalThis.child.childType; // сохранить в локальные переменные.
+        const {childId, childType} = this.parseMetadata();
+        this.childId = childId;
+        this.childType = childType;
         this.requestToParent('connected'); // запросить инициализационный стейт
       }),
     );
-    actionsOnMetadataReady.subscribe();
+    onMetadataReady$.subscribe();
   }
 
   requestToParent(type: TChildWindowRequest) {
@@ -103,12 +111,21 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
   };
 
 
-  private waitForMetadataReady(durationMinutes = 0.25): Promise<void> {
-    const isReady = () =>
-      !!globalThis.child
-      && !!globalThis.child.childId
-      && !!globalThis.child.childType
-    ;
+//region Support
+
+  private parseMetadata(): IChildWindowMetadata | undefined {
+    const search = new URLSearchParams(globalThis.location.search);
+    const metadataStr = search.get('childWindowMetadata');
+    if (!metadataStr)
+      return;
+    return JSON.parse(atob(metadataStr));
+  }
+
+  private waitForMetadataReady(durationMinutes = 0.34): Promise<void> {
+    const isReady = () => {
+      const metadata = this.parseMetadata();
+      return metadata && metadata.childId && metadata.childType;
+    };
     return new Promise(async (resolve, reject) => {
       if (isReady())
         resolve();
@@ -120,11 +137,20 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
       if (isReady())
         resolve();
       else {
-        logError(`Metadata in globalThis.child "${JSON.stringify(globalThis.child)}" not fount. Waited for ${durationMinutes * 60} seconds.`);
+        logError(`Metadata in url.search "${JSON.stringify(globalThis.location.search)}" not fount. Waited for ${Math.trunc(durationMinutes * 60)} seconds.`);
         reject();
       }
     });
   }
+
+  private isRefreshPage(keyboardEvent): boolean {
+    if (!keyboardEvent)
+      return false;
+    const {code, ctrlKey} = keyboardEvent;
+    return code === 'F5' || (code === 'KeyR' && ctrlKey === true);
+  }
+
+//endregion
 
 }
 
