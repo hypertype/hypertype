@@ -59,6 +59,7 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
         ),
       ),
       tap(([, keyboardEvent]) => {
+        this.sendMessage({code: keyboardEvent?.code, ctrlKey: keyboardEvent?.ctrlKey, metaKey: keyboardEvent?.metaKey})
         if (!this.isRefreshPage(keyboardEvent))
           this.requestToParent('disconnected');
       }),
