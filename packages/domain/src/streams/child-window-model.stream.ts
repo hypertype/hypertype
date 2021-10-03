@@ -144,7 +144,6 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
   }
 
   private isRefreshPage(keyboardEvent): boolean {
-    console.log(``, {code: keyboardEvent?.code, ctrlKey: keyboardEvent?.ctrlKey, metaKey: keyboardEvent?.metaKey});
     if (!keyboardEvent)
       return false;
     const {code, ctrlKey, metaKey} = keyboardEvent;
