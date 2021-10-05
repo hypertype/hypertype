@@ -137,7 +137,7 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
       if (isReady())
         resolve();
       else {
-        logError(`Metadata in url.search "${JSON.stringify(globalThis.location.search)}" not fount. Waited for ${Math.trunc(durationMinutes * 60)} seconds.`);
+        logError(`Child window metadata in url.search "${JSON.stringify(globalThis.location.search)}" not fount. Waited for ${Math.trunc(durationMinutes * 60)} seconds.`);
         reject();
       }
     });
