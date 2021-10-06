@@ -24,6 +24,7 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
     if (!this.parentWindow)
       throw new Error(`parent window is missing`);
     this.hasOffscreenCanvas = 'OffscreenCanvas' in globalThis;
+    console.log(`hypertype check`, )
 
     // => из Родительского окна пришло сообщение -> в Child-окно
     this.Input$ = fromEvent<MessageEvent>(globalThis, 'message').pipe(
