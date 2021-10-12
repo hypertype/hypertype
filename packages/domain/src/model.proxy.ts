@@ -18,7 +18,7 @@ export class ModelProxy<TState, TActions extends IActions<TActions>> {
     distinctUntilChanged(),
     map(state => this.GetSubState(state, this.path)),
     filter(state => {
-      if (!state.lastUpdate)
+      if (!state || !state.lastUpdate)
         return true;
       return state.lastUpdate >= ModelProxy.lastUpdate;
     }),
