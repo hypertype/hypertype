@@ -30,7 +30,7 @@ export class SimpleWebWorkerEntry {
                 try {
                     self.postMessage(d)
                 }catch (e) {
-                    console.error(`Failed to sent via web worker`, d);
+                    console.error(`Failed to sent via web worker [structured-clone]`, d, e);
                 }
             });
         }

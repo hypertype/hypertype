@@ -46,7 +46,7 @@ export class SharedWebworkerEntry {
         try {
           self.postMessage(d)
         } catch (e) {
-          console.error(`Failed to sent via web worker`, d);
+          console.error(`Failed to sent via web worker [shared-buffer]`, d, e);
         }
       });
     }
