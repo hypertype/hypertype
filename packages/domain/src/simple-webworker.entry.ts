@@ -1,6 +1,7 @@
-import {Container, map, merge, Observable, ReplaySubject, shareReplay, tap} from "@hypertype/core";
-import {Model} from "./model";
+import {Container, map, merge, Observable, ReplaySubject, shareReplay} from "@hypertype/core";
 import {fromEvent, takeUntil} from "@hypertype/core";
+import {getTransferable} from './transferable';
+import {Model} from "./model";
 
 export class SimpleWebWorkerEntry {
 
@@ -28,8 +29,8 @@ export class SimpleWebWorkerEntry {
             // => из Worker отправляю ответ -> в Browser Main
             service.Output$.subscribe(d => {
                 try {
-                    self.postMessage(d)
-                }catch (e) {
+                    self.postMessage(d, getTransferable(d))
+                } catch (e) {
                     console.error(`Failed to sent via web worker [structured-clone]`, d, e);
                 }
             });
@@ -43,7 +44,11 @@ export class SimpleWebWorkerEntry {
                 service.Output$.pipe(
                   takeUntil(fromEvent(self, 'disconnect'))
                 ).subscribe(d => {
-                    port.postMessage(d)
+                  try {
+                      port.postMessage(d, getTransferable(d));
+                  } catch (e) {
+                      console.error(`Failed to sent via shared worker [structured-clone]`, d, e);
+                  }
                 });
                 port.start();
             };

@@ -86,17 +86,17 @@ export class ParentWindowStreamProxy {
   }
 
 
-  broadcast(message, options?): void {
-    this.children.forEach(window => postMessage(window, message, options));
+  broadcast(message): void {
+    this.children.forEach(window => postMessage(window, message));
   }
 
-  sendToChild(childId: string, message, options?) {
+  sendToChild(childId: string, message) {
     const window = this.childById(childId);
     if (!window) {
       logError(`child window by id "${childId}" not found on sending to child`);
       return;
     }
-    postMessage(window, message, options);
+    postMessage(window, message);
   }
 
 
@@ -124,9 +124,9 @@ export class ParentWindowStreamProxy {
 
 }
 
-function postMessage(window, message, options?): void {
+function postMessage(window, message): void {
   log('Child.postMessage', message);
-  window.postMessage(message, globalThis.origin, options);
+  window.postMessage(message, globalThis.origin);
 }
 
 function log(...args) {

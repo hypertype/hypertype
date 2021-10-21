@@ -1,6 +1,6 @@
-import {getMessageId, IAction, IInvoker, ModelStream} from "../model.stream";
 import {filter, first, Fn, map, mergeMap, Observable, of, throwError} from "@hypertype/core";
-declare const OffscreenCanvas;
+import {getMessageId, IAction, IInvoker, ModelStream} from "../model.stream";
+import {getTransferable} from '../transferable';
 
 export abstract class WorkerModelStream<TState, TActions> extends ModelStream<TState, TActions> {
     public Input$: Observable<any>;
@@ -32,9 +32,7 @@ export abstract class WorkerModelStream<TState, TActions> extends ModelStream<TS
         this.sendMessage({
             ...action,
             _id: id
-        }, ('OffscreenCanvas' in self) ? action.args.filter(a => {
-            return (a instanceof OffscreenCanvas);
-        }) : []);
+          }, getTransferable(action.args));
         return this.Input$.pipe(
             filter(d => d.requestId == id),
             mergeMap(d => d.error ? throwError(d.error) : of(d.response)),

@@ -1,7 +1,7 @@
 import {delayAsync, filter, first, Fn, fromEvent, map, mergeMap, Observable, of, shareReplay, startWith, switchMap, tap, throwError, withLatestFrom} from '@hypertype/core';
 import {IChildWindowMetadata, TChildWindowRequest, TParentWindowRequest} from '../contract';
 import {getMessageId, IAction, IInvoker, ModelStream} from '../model.stream';
-declare const OffscreenCanvas;
+import {getTransferable} from '../transferable';
 
 /**
  * Идея: в открепленном окне(Child-окно) нет воркера.
@@ -23,7 +23,6 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
     super();
     if (!this.parentWindow)
       throw new Error(`parent window is missing`);
-    this.hasOffscreenCanvas = 'OffscreenCanvas' in globalThis;
 
     // => из Родительского окна пришло сообщение -> в Child-окно
     this.Input$ = fromEvent<MessageEvent>(globalThis, 'message').pipe(
@@ -87,7 +86,6 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
   }
 
   // => из Child-окна отправляю сообщение -> в Родительское окно
-  private hasOffscreenCanvas;
   public Action: IInvoker<TActions> = (action: IAction<TActions>) => {
     switch (action.method) {
       case 'SetFontFactor': // Это инициализационные action'ы, а так как в родительском окне
@@ -101,7 +99,7 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
         ...action,
         _id: id
       },
-      this.hasOffscreenCanvas ? action.args.filter(a => (a instanceof OffscreenCanvas)) : []
+      getTransferable(action.args),
     );
     return this.Input$.pipe(
       filter(d => d.requestId == id),
