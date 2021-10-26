@@ -1,4 +1,4 @@
-import {catchError, filter, map, Observable, of, ReplaySubject, shareReplay, tap} from "@hypertype/core";
+import {catchError, filter, map, Observable, of, Subject, shareReplay, tap} from "@hypertype/core";
 import {Model} from "./model";
 
 export class WebsocketEntry {
@@ -8,7 +8,7 @@ export class WebsocketEntry {
         map(s => JSON.stringify(s)),
         shareReplay(1)
     );
-    private InputSubject$ = new ReplaySubject();
+    private InputSubject$ = new Subject();
     private Input$ = this.InputSubject$.asObservable().pipe(
         map((d: string) => JSON.parse(d)),
         tap(console.log),

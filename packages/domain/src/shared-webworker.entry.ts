@@ -4,9 +4,8 @@ import {
   map,
   merge,
   Observable,
-  ReplaySubject,
-  shareReplay,
   Subject,
+  shareReplay,
   switchMap,
   takeUntil
 } from "@hypertype/core";
@@ -15,7 +14,7 @@ import {SharedStore} from "./shared.store";
 
 export class SharedWebworkerEntry {
 
-  private Responses$ = new ReplaySubject();
+  private Responses$ = new Subject();
   private store: SharedStore;
   private StoreHandler$ = new Subject();
 

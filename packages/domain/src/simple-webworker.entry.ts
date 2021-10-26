@@ -1,11 +1,11 @@
-import {Container, map, merge, Observable, ReplaySubject, shareReplay} from "@hypertype/core";
+import {Container, map, merge, Observable, Subject, shareReplay} from "@hypertype/core";
 import {fromEvent, takeUntil} from "@hypertype/core";
 import {getTransferable} from './transferable';
 import {Model} from "./model";
 
 export class SimpleWebWorkerEntry {
 
-    private Responses$ = new ReplaySubject();
+    private Responses$ = new Subject();
 
     public Output$: Observable<any> = merge(
         this.model.State$.pipe(map(d => ({state: d}))),
