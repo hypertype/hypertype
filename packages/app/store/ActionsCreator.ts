@@ -70,7 +70,7 @@ export class ActionsCreator<T> {
         this.actionQueueSubject$.next(action);
     }
 
-    private actionQueueSubject$ = new ReplaySubject<Action>();
+    private actionQueueSubject$ = new ReplaySubject<Action>(1);
     private actionQueue = this.actionQueueSubject$.asObservable();
 
     public InitActionCreator(store, path, state = {}) {

@@ -19,7 +19,7 @@ export abstract class HyperComponent<TState = any, TEvents = any> {
     protected defaultState: TState;
     // private _attributesSubject$ = new ReplaySubject<{ name, value }>();
     private _eventsSubject$ = new Subject<{ args: any; type: keyof TEvents; }>();
-    private _elementSubject$: Subject<HTMLElement> = new ReplaySubject<HTMLElement>();
+    private _elementSubject$: Subject<HTMLElement> = new ReplaySubject<HTMLElement>(1);
     private _disconnect$: Subject<void> = new Subject<void>();
     protected Element$: Observable<HTMLElement> = this._elementSubject$.asObservable().pipe(
         filter(x => !!x)
@@ -45,7 +45,7 @@ export abstract class HyperComponent<TState = any, TEvents = any> {
         filter(rect => rect.width > 0 && rect.height > 0),
         shareReplay(1)
     );
-    protected Render$ = new ReplaySubject();
+    protected Render$ = new ReplaySubject(1);
 
     protected select<E extends Element = Element>(selector: string): Observable<E | null> {
         return this.Render$.asObservable().pipe(
@@ -54,7 +54,7 @@ export abstract class HyperComponent<TState = any, TEvents = any> {
         );
     }
 
-    private _injectedContent$ = new ReplaySubject<(HTMLElement|SVGElement)[]>();
+    private _injectedContent$ = new ReplaySubject<(HTMLElement|SVGElement)[]>(1);
     protected InjectedContent$ = this._injectedContent$.asObservable();
 
     protected Events: Partial<TEvents>;
