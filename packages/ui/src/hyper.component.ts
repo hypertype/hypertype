@@ -5,7 +5,7 @@ import {
     Observable,
     of,
     ReplaySubject,
-    shareReplay,
+    shareReplayRC,
     Subject,
     switchMap,
     withLatestFrom
@@ -43,7 +43,7 @@ export abstract class HyperComponent<TState = any, TEvents = any> {
             };
         })),
         filter(rect => rect.width > 0 && rect.height > 0),
-        shareReplay(1)
+        shareReplayRC(1)
     );
     protected Render$ = new ReplaySubject(1);
 

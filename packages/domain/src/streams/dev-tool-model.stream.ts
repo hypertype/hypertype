@@ -1,5 +1,5 @@
 import {IAction, IInvoker, ModelStream} from "../model.stream";
-import {debounceTime, Observable, shareReplay, tap} from "@hypertype/core";
+import {debounceTime, Observable, shareReplayRC, tap} from "@hypertype/core";
 import {StateLogger} from "@hypertype/infr";
 
 export class DevToolModelStream<TState, TActions> extends ModelStream<TState, TActions> {
@@ -10,7 +10,7 @@ export class DevToolModelStream<TState, TActions> extends ModelStream<TState, TA
             this.lastState = state;
             this.stateLogger.send({type: 'domain.new-state', payload: null}, state);
         }),
-        shareReplay(1)
+        shareReplayRC(1)
     );
 
     constructor(private stream: ModelStream<TState, TActions>, private stateLogger: StateLogger) {

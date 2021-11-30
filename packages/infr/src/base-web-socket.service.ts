@@ -1,4 +1,4 @@
-import {filter, first, Fn, Observable, ReplaySubject, shareReplay, Subject} from "@hypertype/core";
+import {filter, first, Fn, Observable, ReplaySubject, shareReplayRC, Subject} from "@hypertype/core";
 import {IWebSocketService} from "./i-web-socket.service";
 import {HubConnection} from "../signalr/HubConnection";
 import {IHttpConnectionOptions} from "../signalr";
@@ -82,7 +82,7 @@ export abstract class BaseWebSocketService extends IWebSocketService {
 export class WebSocketHub {
     private messagesSubject = new Subject();
     public messages$: Observable<any> = this.messagesSubject.asObservable().pipe(
-        shareReplay(1)
+      shareReplayRC(1)
     );
 
     constructor(private connection: Observable<HubConnection>, hub: string) {

@@ -1,4 +1,4 @@
-import {Container, map, merge, Observable, Subject, shareReplay} from "@hypertype/core";
+import {Container, map, merge, Observable, Subject, shareReplayRC} from "@hypertype/core";
 import {fromEvent, takeUntil} from "@hypertype/core";
 import {getTransferable} from './transferable';
 import {Model} from "./model";
@@ -11,7 +11,7 @@ export class SimpleWebWorkerEntry {
         this.model.State$.pipe(map(d => ({state: d}))),
         this.Responses$.asObservable()
     ).pipe(
-        shareReplay(1)
+        shareReplayRC(1)
     );
 
     constructor(private model: Model<any, any>) {

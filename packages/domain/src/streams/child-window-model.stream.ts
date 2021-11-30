@@ -1,4 +1,4 @@
-import {delayAsync, filter, first, Fn, fromEvent, map, mergeMap, Observable, of, shareReplay, startWith, switchMap, tap, throwError, withLatestFrom} from '@hypertype/core';
+import {delayAsync, filter, first, Fn, fromEvent, map, mergeMap, Observable, of, shareReplayRC, startWith, switchMap, tap, throwError, withLatestFrom} from '@hypertype/core';
 import {IChildWindowMetadata, TChildWindowRequest, TParentWindowRequest} from '../contract';
 import {getMessageId, IAction, IInvoker, ModelStream} from '../model.stream';
 import {getTransferable} from '../transferable';
@@ -42,7 +42,7 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
         }
       }),
       filter(Fn.Ib),
-      shareReplay(1)
+      shareReplayRC(1)
     );
 
     this.State$ = this.Input$.pipe(

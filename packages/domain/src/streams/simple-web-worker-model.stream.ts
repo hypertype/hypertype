@@ -1,6 +1,6 @@
 import {InjectionToken, Observable} from "@hypertype/core";
 import {WorkerModelStream} from "./worker-model.stream";
-import {fromEvent, map, shareReplay} from "@hypertype/core";
+import {fromEvent, map, shareReplayRC} from "@hypertype/core";
 
 export const UrlToken = new InjectionToken('webworker');
 
@@ -9,7 +9,7 @@ export class SimpleWebWorkerModelStream<TState, TActions>
   protected Subscribe(): Observable<any> {
     return fromEvent<MessageEvent>(this.worker, 'message').pipe(
       map(e => e.data),
-      shareReplay(1)
+      shareReplayRC(1)
     );
   }
 

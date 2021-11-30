@@ -1,4 +1,5 @@
-import {async, debounceTime, first, ReplaySubject, shareReplay, switchMap} from "./operators";
+import {async, debounceTime, first, ReplaySubject, switchMap} from "./operators";
+import {shareReplayRC} from './share-replay-rc';
 
 export function switchDebounce(time: number) {
     return (target, key, decorator) => {
@@ -12,7 +13,7 @@ export function switchDebounce(time: number) {
                 const response$ = this[responseSymbol] = this[responseSymbol] || requests$.pipe(
                     debounceTime(time, async),
                     switchMap(fn => fn()),
-                    shareReplay(1)
+                    shareReplayRC(1)
                 );
                 requests$.next(() => fn.apply(this, args));
                 return response$.pipe(first()).toPromise();

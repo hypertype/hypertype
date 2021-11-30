@@ -1,4 +1,4 @@
-import {filter, first, Fn, fromEvent, map, Observable, share, shareReplay, Subject, switchMap, tap} from '@hypertype/core';
+import {filter, first, Fn, fromEvent, map, Observable, share, shareReplayRC, Subject, switchMap, tap} from '@hypertype/core';
 import {IChildWindowMetadata, TChildWindowRequest} from './contract';
 import {ModelStream} from './model.stream';
 
@@ -11,7 +11,7 @@ export class ParentWindowStreamProxy {
   public enabledToInformAboutRemove = true;
 
   constructor(private modelStream: ModelStream<any, any>) {
-    this.modelStreamState$ = this.modelStream.State$.pipe(shareReplay(1));
+    this.modelStreamState$ = this.modelStream.State$.pipe(shareReplayRC(1));
     this.modelStreamState$.subscribe();
 
     // => из Child-окна пришло сообщение в Родительское окно. Проксировать сообщение -> в Воркер

@@ -5,7 +5,7 @@ import {
   merge,
   Observable,
   Subject,
-  shareReplay,
+  shareReplayRC,
   switchMap,
   takeUntil
 } from "@hypertype/core";
@@ -25,7 +25,7 @@ export class SharedWebworkerEntry {
     )),
     // filter(x => this.store != null),
     map(data => this.store.Write(data)),
-    shareReplay(1)
+    shareReplayRC(1)
   );
 
   constructor(private model: Model<any, any>) {

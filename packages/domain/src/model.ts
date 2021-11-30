@@ -1,4 +1,4 @@
-import {concatMap, distinctUntilChanged, map, Observable, shareReplay, startWith, Subject} from "@hypertype/core";
+import {concatMap, distinctUntilChanged, map, Observable, shareReplayRC, startWith, Subject} from "@hypertype/core";
 import {IAction, IInvoker} from "./model.stream";
 
 /**
@@ -43,7 +43,7 @@ export abstract class Model<TState, TActions> implements IModel<TState, TActions
       lastUpdate: this.lastUpdate
     })),
     distinctUntilChanged(compare),
-    shareReplay(1),
+    shareReplayRC(1),
   );
 
   private lastUpdate: string;

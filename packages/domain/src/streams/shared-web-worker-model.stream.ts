@@ -1,4 +1,4 @@
-import {fromEvent, InjectionToken, map, Observable, shareReplay} from "@hypertype/core";
+import {fromEvent, InjectionToken, map, Observable, shareReplayRC} from "@hypertype/core";
 import {WorkerModelStream} from "./worker-model.stream";
 import {SharedStore} from "../shared.store";
 
@@ -11,7 +11,7 @@ export class SharedWebWorkerModelStream<TState, TActions>
   protected Subscribe(): Observable<any> {
     return fromEvent<MessageEvent>(this.worker, 'message').pipe(
       map(e => this.store.Read(e.data)),
-      shareReplay(1)
+      shareReplayRC(1)
     );
   }
 

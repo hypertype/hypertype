@@ -1,6 +1,6 @@
 import createRouter, {Options, Route, RouteNode, Router as Router5, State as RouterState} from 'router5';
 import browserPlugin from 'router5-plugin-browser';
-import {Observable, shareReplay, startWith} from "@hypertype/core";
+import {Observable, shareReplayRC, startWith} from "@hypertype/core";
 
 export class IRouterOptions {
   routes: Route[] | RouteNode;
@@ -26,7 +26,7 @@ export class Router {
       this.router.subscribe(change => subscr.next(change.route as RouterState))
     }).pipe(
       startWith(this.router.getState() as RouterState),
-      shareReplay(1)
+      shareReplayRC(1)
     );
   }
 }
