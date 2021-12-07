@@ -1,4 +1,4 @@
-import {HyperElement, wire} from "../hyperhtml/hyper.element";
+import {html, render} from "uhtml";
 import {Observable, ReplaySubject, Subject, takeUntil} from "@hypertype/core";
 import {UI} from "./ui";
 import {importStyle} from "./import-styles";
@@ -54,7 +54,7 @@ export function Component(info: {
     if (info.style)
       importStyle(info.style, target.name);
 
-    class ProxyHTML extends HyperElement {
+    class ProxyHTML extends HTMLElement {
 
       constructor() {
         super();
@@ -63,6 +63,7 @@ export function Component(info: {
             this[key] = this.hasAttribute(key) ? this.getAttribute(key) : null;
           }
         }
+        this.created();
       }
 
 
@@ -72,9 +73,21 @@ export function Component(info: {
       private component: ComponentExtended<any, any>;
       private _id = Id++;
       private eventHandlers = {};
+      protected state;
+      private html = (strings: TemplateStringsArray | string, ...args) => {
+        if (typeof strings == "string") {
+          // case of html('key')`<template>`
+          return html.for(this, strings);
+        }
+        // case of html`<template>`
+        if (Array.isArray(strings)) {
+          return render(this, html(strings, ...args));
+        }
+        // case of html(object, 'key')`<template>`
+        return html.for(strings, args.join(','));
+      }
 
       renderState(state) {
-        this.state = state;
         info.template.call(this, this.html, state, this.handlerProxy);
         this.component.Render$.next();
       }
@@ -90,16 +103,16 @@ export function Component(info: {
             Object.defineProperty(this, key, desrc);
           }
         }
-        const htmlDefault = this.html.bind(this);
-        this.html = (strings: string[] | string, ...args) => {
-          if (typeof strings == "string") {
-            return wire(this, strings);
-          }
-          if (Array.isArray(strings)) {
-            return htmlDefault(strings, ...args);
-          }
-          return wire(strings, args.join(','));
-        }
+        // const htmlDefault = this.html.bind(this);
+        // this.html = (strings: string[] | string, ...args) => {
+        //   if (typeof strings == "string") {
+        //     return render(this, strings);
+        //   }
+        //   if (Array.isArray(strings)) {
+        //     return htmlDefault(strings, ...args);
+        //   }
+        //   return render(strings, args.join(','));
+        // }
         // this.component.element = this;
         // this.component.element = this;
         this.component['id'] = this._id;
@@ -133,7 +146,7 @@ export function Component(info: {
         const key = `${type}.${mapping}`;
         if (key in this.eventHandlers)
           return this.eventHandlers[key];
-        return (this.eventHandlers[key] = event => {
+        return (this.eventHandlers[key] = [event => {
           event.preventDefault();
           const directHandler = this.component.Events && this.component.Events[type];
           if (directHandler)
@@ -143,7 +156,7 @@ export function Component(info: {
             type: type
           });
           return false;
-        });
+        }, {}, unsubscr => this.component._disconnect$.subscribe(unsubscr)]);
       };
 
       attributeChangedCallback(name: string, prev: string, curr: string) {
@@ -154,33 +167,34 @@ export function Component(info: {
         }
       }
 
-      removeEventListeners(){
+      removeEventListeners() {
         for (let eventHandlersKey in this.eventHandlers) {
           this.eventHandlers[eventHandlersKey] = null;
         }
         try {
           this.renderState(this.state);
-        }catch (e){
+        } catch (e) {
           // hide events because state maybe empty
         }
       }
 
       disconnectedCallback() {
         this.component._disconnect$.next();
-        this.removeEventListeners();
+        // this.removeEventListeners();
       }
     };
+
     if (UI.container) {
-      ProxyHTML.define(info.name);
+      customElements.define(info.name, ProxyHTML);
     } else {
-      definitions.push(() => ProxyHTML.define(info.name))
+      definitions.push(() => customElements.define(info.name, ProxyHTML));
     }
   }
 }
 
 interface ComponentExtended<TState, TEvents> {
   _disconnect$: ReplaySubject<void>;
-  element: HyperElement;
+  element: HTMLElement;
   _eventsSubject$: Subject<{ args: any; type: string }>;
   _elementSubject$: Subject<HTMLElement>;
   _injectedContent$: Subject<(HTMLElement | SVGElement)[]>
@@ -195,7 +209,7 @@ interface ComponentExtended<TState, TEvents> {
 
   // element: HTMLElement;
 
-  select<E extends HyperElement = HyperElement>(selectors: string): Observable<E | null>;
+  select<E extends HTMLElement = HTMLElement>(selectors: string): Observable<E | null>;
 }
 
 export type IEventHandler<TEvents> = {

@@ -1,7 +1,8 @@
 import {UI} from "./src/ui";
 import {Container} from "@hypertype/core";
+import { render } from "uhtml";
 
-export {HyperElement, wire, bind} from "./hyperhtml/hyper.element";
+export {html, svg, render} from "uhtml";
 
 export * from "./src/component";
 export * from "./src/hyper.component";
