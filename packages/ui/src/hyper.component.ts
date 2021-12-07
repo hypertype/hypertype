@@ -10,6 +10,7 @@ import {
     switchMap,
     withLatestFrom
 } from "@hypertype/core";
+import {distinctUntilChanged} from "@hypertype/core/frp";
 
 export abstract class HyperComponent<TState = any, TEvents = any> {
 
@@ -29,8 +30,8 @@ export abstract class HyperComponent<TState = any, TEvents = any> {
     //     scan<{ name, value }, any>((acc, val) => ({...acc, [val.name]: val.value}), {}),
     //     startWith({}),
     // );
-
-    protected ClientRect$ = this.Element$.pipe(
+    /* @obsolete: use Size$ instead */
+    protected ClientRect$: Observable<ClientRect> = this.Element$.pipe(
         switchMap(el => new Observable<ClientRect>(subscr => {
             // @ts-ignore
             const observer = new ResizeObserver(entries => {
@@ -45,12 +46,17 @@ export abstract class HyperComponent<TState = any, TEvents = any> {
         filter(rect => rect.width > 0 && rect.height > 0),
         shareReplayRC(1)
     );
+
+    protected Size$: Observable<{width: number; height: number;}> = this.ClientRect$.pipe(
+      map(x => ({width: x.width, height: x.height}))
+    );
     protected Render$ = new ReplaySubject(1);
 
     protected select<E extends Element = Element>(selector: string): Observable<E | null> {
         return this.Render$.asObservable().pipe(
             withLatestFrom(this.Element$),
-            map(([_, element]) => element.querySelector(selector))
+            map(([_, element]) => element.querySelector(selector) as E),
+            distinctUntilChanged(),
         );
     }
 
