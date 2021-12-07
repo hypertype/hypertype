@@ -8,9 +8,9 @@ import {
     shareReplayRC,
     Subject,
     switchMap,
-    withLatestFrom
+    withLatestFrom,
+  distinctUntilChanged
 } from "@hypertype/core";
-import {distinctUntilChanged} from "@hypertype/core/frp";
 
 export abstract class HyperComponent<TState = any, TEvents = any> {
 
