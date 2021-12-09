@@ -142,6 +142,8 @@ export function Component(info: {
         ).subscribe();
       }
 
+      unsubscriber = unsubscr => this.component._disconnect$.subscribe(unsubscr)
+
       getEventHandler = type => mapping => {
         const key = `${type}.${mapping}`;
         if (key in this.eventHandlers)
@@ -156,7 +158,7 @@ export function Component(info: {
             type: type
           });
           return false;
-        }, {}, unsubscr => this.component._disconnect$.subscribe(unsubscr)]);
+        }, false, this.unsubscriber]);
       };
 
       attributeChangedCallback(name: string, prev: string, curr: string) {

@@ -66,7 +66,7 @@ export const data = ({dataset}) => values => {
 };
 
 export const event = (node, name) => {
-  let oldValue, type = name.slice(2);
+  let oldValue, oldUnsubscriber, type = name.slice(2);
   if (!(name in node) && name.toLowerCase() in node)
     type = type.toLowerCase();
   return newValue => {
@@ -74,12 +74,14 @@ export const event = (node, name) => {
     if (oldValue !== info[0]) {
       if (oldValue)
         node.removeEventListener(type, oldValue, info[1]);
-      if (oldValue = info[0])
+      if (oldValue = info[0]) {
         node.addEventListener(type, oldValue, info[1]);
+        if (newValue[2] && newValue[2] !== oldUnsubscriber){
+          oldUnsubscriber = newValue[2];
+          newValue[2](() => node.removeEventListener(type, oldValue, info[1]));
+        }
+      }
     }
-    // if (newValue[2]){
-    //   newValue[2](() => node.removeEventListener(type, oldValue, info[1]));
-    // }
   };
 };
 
