@@ -74,11 +74,16 @@ export const event = (node, name) => {
     if (oldValue !== info[0]) {
       if (oldValue)
         node.removeEventListener(type, oldValue, info[1]);
-      if (oldValue = info[0]) {
+      if (info[0]) {
+        oldValue = info[0]
         node.addEventListener(type, oldValue, info[1]);
         if (newValue[2] && newValue[2] !== oldUnsubscriber){
           oldUnsubscriber = newValue[2];
-          newValue[2](() => node.removeEventListener(type, oldValue, info[1]));
+          newValue[2](() => {
+            node.removeEventListener(type, oldValue, info[1]);
+            oldValue = undefined;
+            oldUnsubscriber = undefined;
+          });
         }
       }
     }

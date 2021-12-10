@@ -142,13 +142,13 @@ export function Component(info: {
         ).subscribe();
       }
 
-      unsubscriber = unsubscr => this.component._disconnect$.subscribe(unsubscr)
+      unsubscriber = unsubscr => this.component._disconnect$.subscribe(unsubscr);
 
       getEventHandler = type => mapping => {
         const key = `${type}.${mapping}`;
         if (key in this.eventHandlers)
           return this.eventHandlers[key];
-        return (this.eventHandlers[key] = [event => {
+        const listener = event => {
           event.preventDefault();
           const directHandler = this.component.Events && this.component.Events[type];
           if (directHandler)
@@ -158,7 +158,8 @@ export function Component(info: {
             type: type
           });
           return false;
-        }, false, this.unsubscriber]);
+        };
+        return (this.eventHandlers[key] = [listener, false, this.unsubscriber]);
       };
 
       attributeChangedCallback(name: string, prev: string, curr: string) {
