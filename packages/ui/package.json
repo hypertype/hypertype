@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/ui",
-  "version": "3.6.30-uhtml3",
+  "version": "3.6.30-uhtml4",
   "description": "",
   "main": "dist/index.js",
   "browser": "dist/index.js",
