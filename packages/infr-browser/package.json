@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/infr-browser",
-  "version": "3.6.28",
+  "version": "3.6.31",
   "description": "",
   "main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
