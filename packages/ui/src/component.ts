@@ -1,4 +1,4 @@
-import {html, render} from "uhtml";
+import {html,svg, render} from "uhtml";
 import {Observable, ReplaySubject, Subject, takeUntil} from "@hypertype/core";
 import {UI} from "./ui";
 import {importStyle} from "./import-styles";
@@ -82,6 +82,9 @@ export function Component(info: {
         // case of html`<template>`
         if (Array.isArray(strings)) {
           return render(this, html(strings, ...args));
+        }
+        if (!strings){
+          return html.node;
         }
         // case of html(object, 'key')`<template>`
         return html.for(strings, args.join(','));
