@@ -2,7 +2,7 @@ import {delayAsync, filter, first, Fn, fromEvent, map, mergeMap, Observable, of,
 import {IChildWindowMetadata, TChildWindowRequest, TParentWindowRequest} from '../contract';
 import {getMessageId, IAction, IInvoker, ModelStream} from '../model.stream';
 import {getTransferable} from '../transferable';
-import {takeUntil} from "@hypertype/core/frp";
+import {takeUntil} from "@hypertype/core";
 
 /**
  * Идея: в открепленном окне(Child-окно) нет воркера.
