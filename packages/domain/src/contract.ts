@@ -2,7 +2,6 @@
 
 export interface IChildWindowMetadata {
   childId: string;
-  childType: string;
 }
 
 export type TDetachState =

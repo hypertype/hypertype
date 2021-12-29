@@ -2,6 +2,7 @@ import {delayAsync, filter, first, Fn, fromEvent, map, mergeMap, Observable, of,
 import {IChildWindowMetadata, TChildWindowRequest, TParentWindowRequest} from '../contract';
 import {getMessageId, IAction, IInvoker, ModelStream} from '../model.stream';
 import {getTransferable} from '../transferable';
+import {takeUntil} from "@hypertype/core/frp";
 
 /**
  * Идея: в открепленном окне(Child-окно) нет воркера.
@@ -9,11 +10,8 @@ import {getTransferable} from '../transferable';
  *    Child-окно <--> Родительское окно <--> Воркер родительского окна
  */
 export abstract class ChildWindowModelStream<TState, TActions> extends ModelStream<TState, TActions> {
-  public Input$: Observable<any>;
-  public State$: Observable<TState>;
 
   public childId: string;
-  public childType: string;
 
   get parentWindow() {
     return globalThis.opener;
@@ -24,57 +22,54 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
     if (!this.parentWindow)
       throw new Error(`parent window is missing`);
 
-    // => из Родительского окна пришло сообщение -> в Child-окно
-    this.Input$ = fromEvent<MessageEvent>(globalThis, 'message').pipe(
-      filter(event => event.origin === globalThis.origin),
-      map(event => event.data),
-      filter(Fn.Ib),
-      tap(data => log(`Child.onMessage`, data)),
-      filter(data => !data.childType || data.childType === this.childType), // сообщение для типа окон как у этого окна
-      filter(data => !data.childId || data.childId === this.childId),       // сообщение индивидуально этому окну
-      tap(data => { // Отработка специальных команд для Child-окна
-        switch (data.type as TParentWindowRequest) {
-          case 'close':
-            globalThis.close();
-            break;
-          default:
-            return data;
-        }
-      }),
-      filter(Fn.Ib),
-      shareReplayRC(1)
-    );
-
-    this.State$ = this.Input$.pipe(
-      map(d => d.state),
-      filter(Fn.Ib),
-    );
-    this.State$.subscribe();
-
-    fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
-      withLatestFrom(
-        fromEvent<any>(globalThis.document, 'keydown').pipe(
-          startWith(null),
-        ),
-      ),
-      tap(([, keyboardEvent]) => {
-        if (!this.isRefreshPage(keyboardEvent))
-          this.requestToParent('disconnected');
-      }),
-    ).subscribe();
-
     // необходимо гарантировать, что у Child-окна появились метаданные.
     const onMetadataReady$ = of(1).pipe(
       switchMap(() => this.waitForMetadataReady()),
       tap(() => {
-        const {childId, childType} = this.parseMetadata();
+        const {childId} = this.parseMetadata();
         this.childId = childId;
-        this.childType = childType;
         this.requestToParent('connected'); // запросить инициализационный стейт
       }),
     );
     onMetadataReady$.subscribe();
   }
+
+  private beforeUnload$ = fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
+    withLatestFrom(
+      fromEvent<any>(globalThis.document, 'keydown').pipe(
+        startWith(null),
+      ),
+    ),
+    tap(([, keyboardEvent]) => {
+      if (!this.isRefreshPage(keyboardEvent))
+        this.requestToParent('disconnected');
+    }),
+  );
+
+  // => из Родительского окна пришло сообщение -> в Child-окно
+  public Input$ = fromEvent<MessageEvent>(globalThis, 'message').pipe(
+    filter(event => event.origin === globalThis.origin),
+    map(event => event.data),
+    filter(Fn.Ib),
+    tap(data => log(`Child.onMessage`, data)),
+    tap(data => { // Отработка специальных команд для Child-окна
+      switch (data.type as TParentWindowRequest) {
+        case 'close':
+          globalThis.close();
+          break;
+        default:
+          return data;
+      }
+    }),
+    filter(Fn.Ib),
+    shareReplayRC(1)
+  );
+
+  public State$ = this.Input$.pipe(
+    map(d => d.state),
+    filter(Fn.Ib),
+    takeUntil(this.beforeUnload$)
+  );
 
   requestToParent(type: TChildWindowRequest) {
     this.sendMessage({type, childId: this.childId});
@@ -96,8 +91,12 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
     const id = getMessageId(action);
     this.sendMessage(
       {
-        ...action,
-        _id: id
+        childId: this.childId,
+        type: 'action',
+        action: {
+          ...action,
+          _id: id
+        }
       },
       getTransferable(action.args),
     );
@@ -122,7 +121,7 @@ export abstract class ChildWindowModelStream<TState, TActions> extends ModelStre
   private waitForMetadataReady(durationMinutes = 0.34): Promise<void> {
     const isReady = () => {
       const metadata = this.parseMetadata();
-      return metadata && metadata.childId && metadata.childType;
+      return metadata && metadata.childId;
     };
     return new Promise(async (resolve, reject) => {
       if (isReady())

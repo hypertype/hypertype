@@ -22,12 +22,30 @@ export interface IConnector<TState, TActions> {
   Send(response: { requestId; error?; response; });
 }
 
+/**
+ * Используется для соединения childWindow и modelProxy
+ * для отправки состояния в childWindow и actions в домен
+ */
 export class ChildWindowConnector<TState, TActions> implements IConnector<TState, TActions> {
 
-  constructor(private window: any) {
-    fromEvent<MessageEvent>(globalThis, 'beforeunload').pipe(
-      takeUntil(from(this.isDisconnected))
-    ).subscribe(() => this.window.close());
+  private static Instances = new Map<any, ChildWindowConnector<any, any>>();
+
+  public static closeAll(){
+    for (const [key, connector] of this.Instances) {
+      connector.window.close();
+    }
+  }
+
+  constructor(private window: any, private childId) {
+    if (ChildWindowConnector.Instances.has(childId)){
+      ChildWindowConnector.Instances.get(childId).window.close();
+    }
+    ChildWindowConnector.Instances.set(childId, this);
+  }
+
+  private disconnect(){
+    this.isDisconnected.resolve();
+    ChildWindowConnector.Instances.delete(this.childId);
   }
 
   // public isConnectedSubj = new Subject();
@@ -39,17 +57,18 @@ export class ChildWindowConnector<TState, TActions> implements IConnector<TState
     filter(event => event.origin == globalThis.origin),
     map(event => event.data),
     filter(Fn.Ib),
+    filter(data => data.childId == this.childId),
     switchMap(async data => { // Отработка специальных команд для Родительского окна
-      const {type, childId} = data;
+      const {type} = data;
       switch (type) {
         case 'connected':
           this.isConnected.resolve();
           break;
         case 'disconnected':
-          this.isDisconnected.resolve();
+          this.disconnect();
           break;
-        default:
-          return data;
+        case 'action':
+          return data.action;
       }
     }),
     filter(Fn.Ib),
