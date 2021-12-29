@@ -3,6 +3,7 @@ import "symbol-observable";
 
 
 export * from "./frp";
+export {ResolvablePromise} from "./utils/resolvable-promise";
 export * from "./di";
 export {deepAssign} from "./utils/deepAssign";
 export {utc, utcToday} from "./utils/utc";
