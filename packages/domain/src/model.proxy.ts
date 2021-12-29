@@ -1,7 +1,19 @@
-import {distinctUntilChanged, filter, map, Observable, shareReplayRC, startWith, Subject, switchMap} from "@hypertype/core";
-import {ModelStream} from "./model.stream";
+import {
+  distinctUntilChanged,
+  filter,
+  Fn,
+  from,
+  map,
+  Observable,
+  shareReplayRC,
+  startWith,
+  Subject,
+  switchMap,
+  takeUntil
+} from "@hypertype/core";
+import {IAction, ModelStream} from "./model.stream";
 import {IActions} from "./model";
-import { Fn } from "@hypertype/core";
+import {IConnector} from "./child-window.connector";
 
 export class ModelProxy<TState, TActions extends IActions<TActions>> {
 
@@ -24,6 +36,10 @@ export class ModelProxy<TState, TActions extends IActions<TActions>> {
     }),
     shareReplayRC(1),
   );
+
+  public InvokeAction(action: IAction<TActions>) {
+    return this.stream.Action(action);
+  }
 
   public Actions: TActions = new Proxy({} as TActions, {
     get: (target: TActions, key: keyof TActions, receiver) => {
@@ -66,5 +82,21 @@ export class ModelProxy<TState, TActions extends IActions<TActions>> {
     if (Array.isArray(state))
       return this.GetSubState(state.find(s => s.Id == path[0]), path.slice(1));
     return this.GetSubState(state[path[0]], path.slice(1));
+  }
+
+  public Connect(connector: IConnector<TState, TActions>) {
+    this.State$.pipe(
+      takeUntil(from(connector.isDisconnected)),
+    ).subscribe(state => connector.Send({state}));
+    connector.Actions$.subscribe(async action => {
+      const result = await this['stream'].Action({
+        ...action,
+        path: [...this.path, ...action.path]
+      });
+      connector.Send({
+        requestId: action._id,
+        response: result
+      });
+    });
   }
 }
