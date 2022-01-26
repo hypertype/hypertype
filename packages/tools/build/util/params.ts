@@ -9,7 +9,7 @@ export const PKG = require(PKG_FILE);
 export const OPTIONS = PKG.hypertype;
 export const OVERRIDE_CONFIG = existsSync(OVERRIDE_CONFIG_FILE) ? require(OVERRIDE_CONFIG_FILE) : null;
 
-const [nodePath, thisFilePath, ...args] = process.argv;
+const [nodePath, runFilePath, ...args] = process.argv;
 const [arg1, arg2, arg3, arg4] = args;
 export const ARG1 = arg1;
 export const ARG2 = arg2;
