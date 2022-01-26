@@ -1,20 +1,17 @@
 import webpack from 'webpack';
-import * as path from 'path';
+import {join} from 'path';
+import {BASE_DIR, DIST_DIR, isProd, PKG} from './util/params';
 
 export const bundle = ({index}) => {
-    const basePath = process.cwd();
-    const pkg = require(path.join(basePath, './package'));
-    const outputPath = path.join(basePath, 'dist/bundle');
-    const prod = process.argv.filter(a => /--prod/.test(a)).length;
-
+    const outputPath = join(DIST_DIR, 'bundle');
     webpack({
         entry: {
-            index: path.join(basePath, index),
+            index: join(BASE_DIR, index),
         },
         target: 'node',
-        mode: prod ? 'production' : 'development',
-        devtool: prod ? 'none' : 'source-map',
-        externals: Object.keys(pkg.peerDependencies || []),
+        mode: isProd ? 'production' : 'development',
+        devtool: isProd ? 'none' : 'source-map',
+        externals: Object.keys(PKG.peerDependencies || []),
         output: {
             path: outputPath,
             libraryTarget: 'umd'

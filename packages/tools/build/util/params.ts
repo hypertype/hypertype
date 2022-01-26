@@ -2,6 +2,7 @@ import {existsSync} from 'fs';
 import {join} from 'path';
 
 export const BASE_DIR = process.cwd();
+export const DIST_DIR = join(BASE_DIR, 'dist');
 export const PKG_FILE = join(BASE_DIR, 'package.json');
 export const OVERRIDE_CONFIG_FILE = join(BASE_DIR, 'webpack.config.js');
 

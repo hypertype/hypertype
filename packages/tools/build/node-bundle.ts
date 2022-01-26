@@ -2,7 +2,7 @@ import webpack from 'webpack';
 import {getConfig} from './webpack.config';
 import {runCompiler} from './run.compiler';
 
-export const nodeBundle = ({index, output, target}) => {
+export const nodeBundle = ({index, target, output}) => {
   const config = getConfig(index, target, output, 'node');
   const compiler = webpack({
     ...config,

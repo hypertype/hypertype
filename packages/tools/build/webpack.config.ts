@@ -4,7 +4,7 @@ import merge from 'webpack-merge';
 import * as path from 'path';
 import {BASE_DIR, isProd, needStats, OVERRIDE_CONFIG, OVERRIDE_CONFIG_FILE, PKG} from './util/params';
 
-export const getConfig = (index, filename?, output?, target?) => {
+export const getConfig = (index, filename = 'index.js', output = 'dist', target = 'web') => {
   if (OVERRIDE_CONFIG)
     console.log(`use config override from ${OVERRIDE_CONFIG_FILE}`);
   const mainEs = 'es6';
@@ -13,14 +13,12 @@ export const getConfig = (index, filename?, output?, target?) => {
   if (target !== 'node')
     mainFields.unshift('browser');
   return merge({
-    entry: {
-      index: index,
-    },
+    entry: {index},
     output: {
-      path: path.join(BASE_DIR, output || 'dist', isProd ? 'prod' : ''),
-      filename: (filename || 'index.js')
+      path: path.join(BASE_DIR, output, isProd ? 'prod' : ''),
+      filename,
     },
-    target: target || 'web',
+    target,
     node: {
       global: true
     },
