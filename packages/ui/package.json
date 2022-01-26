@@ -47,12 +47,12 @@
   },
   "hypertype": {
     "lib": {
-      "index": "./dist/esm/index.js",
-      "type": "lib"
+      "entryPoint": "dist/esm/index.js",
+      "bundler": "lib"
     },
     "es5": {
-      "index": "./dist/es5/index.js",
-      "target": "index.es5.js"
+      "entryPoint": "dist/es5/index.js",
+      "outputFilename": "index.es5.js"
     }
   },
   "gitHead": "9151a37757c75a5b80836c57de97db2bf7158fa0"

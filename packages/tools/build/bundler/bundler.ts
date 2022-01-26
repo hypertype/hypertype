@@ -1,12 +1,14 @@
 import webpack from 'webpack';
 import {join} from 'path';
-import {BASE_DIR, DIST_DIR, isProd, PKG} from './util/params';
+import {DIST_DIR, isProd, PKG} from '../util/params';
+import {relativeToBase} from '../util/common';
+import {IOptions} from '../contract';
 
-export const bundle = ({index}) => {
+export const bundler = ({entryPoint}: IOptions) => {
     const outputPath = join(DIST_DIR, 'bundle');
     webpack({
         entry: {
-            index: join(BASE_DIR, index),
+            index: relativeToBase(entryPoint),
         },
         target: 'node',
         mode: isProd ? 'production' : 'development',

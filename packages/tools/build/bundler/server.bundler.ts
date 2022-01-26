@@ -1,26 +1,28 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 import webpack from 'webpack';
-import {getConfig} from "./webpack.config";
-import {runCompiler} from './run.compiler';
-import {DIST_DIR} from './util/params';
+import {relativeToBase} from '../util/common';
+import {getConfig} from "../webpack.config";
+import {runCompiler} from '../run.compiler';
+import {DIST_DIR} from '../util/params';
+import {IOptions} from '../contract';
 
-export const serverBundle = ({html, index, output, publicPath, port, host}) => {
+export const serverBundler = ({entryPoint, outputPath, template, host, port, publicPath}: IOptions) => {
   if (!publicPath) publicPath = '';
   if (!host) host = 'localhost';
-  if (!port) port = '3200';
-  const config = getConfig(index, "index.js", output);
+  if (!port) port = 3200;
+  const config = getConfig(entryPoint, "index.js", outputPath);
   const compiler = webpack({
     ...config,
     externals: [],
     output: {
       ...config.output,
-      publicPath: publicPath
+      publicPath
     },
     plugins: [
       new HtmlWebpackPlugin({
         minify: false,
-        template: html,
+        template: relativeToBase(template),
         base: {
           href: publicPath
         }

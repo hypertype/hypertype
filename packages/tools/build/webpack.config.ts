@@ -1,10 +1,10 @@
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 import merge from 'webpack-merge';
-import * as path from 'path';
-import {BASE_DIR, isProd, needStats, OVERRIDE_CONFIG, OVERRIDE_CONFIG_FILE, PKG} from './util/params';
+import {isProd, needStats, OVERRIDE_CONFIG, OVERRIDE_CONFIG_FILE, PKG} from './util/params';
+import {relativeToBase} from './util/common';
 
-export const getConfig = (index, filename = 'index.js', output = 'dist', target = 'web') => {
+export const getConfig = (entryPoint, outputFilename = 'index.js', outputPath = 'dist', target = 'web') => {
   if (OVERRIDE_CONFIG)
     console.log(`use config override from ${OVERRIDE_CONFIG_FILE}`);
   const mainEs = 'es6';
@@ -13,10 +13,12 @@ export const getConfig = (index, filename = 'index.js', output = 'dist', target 
   if (target !== 'node')
     mainFields.unshift('browser');
   return merge({
-    entry: {index},
+    entry: {
+      index: relativeToBase(entryPoint)
+    },
     output: {
-      path: path.join(BASE_DIR, output, isProd ? 'prod' : ''),
-      filename,
+      path: relativeToBase(outputPath, isProd ? 'prod' : ''),
+      filename: outputFilename,
     },
     target,
     node: {

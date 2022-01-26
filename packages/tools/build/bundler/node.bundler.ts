@@ -1,9 +1,10 @@
 import webpack from 'webpack';
-import {getConfig} from './webpack.config';
-import {runCompiler} from './run.compiler';
+import {getConfig} from '../webpack.config';
+import {runCompiler} from '../run.compiler';
+import {IOptions} from '../contract';
 
-export const nodeBundle = ({index, target, output}) => {
-  const config = getConfig(index, target, output, 'node');
+export const nodeBundler = ({entryPoint, outputFilename, outputPath}: IOptions) => {
+  const config = getConfig(entryPoint, outputFilename, outputPath, 'node');
   const compiler = webpack({
     ...config,
     node: {

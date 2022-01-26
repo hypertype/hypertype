@@ -1,17 +1,19 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 import webpack from 'webpack';
-import {getConfig} from "./webpack.config";
-import {DIST_DIR} from './util/params';
+import {relativeToBase} from '../util/common';
+import {getConfig} from "../webpack.config";
+import {DIST_DIR} from '../util/params';
+import {IOptions} from '../contract';
 
-export const testBundle = ({html, index, publicPath, port, host}) => {
-    const config = getConfig(index);
+export const testBundler = ({entryPoint, template, host, port, publicPath}: IOptions) => {
+    const config = getConfig(entryPoint);
     const compiler = webpack({
         ...config,
         externals: [],
         plugins: [
             new HtmlWebpackPlugin({
-                template: html,
+                template: relativeToBase(template),
                 base: {
                     href: publicPath
                 }

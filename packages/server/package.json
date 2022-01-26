@@ -59,8 +59,8 @@
   },
   "hypertype": {
     "node": {
-      "index": "./dist/esm/index.js",
-      "type": "node"
+      "entryPoint": "dist/esm/index.js",
+      "bundler": "node"
     }
   },
   "gitHead": "9151a37757c75a5b80836c57de97db2bf7158fa0"
