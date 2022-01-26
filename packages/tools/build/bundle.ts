@@ -1,7 +1,7 @@
-const path = require('path');
-const webpack = require('webpack');
+import webpack from 'webpack';
+import * as path from 'path';
 
-module.exports = ({index}) => {
+export const bundle = ({index}) => {
     const basePath = process.cwd();
     const pkg = require(path.join(basePath, './package'));
     const outputPath = path.join(basePath, 'dist/bundle');

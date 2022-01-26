@@ -21,6 +21,7 @@
     { "path": "./packages/infr-node" },
     { "path": "./packages/infr-browser" },
     { "path": "./packages/ui" },
-    { "path": "./packages/server" }
+    { "path": "./packages/server" },
+    { "path": "./packages/tools" }
   ]
 }

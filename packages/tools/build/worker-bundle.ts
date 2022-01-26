@@ -1,8 +1,8 @@
-const webpack = require('webpack');
-const runCompiler = require('./run.compiler');
-const getConfig = require('./webpack.config');
+import webpack from 'webpack';
+import {getConfig} from "./webpack.config";
+import {runCompiler} from './run.compiler';
 
-module.exports = ({index, output, target}) => {
+export const workerBundle = ({index, output, target}) => {
   const config = getConfig(index, target || 'worker.js', output, 'worker');
   const compiler = webpack({
     ...config,

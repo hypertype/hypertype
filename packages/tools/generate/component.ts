@@ -1,7 +1,7 @@
-const path = require('path');
-const fs = require('fs');
+import * as path from 'path';
+import * as fs from 'fs';
 
-module.exports = function newComponent(directoryPath, componentName) {
+export function newComponent(directoryPath, componentName) {
     fs.mkdirSync(path.join(directoryPath, componentName));
 	const componentNameClass = componentName.replace(/(^.|\-.)/g, ch => ch[ch.length - 1].toUpperCase());
     fs.writeFileSync(path.join(directoryPath, componentName, `${componentName}.style.less`),

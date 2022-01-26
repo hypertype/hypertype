@@ -1,4 +1,4 @@
-module.exports = function runCompiler(compiler) {
+export function runCompiler(compiler) {
     console.log(`compiling to ${compiler.options.output.path}`);
     if (process.argv.filter(t => /watch/.test(t)).length) {
         compiler.watch({}, (err, stats) => {
@@ -23,4 +23,4 @@ module.exports = function runCompiler(compiler) {
             // Done processing
         })
     }
-};
+}

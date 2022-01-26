@@ -1,11 +1,11 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-const webpack = require('webpack');
-const runCompiler = require('./run.compiler');
-const getConfig = require('./webpack.config');
-const devServer = require('webpack-dev-server');
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import WebpackDevServer from 'webpack-dev-server';
+import webpack from 'webpack';
+import * as path from 'path';
+import {getConfig} from "./webpack.config";
+import {runCompiler} from './run.compiler';
 
-module.exports = ({html, index, publicPath, port, host, output}) => {
+export const serverBundle = ({html, index, publicPath, port, host, output}) => {
   if (!publicPath) publicPath = '';
   if (!host) host = 'localhost';
   if (!port) port = '3200';
@@ -31,7 +31,7 @@ module.exports = ({html, index, publicPath, port, host, output}) => {
   });
   if (process.argv.indexOf('--run') >= 0) {
     console.log(`starting web server...`);
-    const server = new devServer(compiler, {
+    const server = new WebpackDevServer(compiler, {
       port: port,
       static: {
         directory: path.join(baseDir, 'dist'),
