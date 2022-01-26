@@ -10,11 +10,6 @@ export const OPTIONS = PKG.hypertype;
 export const OVERRIDE_CONFIG = existsSync(OVERRIDE_CONFIG_FILE) ? require(OVERRIDE_CONFIG_FILE) : null;
 
 const [nodePath, runFilePath, ...args] = process.argv;
-const [arg1, arg2, arg3, arg4] = args;
-export const ARG1 = arg1;
-export const ARG2 = arg2;
-export const ARG3 = arg3;
-export const ARG4 = arg4;
-
+export const ARGS = args;
 export const isProd = args.filter(a => /--prod/.test(a)).length > 0;
 export const needStats = args.filter(a => /stats/.test(a)).length > 0;
