@@ -4,5 +4,15 @@
     "packages/*"
   ],
   "hoist": "**",
-  "npmClient": "npm"
+  "npmClient": "npm",
+  "command": {
+    "bootstrap": {
+      "nohoist": [
+        "rxjs",
+        "crc-32",
+        "reflect-metadata",
+        "ulid"
+      ]
+    }
+  }
 }
