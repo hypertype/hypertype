@@ -1,4 +1,4 @@
-import {suite, test, timeout} from "@hypertype/tools/test";
+import {suite, test, timeout} from "@hypertype/tools/dist/test";
 import {first} from "@hypertype/core";
 import {NodeWebSocketService} from "../node.web-socket.service";
 import {NodeFetchService} from "../nodeFetchService";

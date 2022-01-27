@@ -1,5 +1,5 @@
 import {Container} from "../di/container";
-import {expect, suite, test} from "@hypertype/tools/test";
+import {expect, suite, test} from "@hypertype/tools/dist/test";
 
 @suite
 export class ContainerSpec {

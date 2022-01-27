@@ -1,4 +1,4 @@
-import {suite, test, timeout} from '@hypertype/tools/test';
+import {suite, test, timeout} from '@hypertype/tools/dist/test';
 import {RabbitLogger} from "../../core/logger/rabbit.logger";
 import {TcpLogger} from "../../core/logger/tcp.logger";
 import {of} from "@hypertype/core";

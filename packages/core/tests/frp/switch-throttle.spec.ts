@@ -1,5 +1,5 @@
 import {switchThrottle} from "../../frp";
-import {expect, suite, test} from "@hypertype/tools/test";
+import {expect, suite, test} from "@hypertype/tools/dist/test";
 import {delayAsync} from "../../frp/delay-async";
 
 @suite
