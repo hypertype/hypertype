@@ -1,16 +1,17 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 import webpack from 'webpack';
+import { join } from 'path';
+import {DIST_DIR, needToRun} from '../util/params';
 import {relativeToBase} from '../util/common';
 import {getConfig} from "../webpack.config";
 import {runCompiler} from '../run.compiler';
-import {DIST_DIR, needToRun} from '../util/params';
 import {IOptions} from '../contract';
 
 export const serverBundler = ({entryPoint, outputPath, template, host, port, publicPath}: IOptions) => {
-  if (!publicPath) publicPath = '';
-  if (!host) host = 'localhost';
-  if (!port) port = 3200;
+  publicPath = publicPath || '/';
+  host = host || 'localhost';
+  port = port || 3200;
   const config = getConfig(entryPoint, "index.js", outputPath);
   const compiler = webpack({
     ...config,
@@ -36,11 +37,11 @@ export const serverBundler = ({entryPoint, outputPath, template, host, port, pub
       port: port,
       static: {
         directory: DIST_DIR,
-        publicPath: publicPath,
+        publicPath,
       },
       historyApiFallback: {
         rewrites: [
-          {from: /./, to: `/index.html`},
+          {from: /./, to: join(publicPath, 'index.html')},
         ]
       }
     },);
