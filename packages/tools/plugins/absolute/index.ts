@@ -18,7 +18,7 @@ function visitRequireNode(importNode: ts.CallExpression) {
 //     const file = (importNode.moduleSpecifier as ts.StringLiteral).text;
 //     if (!/\.less/.test(file))
 //         return importNode as ts.Node;
-//     const content = getFileContetn(importNode as ts.Node, file);
+//     const content = getFileContent(importNode as ts.Node, file);
 //     const name = (importNode.importClause as any).symbol.escapedName;
 //     const newNode = ts.createVariableDeclaration(name, undefined, ts.createStringLiteral(content));
 //     return ts.createVariableDeclarationList([newNode], ts.NodeFlags.Const) as ts.Node;
