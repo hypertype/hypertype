@@ -64,6 +64,7 @@
   },
   "hypertype": {
     "lib": {
+      "bundler": "node",
       "entryPoint": "dist/esm/index.js"
     }
   },

@@ -47,10 +47,11 @@
   },
   "hypertype": {
     "lib": {
-      "entryPoint": "dist/esm/index.js",
-      "bundler": "lib"
+      "bundler": "node",
+      "entryPoint": "dist/esm/index.js"
     },
     "es5": {
+      "bundler": "node",
       "entryPoint": "dist/es5/index.js",
       "outputFilename": "index.es5.js"
     }
