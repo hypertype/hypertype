@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/ui",
-  "version": "3.7.1",
+  "version": "3.7.3",
   "description": "",
   "main": "dist/index.js",
   "browser": "dist/index.js",
@@ -40,8 +40,8 @@
     "uhtml": "^2"
   },
   "devDependencies": {
-    "@hypertype/core": "^3.7.1",
-    "@hypertype/tools": "^3.7.1",
+    "@hypertype/core": "^3.7.3",
+    "@hypertype/tools": "^3.7.3",
     "@types/node": "12.19.8",
     "typescript": "4.1.3"
   },
