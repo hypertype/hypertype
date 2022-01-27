@@ -13,5 +13,6 @@ export const OVERRIDE_CONFIG = existsSync(OVERRIDE_CONFIG_FILE) ? require(OVERRI
 const [nodePath, runFilePath, ...args] = process.argv;
 export const ARGS = args;
 export const isProd = args.filter(a => /--prod/.test(a)).length > 0;
+export const needToRun = args.filter(a => /--run/.test(a)).length > 0;
 export const needToWatch = args.filter(a => /--watch/.test(a)).length > 0;
 export const needStats = args.filter(a => /--stats/.test(a)).length > 0;

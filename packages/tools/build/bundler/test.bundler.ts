@@ -20,7 +20,6 @@ export const testBundler = ({entryPoint, template, host, port, publicPath}: IOpt
             }),
         ],
     });
-    // if (process.argv.indexOf('run') >= 0) {
     const server = new WebpackDevServer(compiler, {
         contentBase: DIST_DIR,
         port: port,
@@ -33,7 +32,4 @@ export const testBundler = ({entryPoint, template, host, port, publicPath}: IOpt
     },);
     server.listen(port, host, (err, stats) => {
     });
-    // }else {
-    //     runCompiler(compiler)
-    // }
 };

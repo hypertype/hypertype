@@ -4,7 +4,7 @@ import webpack from 'webpack';
 import {relativeToBase} from '../util/common';
 import {getConfig} from "../webpack.config";
 import {runCompiler} from '../run.compiler';
-import {DIST_DIR} from '../util/params';
+import {DIST_DIR, needToRun} from '../util/params';
 import {IOptions} from '../contract';
 
 export const serverBundler = ({entryPoint, outputPath, template, host, port, publicPath}: IOptions) => {
@@ -30,7 +30,7 @@ export const serverBundler = ({entryPoint, outputPath, template, host, port, pub
       ...config.plugins
     ],
   });
-  if (process.argv.indexOf('--run') >= 0) {
+  if (needToRun) {
     console.log(`starting web server...`);
     const server = new WebpackDevServer(compiler, {
       port: port,
