@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "3.7.8",
+  "version": "3.7.10",
   "description": "",
   "bin": {
     "hypertype": "./dist/bin.js"
@@ -21,9 +21,9 @@
     "typescript": "*"
   },
   "dependencies": {
-    "@types/node": "16",
     "@testdeck/jest": "*",
     "@types/chai": "4",
+    "@types/node": "16",
     "chai": "4",
     "css-loader": "6.5",
     "html-webpack-plugin": "5.5",
