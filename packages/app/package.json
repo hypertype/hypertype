@@ -53,11 +53,11 @@
     "@hypertype/ui": "^3.4.1"
   },
   "devDependencies": {
+    "@types/node": "16",
     "@hypertype/core": "^3.7.8",
     "@hypertype/infr": "^3.7.8",
     "@hypertype/tools": "^3.7.8",
     "@hypertype/ui": "^3.7.8",
-    "@types/node": "16",
     "@types/redux": "latest",
     "@types/router5": "latest",
     "redux": "4.0.5",

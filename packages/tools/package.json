@@ -21,9 +21,9 @@
     "typescript": "*"
   },
   "dependencies": {
+    "@types/node": "16",
     "@testdeck/jest": "*",
     "@types/chai": "4",
-    "@types/node": "16",
     "chai": "4",
     "css-loader": "6.5",
     "html-webpack-plugin": "5.5",

@@ -44,6 +44,7 @@
     "@hypertype/tools": "^3.4.1"
   },
   "devDependencies": {
+    "@types/node": "16",
     "@hypertype/core": "^3.7.8",
     "@hypertype/infr": "^3.7.8",
     "@hypertype/tools": "^3.7.8"
