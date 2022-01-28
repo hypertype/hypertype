@@ -57,13 +57,13 @@
     "@hypertype/infr": "^3.7.4",
     "@hypertype/tools": "^3.7.3",
     "@hypertype/ui": "^3.7.4",
-    "@types/node": "12.19.8",
+    "@types/node": "16",
     "@types/redux": "latest",
     "@types/router5": "latest",
     "redux": "4.0.5",
     "router5": "8.0.1",
     "router5-plugin-browser": "8.0.1",
-    "typescript": "4.1.3"
+    "typescript": "4.1"
   },
   "hypertype": {
     "lib": {

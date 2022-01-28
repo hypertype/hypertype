@@ -33,8 +33,8 @@
   "peerDependencies": {
     "@hypertype/core": "^3.4.1",
     "@hypertype/tools": "^3.4.1",
-    "@types/node": "12.19.8",
-    "typescript": "4.1.3"
+    "@types/node": "16",
+    "typescript": "4.1"
   },
   "dependencies": {
     "uhtml": "^2"
@@ -42,8 +42,8 @@
   "devDependencies": {
     "@hypertype/core": "^3.7.4",
     "@hypertype/tools": "^3.7.3",
-    "@types/node": "12.19.8",
-    "typescript": "4.1.3"
+    "@types/node": "16",
+    "typescript": "4.1"
   },
   "hypertype": {
     "lib": {

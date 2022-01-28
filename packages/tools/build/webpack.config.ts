@@ -1,6 +1,7 @@
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 import merge from 'webpack-merge';
+import { Configuration } from 'webpack';
 import {isProd, needStats, OVERRIDE_CONFIG, OVERRIDE_CONFIG_FILE, PKG} from './util/params';
 import {relativeToBase} from './util/common';
 
@@ -53,7 +54,7 @@ export const getConfig = (entryPoint, outputFilename = 'index.js', outputPath = 
         },
         {
           test: /\.(html|svg)$/,
-          loader: 'raw-loader',
+          type: 'asset/source',
         },
         {
           test: /\.ts/,
@@ -64,5 +65,5 @@ export const getConfig = (entryPoint, outputFilename = 'index.js', outputPath = 
     plugins: [
       ...(needStats ? [new BundleAnalyzerPlugin()] : [])
     ]
-  }, OVERRIDE_CONFIG || {});
+  } as Configuration, OVERRIDE_CONFIG || {});
 };

@@ -9,9 +9,9 @@ export const nodeBundler = ({entryPoint, outputFilename, outputPath}: IOptions) 
     ...config,
     node: {
       __dirname: false,
-      dns: 'empty',
-      net: 'empty',
-      btoa: true
+      // dns: 'empty',
+      // net: 'empty',
+      // btoa: true
     },
     output: {
       ...config.output,

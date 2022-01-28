@@ -47,7 +47,7 @@
   "devDependencies": {
     "@hypertype/core": "^3.7.4",
     "@hypertype/tools": "^3.7.3",
-    "@types/node": "12.19.8"
+    "@types/node": "16"
   },
   "hypertype": {
     "lib": {

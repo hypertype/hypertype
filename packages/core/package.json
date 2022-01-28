@@ -42,7 +42,7 @@
       }
     }
   },
-  "bundleDependencies": [
+  "bundledDependencies": [
     "rxjs",
     "crc-32",
     "reflect-metadata",
@@ -54,7 +54,7 @@
   "devDependencies": {
     "@hypertype/tools": "^3.7.3",
     "@types/luxon": "^1.12.0",
-    "@types/node": "12.19.8",
+    "@types/node": "16",
     "crc-32": "*",
     "reflect-metadata": "^0.1.13",
     "rxjs": "6.6.3",

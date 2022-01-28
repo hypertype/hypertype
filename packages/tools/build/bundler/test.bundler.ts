@@ -14,22 +14,22 @@ export const testBundler = ({entryPoint, template, host, port, publicPath}: IOpt
         plugins: [
             new HtmlWebpackPlugin({
                 template: relativeToBase(template),
-                base: {
-                    href: publicPath
-                }
+                base: publicPath
             }),
         ],
     });
     const server = new WebpackDevServer(compiler, {
-        contentBase: DIST_DIR,
+        static: {
+          directory: DIST_DIR,
+          publicPath,
+        },
         port: port,
-        publicPath: publicPath,
         historyApiFallback: {
             rewrites: [
                 {from: /.*/, to: `${publicPath}/index.html`},
             ]
         }
     },);
-    server.listen(port, host, (err, stats) => {
+    server.listen(port, host, (err) => {
     });
 };

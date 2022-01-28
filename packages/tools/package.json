@@ -23,21 +23,20 @@
   "dependencies": {
     "@testdeck/jest": "*",
     "@types/chai": "4",
-    "@types/node": "14",
+    "@types/node": "16",
     "chai": "4",
-    "css-loader": "4",
-    "html-webpack-plugin": "4",
     "jest": "27",
-    "less": "4",
-    "less-loader": "4",
     "node-libs-browser": "2.2.1",
-    "raw-loader": "4",
-    "ts-loader": "8",
-    "tsconfig-paths-webpack-plugin": "3",
-    "webpack": "4",
-    "webpack-bundle-analyzer": "4",
-    "webpack-dev-server": "4",
-    "webpack-merge": "4"
+    "webpack": "5.67",
+    "webpack-merge": "5.8",
+    "webpack-dev-server": "4.7",
+    "html-webpack-plugin": "5.5",
+    "webpack-bundle-analyzer": "4.5",
+    "tsconfig-paths-webpack-plugin": "3.5",
+    "ts-loader": "9.2",
+    "css-loader": "6.5",
+    "less": "4.1",
+    "less-loader": "10.2"
   },
   "gitHead": "9151a37757c75a5b80836c57de97db2bf7158fa0"
 }

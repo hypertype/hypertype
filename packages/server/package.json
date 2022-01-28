@@ -42,7 +42,7 @@
     "@hypertype/infr-node": "^3.7.4",
     "@hypertype/tools": "^3.7.3",
     "@types/express": "^4.17.0",
-    "@types/node": "12.19.8",
+    "@types/node": "16",
     "@types/redis": "^2.8.14",
     "@types/workerpool": "^2.3.1",
     "@types/ws": "^6.0.2",

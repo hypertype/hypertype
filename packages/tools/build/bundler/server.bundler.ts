@@ -24,9 +24,7 @@ export const serverBundler = ({entryPoint, outputPath, template, host, port, pub
       new HtmlWebpackPlugin({
         minify: false,
         template: relativeToBase(template),
-        base: {
-          href: publicPath
-        }
+        base: publicPath
       }),
       ...config.plugins
     ],
@@ -45,7 +43,7 @@ export const serverBundler = ({entryPoint, outputPath, template, host, port, pub
         ]
       }
     },);
-    server.listen(port, host, (err, stats) => {
+    server.listen(port, host, (err) => {
       console.log(`listen on ${host}:${port}`)
     });
   } else {
