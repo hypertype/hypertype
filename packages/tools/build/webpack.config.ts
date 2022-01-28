@@ -54,7 +54,7 @@ export const getConfig = (entryPoint, outputFilename = 'index.js', outputPath = 
         },
         {
           test: /\.(html|svg)$/,
-          type: 'asset/source',
+          loader: 'raw-loader',
         },
         {
           test: /\.ts/,
