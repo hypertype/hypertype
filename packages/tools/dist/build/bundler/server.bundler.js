@@ -35,7 +35,7 @@ const serverBundler = ({ entryPoint, outputPath, template, host, port, publicPat
     });
     if (params_1.needToRun) {
         console.log(`starting web server...`);
-        const server = new webpack_dev_server_1.default(compiler, {
+        const devServer = new webpack_dev_server_1.default({
             port: port,
             static: {
                 directory: params_1.DIST_DIR,
@@ -46,8 +46,9 @@ const serverBundler = ({ entryPoint, outputPath, template, host, port, publicPat
                     { from: /./, to: path_1.join(publicPath, 'index.html') },
                 ]
             }
-        });
-        server.listen(port, host, (err) => {
+        }, compiler);
+        common_1.onProcessExit(() => devServer.close());
+        devServer.startCallback(() => {
             console.log(`listen on ${host}:${port}`);
         });
     }

@@ -1,7 +1,7 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 import webpack from 'webpack';
-import {relativeToBase} from '../util/common';
+import {onProcessExit, relativeToBase} from '../util/common';
 import {getConfig} from "../webpack.config";
 import {DIST_DIR} from '../util/params';
 import {IOptions} from '../contract';
@@ -18,7 +18,7 @@ export const testBundler = ({entryPoint, template, host, port, publicPath}: IOpt
             }),
         ],
     });
-    const server = new WebpackDevServer(compiler, {
+    const devServer = new WebpackDevServer({
         static: {
           directory: DIST_DIR,
           publicPath,
@@ -29,7 +29,9 @@ export const testBundler = ({entryPoint, template, host, port, publicPath}: IOpt
                 {from: /.*/, to: `${publicPath}/index.html`},
             ]
         }
-    },);
-    server.listen(port, host, (err) => {
+    }, compiler);
+    onProcessExit(() => devServer.close());
+    devServer.startCallback(() => {
+      console.log(`listen on ${host}:${port}`)
     });
 };

@@ -3,7 +3,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import webpack from 'webpack';
 import { join } from 'path';
 import {DIST_DIR, needToRun} from '../util/params';
-import {relativeToBase} from '../util/common';
+import {onProcessExit, relativeToBase} from '../util/common';
 import {getConfig} from "../webpack.config";
 import {runCompiler} from '../run.compiler';
 import {IOptions} from '../contract';
@@ -31,7 +31,7 @@ export const serverBundler = ({entryPoint, outputPath, template, host, port, pub
   });
   if (needToRun) {
     console.log(`starting web server...`);
-    const server = new WebpackDevServer(compiler, {
+    const devServer = new WebpackDevServer({
       port: port,
       static: {
         directory: DIST_DIR,
@@ -42,8 +42,9 @@ export const serverBundler = ({entryPoint, outputPath, template, host, port, pub
           {from: /./, to: join(publicPath, 'index.html')},
         ]
       }
-    },);
-    server.listen(port, host, (err) => {
+    }, compiler);
+    onProcessExit(() => devServer.close());
+    devServer.startCallback(() => {
       console.log(`listen on ${host}:${port}`)
     });
   } else {

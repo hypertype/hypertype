@@ -22,7 +22,7 @@ const testBundler = ({ entryPoint, template, host, port, publicPath }) => {
             }),
         ],
     });
-    const server = new webpack_dev_server_1.default(compiler, {
+    const devServer = new webpack_dev_server_1.default({
         static: {
             directory: params_1.DIST_DIR,
             publicPath,
@@ -33,8 +33,10 @@ const testBundler = ({ entryPoint, template, host, port, publicPath }) => {
                 { from: /.*/, to: `${publicPath}/index.html` },
             ]
         }
-    });
-    server.listen(port, host, (err) => {
+    }, compiler);
+    common_1.onProcessExit(() => devServer.close());
+    devServer.startCallback(() => {
+        console.log(`listen on ${host}:${port}`);
     });
 };
 exports.testBundler = testBundler;
