@@ -7,9 +7,9 @@ exports.testBundler = void 0;
 const html_webpack_plugin_1 = __importDefault(require("html-webpack-plugin"));
 const webpack_dev_server_1 = __importDefault(require("webpack-dev-server"));
 const webpack_1 = __importDefault(require("webpack"));
+const params_1 = require("../../util/params");
 const common_1 = require("../../util/common");
 const webpack_config_1 = require("../webpack.config");
-const params_1 = require("../../util/params");
 const testBundler = ({ entryPoint, template, host, port, publicPath }) => {
     const config = webpack_config_1.getConfig(entryPoint);
     const compiler = webpack_1.default({
@@ -17,7 +17,7 @@ const testBundler = ({ entryPoint, template, host, port, publicPath }) => {
         externals: [],
         plugins: [
             new html_webpack_plugin_1.default({
-                template: common_1.relativeToBase(template),
+                template: params_1.relativeToBase(template),
                 base: publicPath
             }),
         ],

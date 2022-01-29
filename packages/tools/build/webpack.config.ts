@@ -2,8 +2,7 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 import { Configuration } from 'webpack';
 import merge from 'webpack-merge';
-import {isProd, needStats, OVERRIDE_CONFIG, OVERRIDE_CONFIG_FILE, PKG} from '../util/params';
-import {relativeToBase} from '../util/common';
+import {isProd, needStats, OVERRIDE_CONFIG, OVERRIDE_CONFIG_FILE, PKG, relativeToBase} from '../util/params';
 
 export const getConfig = (entryPoint, outputFilename = 'index.js', outputPath = 'dist', target = 'web') => {
   if (OVERRIDE_CONFIG)

@@ -1,7 +1,6 @@
 import webpack from 'webpack';
 import {join} from 'path';
-import {DIST_DIR, isProd, PKG} from '../../util/params';
-import {relativeToBase} from '../../util/common';
+import {DIST_DIR, isProd, PKG, relativeToBase} from '../../util/params';
 import {IOptions} from '../contract';
 
 export const bundler = ({entryPoint}: IOptions) => {

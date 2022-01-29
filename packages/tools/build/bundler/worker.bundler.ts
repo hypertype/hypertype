@@ -1,5 +1,5 @@
 import webpack from 'webpack';
-import {relativeToBase} from '../../util/common';
+import {relativeToBase} from '../../util/params';
 import {getConfig} from "../webpack.config";
 import {runCompiler} from '../run.compiler';
 import {IOptions} from '../contract';

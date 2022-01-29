@@ -1,9 +1,9 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 import webpack from 'webpack';
-import {onProcessExit, relativeToBase} from '../../util/common';
+import {DIST_DIR, relativeToBase} from '../../util/params';
+import {onProcessExit} from '../../util/common';
 import {getConfig} from "../webpack.config";
-import {DIST_DIR} from '../../util/params';
 import {IOptions} from '../contract';
 
 export const testBundler = ({entryPoint, template, host, port, publicPath}: IOptions) => {

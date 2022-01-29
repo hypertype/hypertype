@@ -7,12 +7,11 @@ exports.bundler = void 0;
 const webpack_1 = __importDefault(require("webpack"));
 const path_1 = require("path");
 const params_1 = require("../../util/params");
-const common_1 = require("../../util/common");
 const bundler = ({ entryPoint }) => {
     const outputPath = path_1.join(params_1.DIST_DIR, 'bundle');
     webpack_1.default({
         entry: {
-            index: common_1.relativeToBase(entryPoint),
+            index: params_1.relativeToBase(entryPoint),
         },
         target: 'node',
         mode: params_1.isProd ? 'production' : 'development',
