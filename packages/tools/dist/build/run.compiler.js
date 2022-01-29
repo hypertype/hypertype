@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.runCompiler = void 0;
-const params_1 = require("./util/params");
+const params_1 = require("../util/params");
 function runCompiler(compiler) {
     console.log(`compiling to ${compiler.options.output.path}`);
     if (params_1.needToWatch) {

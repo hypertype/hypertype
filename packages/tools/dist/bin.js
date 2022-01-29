@@ -6,7 +6,7 @@ const worker_bundler_1 = require("./build/bundler/worker.bundler");
 const node_bundler_1 = require("./build/bundler/node.bundler");
 const web_bundler_1 = require("./build/bundler/web.bundler");
 const component_1 = require("./generate/component");
-const params_1 = require("./build/util/params");
+const params_1 = require("./util/params");
 const [arg1, arg2, arg3, arg4] = params_1.ARGS;
 if (arg1 === 'new' && arg2 === 'component') {
     component_1.newComponent(arg3, arg4);

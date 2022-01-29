@@ -8,8 +8,8 @@ const html_webpack_plugin_1 = __importDefault(require("html-webpack-plugin"));
 const webpack_dev_server_1 = __importDefault(require("webpack-dev-server"));
 const webpack_1 = __importDefault(require("webpack"));
 const path_1 = require("path");
-const params_1 = require("../util/params");
-const common_1 = require("../util/common");
+const common_1 = require("../../util/common");
+const params_1 = require("../../util/params");
 const webpack_config_1 = require("../webpack.config");
 const run_compiler_1 = require("../run.compiler");
 const serverBundler = ({ entryPoint, outputPath, template, host, port, publicPath }) => {

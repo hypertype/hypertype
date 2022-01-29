@@ -7,8 +7,8 @@ exports.getConfig = void 0;
 const tsconfig_paths_webpack_plugin_1 = __importDefault(require("tsconfig-paths-webpack-plugin"));
 const webpack_bundle_analyzer_1 = require("webpack-bundle-analyzer");
 const webpack_merge_1 = __importDefault(require("webpack-merge"));
-const params_1 = require("./util/params");
-const common_1 = require("./util/common");
+const params_1 = require("../util/params");
+const common_1 = require("../util/common");
 const getConfig = (entryPoint, outputFilename = 'index.js', outputPath = 'dist', target = 'web') => {
     if (params_1.OVERRIDE_CONFIG)
         console.log(`use config override from ${params_1.OVERRIDE_CONFIG_FILE}`);

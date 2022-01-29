@@ -1,4 +1,4 @@
-import {needToWatch} from './util/params';
+import {needToWatch} from '../util/params';
 
 export function runCompiler(compiler) {
     console.log(`compiling to ${compiler.options.output.path}`);

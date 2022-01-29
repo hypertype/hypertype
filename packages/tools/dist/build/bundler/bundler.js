@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.bundler = void 0;
 const webpack_1 = __importDefault(require("webpack"));
 const path_1 = require("path");
-const params_1 = require("../util/params");
-const common_1 = require("../util/common");
+const params_1 = require("../../util/params");
+const common_1 = require("../../util/common");
 const bundler = ({ entryPoint }) => {
     const outputPath = path_1.join(params_1.DIST_DIR, 'bundle');
     webpack_1.default({

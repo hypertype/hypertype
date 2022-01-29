@@ -5,7 +5,7 @@ import {workerBundler} from './build/bundler/worker.bundler';
 import {nodeBundler} from './build/bundler/node.bundler';
 import {webBundler} from './build/bundler/web.bundler';
 import {newComponent} from './generate/component';
-import {OPTIONS, ARGS} from './build/util/params';
+import {OPTIONS, ARGS} from './util/params';
 import {IOptions} from './build/contract';
 
 const [arg1, arg2, arg3, arg4] = ARGS;
