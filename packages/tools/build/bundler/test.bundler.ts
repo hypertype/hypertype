@@ -6,14 +6,14 @@ import {onProcessExit} from '../../util/common';
 import {getConfig} from "../webpack.config";
 import {IOptions} from '../contract';
 
-export const testBundler = ({entryPoint, template, host, port, publicPath}: IOptions) => {
+export const testBundler = ({entryPoint, templatePath, host, port, publicPath}: IOptions) => {
     const config = getConfig(entryPoint);
     const compiler = webpack({
         ...config,
         externals: [],
         plugins: [
             new HtmlWebpackPlugin({
-                template: relativeToBase(template),
+                template: relativeToBase(templatePath),
                 base: publicPath
             }),
         ],

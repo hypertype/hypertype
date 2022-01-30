@@ -10,14 +10,14 @@ const webpack_1 = __importDefault(require("webpack"));
 const params_1 = require("../../util/params");
 const common_1 = require("../../util/common");
 const webpack_config_1 = require("../webpack.config");
-const testBundler = ({ entryPoint, template, host, port, publicPath }) => {
+const testBundler = ({ entryPoint, templatePath, host, port, publicPath }) => {
     const config = webpack_config_1.getConfig(entryPoint);
     const compiler = webpack_1.default({
         ...config,
         externals: [],
         plugins: [
             new html_webpack_plugin_1.default({
-                template: params_1.relativeToBase(template),
+                template: params_1.relativeToBase(templatePath),
                 base: publicPath
             }),
         ],

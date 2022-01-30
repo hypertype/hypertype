@@ -8,7 +8,7 @@ import {getConfig} from "../webpack.config";
 import {runCompiler} from '../run.compiler';
 import {IOptions} from '../contract';
 
-export const serverBundler = ({entryPoint, outputPath, template, host, port, publicPath}: IOptions) => {
+export const serverBundler = ({entryPoint, outputPath, templatePath, host, port, publicPath}: IOptions) => {
   publicPath = publicPath || '/';
   host = host || 'localhost';
   port = port || 3200;
@@ -23,7 +23,7 @@ export const serverBundler = ({entryPoint, outputPath, template, host, port, pub
     plugins: [
       new HtmlWebpackPlugin({
         minify: false,
-        template: relativeToBase(template),
+        template: relativeToBase(templatePath),
         base: publicPath
       }),
       ...config.plugins

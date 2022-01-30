@@ -6,7 +6,7 @@ export interface IOptions {
   outputFilename?: string; // target
   outputPath?: string; // output
 
-  template?: string; // html
+  templatePath?: string; // html
 
   host?: string;
   port?: number;
