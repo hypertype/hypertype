@@ -3,7 +3,7 @@ import {join} from 'path';
 import {IRunOptions} from '../build/contract';
 
 export const messageRunOptionErr = (optionField: keyof IRunOptions, value: any, expected: any): string =>
-  `Incorrect value of the "${optionField}" field : "${value}". Possible value(s): ${expected}`;
+  `Incorrect value of the "${optionField}" option field: "${value}". Possible value(s): ${expected}`;
 
 /**
  * ['hello', 'world', 123] => '"hello", "world", "123"'
