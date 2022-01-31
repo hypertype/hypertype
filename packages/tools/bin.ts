@@ -24,11 +24,11 @@ if (arg1 === 'new' && arg2 === 'component') {
     }
 
     if (findArg('--prod'))
-      prepareEnv('production');
+        prepareEnv('production');
     else if (findArg('--test'))
-      prepareEnv('test');
+        prepareEnv('test');
     else
-      prepareEnv('development');
+        prepareEnv('development');
 
     const opt = normalizeOptions(runOpt);
     if (runOpt.printOptions)
