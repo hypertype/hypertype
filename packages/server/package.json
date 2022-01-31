@@ -26,7 +26,6 @@
     "@hypertype/infr-node": "^3.3.17"
   },
   "bundledDependencies": [
-    "amqp-ts",
     "angular-template",
     "basichtml",
     "body-parser",

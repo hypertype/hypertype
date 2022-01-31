@@ -15,7 +15,7 @@
         "crc-32",
         "reflect-metadata",
         "ulid",
-        "amqp-ts",
+
         "angular-template",
         "basichtml",
         "body-parser",
