@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.cleanDir = exports.copySync = exports.onProcessExit = exports.arrToStr = exports.messageRunOptionErr = void 0;
 const fs_1 = require("fs");
 const path_1 = require("path");
-const messageRunOptionErr = (optionField, value, expected) => `Incorrect "${optionField}" option field value: "${value}". Possible value(s): ${expected}`;
+const messageRunOptionErr = (optionField, value, expected) => `Incorrect value of the "${optionField}" field : "${value}". Possible value(s): ${expected}`;
 exports.messageRunOptionErr = messageRunOptionErr;
 /**
  * ['hello', 'world', 123] => '"hello", "world", "123"'

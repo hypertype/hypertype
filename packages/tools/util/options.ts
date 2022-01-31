@@ -1,9 +1,9 @@
+import {join} from 'path';
 import {DIST_DIR, excludeBase, relativeToBase} from './params';
-import {IOptions, IRunOptions} from '../build/contract';
 import {logAction, logBundlerErr, logOption} from './log';
+import {IOptions, IRunOptions} from '../build/contract';
 import {arrToStr, messageRunOptionErr} from './common';
 import {runModeInfo} from './env';
-import {join} from 'path';
 
 /**
  * We must ensure that:
@@ -77,6 +77,7 @@ export const normalizeOptions = (
 }
 
 export function printOptions(opt: IOptions): void {
+  const unset = '--';
   const result: { [key: number]: [keyof IOptions, string] } = {};
 
   for (let [option, value] of Object.entries(opt)) {
@@ -100,11 +101,11 @@ export function printOptions(opt: IOptions): void {
         result[4] = ['outputFilename', value];
         break;
       case 'assetPath':
-        value = value || 'unset';
+        value = value || unset;
         result[5] = ['assetPath', excludeBase(value)];
         break;
       case 'templatePath':
-        value = value || 'unset';
+        value = value || unset;
         result[6] = ['templatePath', excludeBase(value)];
         break;
       case 'svgLoaderType':

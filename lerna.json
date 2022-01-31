@@ -15,7 +15,15 @@
         "crc-32",
         "reflect-metadata",
         "ulid",
-        "chalk"
+        "amqp-ts",
+        "angular-template",
+        "basichtml",
+        "body-parser",
+        "bufferutil",
+        "core-decorators",
+        "express",
+        "redis",
+        "utf-8-validate"
       ]
     }
   }

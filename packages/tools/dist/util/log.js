@@ -4,7 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.log = exports.logBundlerErr = exports.logOption = exports.logAction = exports.logSuccess = exports.logWarn = exports.logErr = void 0;
-const chalk_1 = __importDefault(require("chalk"));
+// import color from 'chalk'; // все отображается без заданных цветов, если запускать через lerna
+const colors_1 = __importDefault(require("colors"));
 function logErr(title, ...message) {
     log({ type: 'error', title, message });
 }
@@ -31,23 +32,23 @@ function logBundlerErr(...message) {
 exports.logBundlerErr = logBundlerErr;
 function log({ type, title, message, asLine }) {
     if (message)
-        message = Array.isArray(message) ? message : [message];
+        message = Array.isArray(message) ? message.join(' ') : message;
     switch (type) {
         case 'error':
-            title = title && chalk_1.default.black.bgRed(title);
-            message = message && chalk_1.default.red(...message);
+            title = title && colors_1.default.black.bgRed(title);
+            message = message && colors_1.default.red(message);
             break;
         case 'warning':
-            title = title && chalk_1.default.black.bgYellow(title);
-            message = message && chalk_1.default.black(...message);
+            title = title && colors_1.default.black.bgYellow(title);
+            message = message && colors_1.default.black(message);
             break;
         case 'success':
-            title = title && chalk_1.default.black.bgGreen(title);
-            message = message && chalk_1.default.green(...message);
+            title = title && colors_1.default.black.bgGreen(title);
+            message = message && colors_1.default.green(message);
             break;
         case 'action':
-            title = title && chalk_1.default.black.bgCyan(title);
-            message = message && chalk_1.default.black(...message);
+            title = title && colors_1.default.black.bgCyan(title);
+            message = message && colors_1.default.black(message);
             break;
         default:
             logBundlerErr(`Unknown message type "${type}"`);

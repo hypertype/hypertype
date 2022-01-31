@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.printOptions = exports.normalizeOptions = void 0;
+const path_1 = require("path");
 const params_1 = require("./params");
 const log_1 = require("./log");
 const common_1 = require("./common");
 const env_1 = require("./env");
-const path_1 = require("path");
 /**
  * We must ensure that:
  *  - all required fields passed;
@@ -63,6 +63,7 @@ const normalizeOptions = ({ bundler, entryPoint, outputPath, outputFilename, ass
 };
 exports.normalizeOptions = normalizeOptions;
 function printOptions(opt) {
+    const unset = '--';
     const result = {};
     for (let [option, value] of Object.entries(opt)) {
         switch (option) {
@@ -85,11 +86,11 @@ function printOptions(opt) {
                 result[4] = ['outputFilename', value];
                 break;
             case 'assetPath':
-                value = value || 'unset';
+                value = value || unset;
                 result[5] = ['assetPath', params_1.excludeBase(value)];
                 break;
             case 'templatePath':
-                value = value || 'unset';
+                value = value || unset;
                 result[6] = ['templatePath', params_1.excludeBase(value)];
                 break;
             case 'svgLoaderType':

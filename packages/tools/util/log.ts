@@ -1,4 +1,5 @@
-import chalk from 'chalk';
+// import color from 'chalk'; // все отображается без заданных цветов, если запускать через lerna
+import color from 'colors';
 
 export function logErr(title: string, ...message: string[]): void {
   log({type: 'error', title, message});
@@ -35,23 +36,23 @@ interface ILog {
 
 export function log({type, title, message, asLine}: ILog): void {
   if (message)
-    message = Array.isArray(message) ? message : [message];
+    message = Array.isArray(message) ? message.join(' ') : message;
   switch (type) {
     case 'error':
-      title = title && chalk.black.bgRed(title);
-      message = message && chalk.red(...message);
+      title = title && color.black.bgRed(title);
+      message = message && color.red(message);
       break;
     case 'warning':
-      title = title && chalk.black.bgYellow(title);
-      message = message && chalk.black(...message);
+      title = title && color.black.bgYellow(title);
+      message = message && color.black(message);
       break;
     case 'success':
-      title = title && chalk.black.bgGreen(title);
-      message = message && chalk.green(...message);
+      title = title && color.black.bgGreen(title);
+      message = message && color.green(message);
       break;
     case 'action':
-      title = title && chalk.black.bgCyan(title);
-      message = message && chalk.black(...message);
+      title = title && color.black.bgCyan(title);
+      message = message && color.black(message);
       break;
     default:
       logBundlerErr(`Unknown message type "${type}"`);
