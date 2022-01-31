@@ -16,7 +16,7 @@
         "reflect-metadata",
         "ulid",
         "angular-template",
-        "basichtml",
+
         "body-parser",
         "bufferutil",
         "core-decorators",

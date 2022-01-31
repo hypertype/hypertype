@@ -27,7 +27,6 @@
   },
   "bundledDependencies": [
     "angular-template",
-    "basichtml",
     "body-parser",
     "bufferutil",
     "core-decorators",
