@@ -1,13 +1,19 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 import webpack from 'webpack';
+import {messageRunOptionErr, onProcessExit} from '../../util/common';
 import {DIST_DIR, relativeToBase} from '../../util/params';
-import {onProcessExit} from '../../util/common';
+import {logAction, logBundlerErr} from '../../util/log';
 import {getConfig} from "../webpack.config";
 import {IOptions} from '../contract';
 
-export const testBundler = ({entryPoint, templatePath, host, port, publicPath}: IOptions) => {
-    const config = getConfig(entryPoint);
+export const testBundler = (opt: IOptions) => {
+    const config = getConfig(opt);
+    const {templatePath, host, port, publicPath} = opt;
+    if (!templatePath) {
+      logBundlerErr(messageRunOptionErr('templatePath', templatePath, 'non empty string'));
+      throw '';
+    }
     const compiler = webpack({
         ...config,
         externals: [],
@@ -23,7 +29,7 @@ export const testBundler = ({entryPoint, templatePath, host, port, publicPath}: 
           directory: DIST_DIR,
           publicPath,
         },
-        port: port,
+        port,
         historyApiFallback: {
             rewrites: [
                 {from: /.*/, to: `${publicPath}/index.html`},
@@ -32,6 +38,6 @@ export const testBundler = ({entryPoint, templatePath, host, port, publicPath}: 
     }, compiler);
     onProcessExit(() => devServer.close());
     devServer.startCallback(() => {
-      console.log(`listen on ${host}:${port}`)
+      logAction(`listen on ${host}:${port}`);
     });
 };

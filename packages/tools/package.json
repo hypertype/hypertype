@@ -20,24 +20,32 @@
   "peerDependencies": {
     "typescript": "*"
   },
+  "bundledDependencies": [
+    "chalk"
+  ],
   "dependencies": {
+    "chai": "4",
+    "chalk": "4.1.2",
+    "css-loader": "6.5.1",
+    "dotenv": "10.0.0",
+    "dotenv-expand": "5.1.0",
+    "html-webpack-plugin": "5.5.0",
+    "jest": "27.4.7",
+    "less": "4.1.2",
+    "less-loader": "10.2.0",
+    "node-libs-browser": "2.2.1",
+    "raw-loader": "4.0.2",
+    "ts-loader": "9.2.6",
+    "tsconfig-paths-webpack-plugin": "3.5.2",
+    "webpack": "5.67.0",
+    "webpack-bundle-analyzer": "4.5.0",
+    "webpack-dev-server": "4.7.3",
+    "webpack-merge": "5.8.0"
+  },
+  "devDependencies": {
     "@testdeck/jest": "*",
     "@types/chai": "4",
-    "@types/node": "16",
-    "chai": "4",
-    "css-loader": "6.5.x",
-    "html-webpack-plugin": "5.5.x",
-    "jest": "27.x",
-    "less": "4.1.x",
-    "less-loader": "10.2.x",
-    "node-libs-browser": "2.2.1",
-    "raw-loader": "4.0.x",
-    "ts-loader": "9.2.x",
-    "tsconfig-paths-webpack-plugin": "3.5.x",
-    "webpack": "5.67.x",
-    "webpack-bundle-analyzer": "4.5.x",
-    "webpack-dev-server": "4.7.x",
-    "webpack-merge": "5.8.x"
+    "@types/node": "16"
   },
   "gitHead": "9151a37757c75a5b80836c57de97db2bf7158fa0"
 }

@@ -7,8 +7,8 @@ exports.nodeBundler = void 0;
 const webpack_1 = __importDefault(require("webpack"));
 const webpack_config_1 = require("../webpack.config");
 const run_compiler_1 = require("../run.compiler");
-const nodeBundler = ({ entryPoint, outputFilename, outputPath }) => {
-    const config = webpack_config_1.getConfig(entryPoint, outputFilename, outputPath, 'node');
+const nodeBundler = (opt) => {
+    const config = webpack_config_1.getConfig(opt);
     const compiler = webpack_1.default({
         ...config,
         node: {

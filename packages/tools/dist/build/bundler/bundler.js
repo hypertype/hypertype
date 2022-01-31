@@ -7,15 +7,17 @@ exports.bundler = void 0;
 const webpack_1 = __importDefault(require("webpack"));
 const path_1 = require("path");
 const params_1 = require("../../util/params");
-const bundler = ({ entryPoint }) => {
+const env_1 = require("../../util/env");
+const bundler = (opt) => {
+    const { isProduction } = env_1.runModeInfo();
     const outputPath = path_1.join(params_1.DIST_DIR, 'bundle');
     webpack_1.default({
-        entry: {
-            index: params_1.relativeToBase(entryPoint),
-        },
+        // entry: {
+        //     index: relativeToBase(entryPoint),
+        // },
         target: 'node',
-        mode: params_1.isProd ? 'production' : 'development',
-        devtool: params_1.isProd ? 'none' : 'source-map',
+        mode: isProduction ? 'production' : 'development',
+        devtool: isProduction ? 'none' : 'source-map',
         externals: Object.keys(params_1.PKG.peerDependencies || []),
         output: {
             path: outputPath,
@@ -23,7 +25,6 @@ const bundler = ({ entryPoint }) => {
         }
     }, (err, stats) => {
         console.warn(`bundle to ${outputPath}`);
-        // console.log(stats.toString())
     });
 };
 exports.bundler = bundler;

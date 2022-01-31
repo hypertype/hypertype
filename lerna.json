@@ -14,7 +14,8 @@
         "rxjs",
         "crc-32",
         "reflect-metadata",
-        "ulid"
+        "ulid",
+        "chalk"
       ]
     }
   }

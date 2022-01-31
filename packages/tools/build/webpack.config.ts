@@ -1,31 +1,28 @@
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
-import { Configuration } from 'webpack';
+import {Configuration, DefinePlugin} from 'webpack';
 import merge from 'webpack-merge';
-import {isProd, needStats, OVERRIDE_CONFIG, OVERRIDE_CONFIG_FILE, PKG, relativeToBase} from '../util/params';
+import {needStats, OVERRIDE_CONFIG, OVERRIDE_CONFIG_FILE, PKG} from '../util/params';
+import {runModeInfo, stringifiedProcessEnv} from '../util/env';
+import {logSuccess} from '../util/log';
+import {IOptions} from './contract';
 
-export const getConfig = (entryPoint, outputFilename = 'index.js', outputPath = 'dist', target = 'web') => {
+export const getConfig = ({target, entry, outputPath, outputFilename, mainFields}: IOptions) => {
+  const {isProduction} = runModeInfo();
   if (OVERRIDE_CONFIG)
-    console.log(`use config override from ${OVERRIDE_CONFIG_FILE}`);
-  const mainEs = 'es6';
-  const moduleEs = 'module';
-  const mainFields = isProd ? [mainEs, 'main', moduleEs] : [moduleEs, mainEs, 'main'];
-  if (target !== 'node')
-    mainFields.unshift('browser');
+    logSuccess('Configuration for override:', OVERRIDE_CONFIG_FILE);
   return merge({
-    entry: {
-      index: relativeToBase(entryPoint)
-    },
+    entry,
     output: {
-      path: relativeToBase(outputPath, isProd ? 'prod' : ''),
+      path: outputPath,
       filename: outputFilename,
     },
     target,
     node: {
       global: true
     },
-    devtool: isProd ? false : 'source-map',
-    mode: isProd ? 'production' : 'development',
+    devtool: isProduction ? false : 'source-map',
+    mode: isProduction ? 'production' : 'development',
     externals: Object.keys(PKG.peerDependencies || []),
     resolve: {
       extensions: ['.ts', '.js', '.html', '.json'],
@@ -62,6 +59,7 @@ export const getConfig = (entryPoint, outputFilename = 'index.js', outputPath = 
       ]
     },
     plugins: [
+      new DefinePlugin(stringifiedProcessEnv()),
       ...(needStats ? [new BundleAnalyzerPlugin()] : [])
     ]
   } as Configuration, OVERRIDE_CONFIG || {});

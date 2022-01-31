@@ -8,15 +8,18 @@ const html_webpack_plugin_1 = __importDefault(require("html-webpack-plugin"));
 const webpack_dev_server_1 = __importDefault(require("webpack-dev-server"));
 const webpack_1 = __importDefault(require("webpack"));
 const path_1 = require("path");
-const params_1 = require("../../util/params");
 const common_1 = require("../../util/common");
+const log_1 = require("../../util/log");
 const webpack_config_1 = require("../webpack.config");
+const params_1 = require("../../util/params");
 const run_compiler_1 = require("../run.compiler");
-const serverBundler = ({ entryPoint, outputPath, templatePath, host, port, publicPath }) => {
-    publicPath = publicPath || '/';
-    host = host || 'localhost';
-    port = port || 3200;
-    const config = webpack_config_1.getConfig(entryPoint, "index.js", outputPath);
+const serverBundler = (opt) => {
+    const config = webpack_config_1.getConfig(opt);
+    const { publicPath, assetPath, templatePath, host, port } = opt;
+    if (!templatePath) {
+        log_1.logBundlerErr(common_1.messageRunOptionErr('templatePath', templatePath, 'non empty string'));
+        throw '';
+    }
     const compiler = webpack_1.default({
         ...config,
         externals: [],
@@ -27,18 +30,18 @@ const serverBundler = ({ entryPoint, outputPath, templatePath, host, port, publi
         plugins: [
             new html_webpack_plugin_1.default({
                 minify: false,
-                template: params_1.relativeToBase(templatePath),
+                template: templatePath,
                 base: publicPath
             }),
             ...config.plugins
         ],
     });
     if (params_1.needToRun) {
-        console.log(`starting web server...`);
+        log_1.logAction(`starting web server...`, false);
         const devServer = new webpack_dev_server_1.default({
-            port: port,
+            port,
             static: {
-                directory: params_1.DIST_DIR,
+                directory: assetPath,
                 publicPath,
             },
             historyApiFallback: {
@@ -49,7 +52,7 @@ const serverBundler = ({ entryPoint, outputPath, templatePath, host, port, publi
         }, compiler);
         common_1.onProcessExit(() => devServer.close());
         devServer.startCallback(() => {
-            console.log(`listen on ${host}:${port}`);
+            log_1.logAction(`listen on ${host}:${port}`);
         });
     }
     else {

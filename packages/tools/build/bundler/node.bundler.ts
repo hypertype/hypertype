@@ -3,8 +3,8 @@ import {getConfig} from '../webpack.config';
 import {runCompiler} from '../run.compiler';
 import {IOptions} from '../contract';
 
-export const nodeBundler = ({entryPoint, outputFilename, outputPath}: IOptions) => {
-  const config = getConfig(entryPoint, outputFilename, outputPath, 'node');
+export const nodeBundler = (opt: IOptions) => {
+  const config = getConfig(opt);
   const compiler = webpack({
     ...config,
     node: {

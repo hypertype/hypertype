@@ -5,18 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.workerBundler = void 0;
 const webpack_1 = __importDefault(require("webpack"));
-const params_1 = require("../../util/params");
 const webpack_config_1 = require("../webpack.config");
 const run_compiler_1 = require("../run.compiler");
-const workerBundler = ({ entryPoint, outputFilename, outputPath }) => {
-    const config = webpack_config_1.getConfig(entryPoint, outputFilename || 'worker.js', outputPath);
+const workerBundler = (opt) => {
+    const config = webpack_config_1.getConfig(opt);
     const compiler = webpack_1.default({
         ...config,
-        entry: {
-            worker: params_1.relativeToBase(entryPoint)
-        },
         externals: [],
-        target: 'webworker',
         output: {
             libraryTarget: 'umd'
         }

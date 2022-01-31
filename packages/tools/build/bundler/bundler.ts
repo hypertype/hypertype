@@ -1,17 +1,19 @@
 import webpack from 'webpack';
 import {join} from 'path';
-import {DIST_DIR, isProd, PKG, relativeToBase} from '../../util/params';
+import {DIST_DIR, PKG} from '../../util/params';
+import {runModeInfo} from '../../util/env';
 import {IOptions} from '../contract';
 
-export const bundler = ({entryPoint}: IOptions) => {
+export const bundler = (opt: IOptions) => {
+  const {isProduction} = runModeInfo();
     const outputPath = join(DIST_DIR, 'bundle');
     webpack({
-        entry: {
-            index: relativeToBase(entryPoint),
-        },
+        // entry: {
+        //     index: relativeToBase(entryPoint),
+        // },
         target: 'node',
-        mode: isProd ? 'production' : 'development',
-        devtool: isProd ? 'none' : 'source-map',
+        mode: isProduction ? 'production' : 'development',
+        devtool: isProduction ? 'none' : 'source-map',
         externals: Object.keys(PKG.peerDependencies || []),
         output: {
             path: outputPath,
@@ -19,6 +21,5 @@ export const bundler = ({entryPoint}: IOptions) => {
         }
     }, (err, stats) => {
         console.warn(`bundle to ${outputPath}`)
-        // console.log(stats.toString())
     });
 }

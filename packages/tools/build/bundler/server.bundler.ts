@@ -1,18 +1,21 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 import webpack from 'webpack';
-import { join } from 'path';
-import {DIST_DIR, needToRun, relativeToBase} from '../../util/params';
-import {onProcessExit} from '../../util/common';
-import {getConfig} from "../webpack.config";
+import {join} from 'path';
+import {messageRunOptionErr, onProcessExit} from '../../util/common';
+import {logAction, logBundlerErr} from '../../util/log';
+import {getConfig} from '../webpack.config';
+import {needToRun} from '../../util/params';
 import {runCompiler} from '../run.compiler';
 import {IOptions} from '../contract';
 
-export const serverBundler = ({entryPoint, outputPath, templatePath, host, port, publicPath}: IOptions) => {
-  publicPath = publicPath || '/';
-  host = host || 'localhost';
-  port = port || 3200;
-  const config = getConfig(entryPoint, "index.js", outputPath);
+export const serverBundler = (opt: IOptions) => {
+  const config = getConfig(opt);
+  const {publicPath, assetPath, templatePath, host, port} = opt;
+  if (!templatePath) {
+    logBundlerErr(messageRunOptionErr('templatePath', templatePath, 'non empty string'));
+    throw '';
+  }
   const compiler = webpack({
     ...config,
     externals: [],
@@ -23,18 +26,18 @@ export const serverBundler = ({entryPoint, outputPath, templatePath, host, port,
     plugins: [
       new HtmlWebpackPlugin({
         minify: false,
-        template: relativeToBase(templatePath),
+        template: templatePath,
         base: publicPath
       }),
       ...config.plugins
     ],
   });
   if (needToRun) {
-    console.log(`starting web server...`);
+    logAction(`starting web server...`, false);
     const devServer = new WebpackDevServer({
-      port: port,
+      port,
       static: {
-        directory: DIST_DIR,
+        directory: assetPath,
         publicPath,
       },
       historyApiFallback: {
@@ -45,7 +48,7 @@ export const serverBundler = ({entryPoint, outputPath, templatePath, host, port,
     }, compiler);
     onProcessExit(() => devServer.close());
     devServer.startCallback(() => {
-      console.log(`listen on ${host}:${port}`)
+      logAction(`listen on ${host}:${port}`);
     });
   } else {
     runCompiler(compiler)

@@ -6,30 +6,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getConfig = void 0;
 const tsconfig_paths_webpack_plugin_1 = __importDefault(require("tsconfig-paths-webpack-plugin"));
 const webpack_bundle_analyzer_1 = require("webpack-bundle-analyzer");
+const webpack_1 = require("webpack");
 const webpack_merge_1 = __importDefault(require("webpack-merge"));
 const params_1 = require("../util/params");
-const getConfig = (entryPoint, outputFilename = 'index.js', outputPath = 'dist', target = 'web') => {
+const env_1 = require("../util/env");
+const log_1 = require("../util/log");
+const getConfig = ({ target, entry, outputPath, outputFilename, mainFields }) => {
+    const { isProduction } = env_1.runModeInfo();
     if (params_1.OVERRIDE_CONFIG)
-        console.log(`use config override from ${params_1.OVERRIDE_CONFIG_FILE}`);
-    const mainEs = 'es6';
-    const moduleEs = 'module';
-    const mainFields = params_1.isProd ? [mainEs, 'main', moduleEs] : [moduleEs, mainEs, 'main'];
-    if (target !== 'node')
-        mainFields.unshift('browser');
+        log_1.logSuccess('Configuration for override:', params_1.OVERRIDE_CONFIG_FILE);
     return webpack_merge_1.default({
-        entry: {
-            index: params_1.relativeToBase(entryPoint)
-        },
+        entry,
         output: {
-            path: params_1.relativeToBase(outputPath, params_1.isProd ? 'prod' : ''),
+            path: outputPath,
             filename: outputFilename,
         },
         target,
         node: {
             global: true
         },
-        devtool: params_1.isProd ? false : 'source-map',
-        mode: params_1.isProd ? 'production' : 'development',
+        devtool: isProduction ? false : 'source-map',
+        mode: isProduction ? 'production' : 'development',
         externals: Object.keys(params_1.PKG.peerDependencies || []),
         resolve: {
             extensions: ['.ts', '.js', '.html', '.json'],
@@ -66,6 +63,7 @@ const getConfig = (entryPoint, outputFilename = 'index.js', outputPath = 'dist',
             ]
         },
         plugins: [
+            new webpack_1.DefinePlugin(env_1.stringifiedProcessEnv()),
             ...(params_1.needStats ? [new webpack_bundle_analyzer_1.BundleAnalyzerPlugin()] : [])
         ]
     }, params_1.OVERRIDE_CONFIG || {});
