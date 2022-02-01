@@ -16,11 +16,6 @@ exports.OPTIONS_MAP_FIELD_NAME = 'hypertype';
 exports.PKG = require(exports.PKG_FILE);
 exports.OPTIONS_MAP = exports.PKG[exports.OPTIONS_MAP_FIELD_NAME];
 exports.OVERRIDE_CONFIG = (0, fs_1.existsSync)(exports.OVERRIDE_CONFIG_FILE) ? require(exports.OVERRIDE_CONFIG_FILE) : null;
-//
-// if (!OPTIONS_MAP || !Object.keys(OPTIONS_MAP).length) {
-//   logBundlerErr(`To run the bundler, specify an object with options in field "${OPTIONS_MAP_FIELD_NAME}" of the file package.json`);
-//   throw '';
-// }
 //endregion
 //region Arguments
 const [nodePath, runFilePath, ...args] = process.argv;

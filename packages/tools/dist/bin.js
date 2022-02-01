@@ -21,6 +21,10 @@ else if (arg1 === 'compile') {
     (0, compile_1.compile)(...params_1.ARGS.slice(1));
 }
 else {
+    if (!params_1.OPTIONS_MAP || !Object.keys(params_1.OPTIONS_MAP).length) {
+        (0, log_1.logBundlerErr)(`To run the bundler, specify an object with options in package.json -> field "${params_1.OPTIONS_MAP_FIELD_NAME}"`);
+        throw '';
+    }
     const runOpt = params_1.OPTIONS_MAP[arg1];
     if (!runOpt) {
         (0, log_1.logBundlerErr)(`Can't find options for key "${arg1}". Check it in package.json -> field "${params_1.OPTIONS_MAP_FIELD_NAME}"`);
