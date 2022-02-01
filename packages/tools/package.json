@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "3.7.15",
+  "version": "3.7.15-1",
   "description": "",
   "bin": {
     "hypertype": "./dist/bin.js"
@@ -15,12 +15,14 @@
   "author": "",
   "license": "ISC",
   "files": [
-    "dist"
+    "dist",
+    "plugins",
+    "types.d.ts"
   ],
   "peerDependencies": {
     "typescript": "*"
   },
-  "typings": "typings.d.ts",
+  "typings": "types.d.ts",
   "dependencies": {
     "chai": "4",
     "colors": "1.4.0",
