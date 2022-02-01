@@ -26,11 +26,11 @@ function visitExportNode(exportNode, sourceFile) {
 
 function visitImportNode(importNode, sourceFile) {
   const file = importNode.moduleSpecifier?.text;
-  if (!file)
+  if (!file || !file.startsWith('.'))
     return;
   const sourceFileDir = path.dirname(sourceFile.path);
   const abs = path.resolve(sourceFileDir, file);
-  if (/\.(less|css|scss|sass|svg|png|html)$/.test(file)) {
+  if (/\.(less|css|scss|sass|json|svg|png|html)$/.test(file)) {
     return ts.updateImportDeclaration(importNode, importNode.decorators, importNode.modifiers, importNode.importClause, ts.createStringLiteral(abs), importNode.assertClause);
   }
   if (fs.existsSync(abs + '.ts')) {
@@ -48,7 +48,7 @@ function visitRequireNode(importNode, sourceFile) {
     return;
   }
   const file = importNode.arguments[0].text;
-  if (/\.(less|css|scss|sass|svg|png|html)/.test(file)) {
+  if (/\.(less|css|scss|sass|json|svg|png|html)/.test(file)) {
     const sourceFileDir = path.dirname(sourceFile.path);
     const real = path.join(sourceFileDir, file);
     return ts.updateCall(importNode, importNode.expression, undefined, [ts.createStringLiteral(real)]);
