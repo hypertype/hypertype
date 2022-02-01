@@ -2,5 +2,4 @@
 .cache
 node_modules
 dist
-!packages/tools/dist
 lerna-debug.log

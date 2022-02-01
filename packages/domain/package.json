@@ -46,7 +46,7 @@
     "@hypertype/infr": "^3.7.17",
     "@hypertype/tools": "^3.7.17",
     "@types/node": "16",
-    "typescript": "4.5"
+    "typescript": "4.5.x"
   },
   "hypertype": {
     "lib": {

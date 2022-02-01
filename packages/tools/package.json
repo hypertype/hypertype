@@ -6,7 +6,7 @@
   "version": "3.7.17",
   "description": "",
   "bin": {
-    "hypertype": "./dist/bin.js"
+    "hypertype": "bin.wrap.js"
   },
   "scripts": {
     "build": "tsc -b",
@@ -16,13 +16,13 @@
   "license": "ISC",
   "files": [
     "dist",
-    "plugins",
-    "types.d.ts"
+    "bin.wrap.js",
+    "plugins"
   ],
   "peerDependencies": {
-    "typescript": "*"
+    "typescript": "4.5.x",
+    "ttypescript": "^1.5.10"
   },
-  "typings": "types.d.ts",
   "dependencies": {
     "chai": "4",
     "colors": "1.4.0",
