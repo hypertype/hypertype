@@ -44,8 +44,8 @@
   },
   "devDependencies": {
     "@testdeck/jest": "*",
-    "@types/chai": "4",
-    "@types/node": "16"
+    "@types/chai": "4.x.x",
+    "@types/node": "16.x.x"
   },
   "gitHead": "9151a37757c75a5b80836c57de97db2bf7158fa0"
 }
