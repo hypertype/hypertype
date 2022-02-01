@@ -21,9 +21,6 @@
     "node-loader.js"
   ],
   "peerDependencies": {
-    "@hypertype/core": "^3.3.17",
-    "@hypertype/infr": "^3.3.17",
-    "@hypertype/infr-node": "^3.3.17"
   },
   "bundledDependencies": [
     "angular-template",

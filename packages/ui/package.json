@@ -31,8 +31,6 @@
   },
   "homepage": "https://github.com/hypertype/ui#readme",
   "peerDependencies": {
-    "@hypertype/core": "^3.4.1",
-    "@hypertype/tools": "^3.4.1",
     "@types/node": "16",
     "typescript": "4.5"
   },
