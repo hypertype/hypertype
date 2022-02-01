@@ -17,12 +17,12 @@
   "files": [
     "dist",
     "plugins",
-    "types.d.ts"
+    "typings.d.ts"
   ],
   "peerDependencies": {
     "typescript": "*"
   },
-  "typings": "types.d.ts",
+  "typings": "typings.d.ts",
   "dependencies": {
     "chai": "4",
     "colors": "1.4.0",
