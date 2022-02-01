@@ -18,7 +18,7 @@ if (arg1 === 'new' && arg2 === 'component') {
     newComponent(arg3, arg4);
 } else {
     if (!OPTIONS_MAP || !Object.keys(OPTIONS_MAP).length) {
-        logBundlerErr(`To run the bundler, specify an object with options in field "${OPTIONS_MAP_FIELD_NAME}" of the file package.json`);
+        logBundlerErr(`To run the bundler, specify an object with options in package.json -> field "${OPTIONS_MAP_FIELD_NAME}"`);
         throw '';
     }
     const runOpt = OPTIONS_MAP[arg1] as IRunOptions;
