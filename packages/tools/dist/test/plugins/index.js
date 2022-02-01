@@ -10,3 +10,4 @@ const printer = ts.createPrinter();
 const transform = lessToStringTransformer(program, {});
 const result = ts.transform(source, [transform]);
 console.log(printer.printFile(result.transformed[0]));
+//# sourceMappingURL=index.js.map

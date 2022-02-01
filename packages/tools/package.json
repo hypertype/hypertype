@@ -20,6 +20,7 @@
   "peerDependencies": {
     "typescript": "*"
   },
+  "typings": "typings.d.ts",
   "dependencies": {
     "chai": "4",
     "colors": "1.4.0",

@@ -63,7 +63,7 @@
     "redux": "4.0.5",
     "router5": "8.0.1",
     "router5-plugin-browser": "8.0.1",
-    "typescript": "4.1"
+    "typescript": "4.5"
   },
   "hypertype": {
     "lib": {

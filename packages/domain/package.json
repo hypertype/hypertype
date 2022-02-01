@@ -44,14 +44,14 @@
   "peerDependencies": {
     "@hypertype/core": "^3.4.1",
     "@hypertype/infr": "^3.4.1",
-    "typescript": "4.1"
+    "typescript": "4.5"
   },
   "devDependencies": {
     "@hypertype/core": "^3.7.12",
     "@hypertype/infr": "^3.7.12",
     "@hypertype/tools": "^3.7.12",
     "@types/node": "16",
-    "typescript": "4.1"
+    "typescript": "4.5"
   },
   "hypertype": {
     "lib": {

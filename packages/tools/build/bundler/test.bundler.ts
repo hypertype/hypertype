@@ -1,6 +1,6 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackDevServer from 'webpack-dev-server';
-import webpack from 'webpack';
+import webpack, { Compiler } from 'webpack';
 import {messageRunOptionErr, onProcessExit} from '../../util/common';
 import {DIST_DIR, relativeToBase} from '../../util/params';
 import {logAction, logBundlerErr} from '../../util/log';
@@ -35,7 +35,7 @@ export const testBundler = (opt: IOptions) => {
                 {from: /.*/, to: `${publicPath}/index.html`},
             ]
         }
-    }, compiler);
+    }, compiler as any);
     onProcessExit(() => devServer.close());
     devServer.startCallback(() => {
       logAction(`listen on ${host}:${port}`);

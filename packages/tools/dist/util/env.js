@@ -47,7 +47,7 @@ function prepareEnv(nodeEnv) {
      */
     dotenvFiles.forEach(file => {
         if (fs_1.default.existsSync(file)) {
-            dotenv_expand_1.default(dotenv_1.default.config({
+            (0, dotenv_expand_1.default)(dotenv_1.default.config({
                 path: file
             }));
         }
@@ -56,8 +56,8 @@ function prepareEnv(nodeEnv) {
 }
 exports.prepareEnv = prepareEnv;
 function getEnv() {
-    if (!exports.runModeInfo().NODE_ENV) {
-        log_1.logBundlerErr('The NODE_ENV environment variable is required but was not specified.');
+    if (!(0, exports.runModeInfo)().NODE_ENV) {
+        (0, log_1.logBundlerErr)('The NODE_ENV environment variable is required but was not specified.');
         throw '';
     }
     return { ...process.env };

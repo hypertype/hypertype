@@ -11,11 +11,14 @@ import {webBundler} from './build/bundler/web.bundler';
 import {logAction, logBundlerErr} from './util/log';
 import {prepareEnv, runModeInfo} from './util/env';
 import {newComponent} from './generate/component';
+import {compile} from "./compile/compile";
 
 const [arg1, arg2, arg3, arg4] = ARGS;
 
 if (arg1 === 'new' && arg2 === 'component') {
     newComponent(arg3, arg4);
+} else if (arg1 === 'compile') {
+  compile(...ARGS.slice(1));
 } else {
     const runOpt = OPTIONS_MAP[arg1] as IRunOptions;
     if (!runOpt) {

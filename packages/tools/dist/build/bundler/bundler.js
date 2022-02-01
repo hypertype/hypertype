@@ -9,9 +9,9 @@ const path_1 = require("path");
 const params_1 = require("../../util/params");
 const env_1 = require("../../util/env");
 const bundler = (opt) => {
-    const { isProduction } = env_1.runModeInfo();
-    const outputPath = path_1.join(params_1.DIST_DIR, 'bundle');
-    webpack_1.default({
+    const { isProduction } = (0, env_1.runModeInfo)();
+    const outputPath = (0, path_1.join)(params_1.DIST_DIR, 'bundle');
+    (0, webpack_1.default)({
         // entry: {
         //     index: relativeToBase(entryPoint),
         // },

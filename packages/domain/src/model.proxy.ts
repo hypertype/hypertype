@@ -12,10 +12,9 @@ import {
   takeUntil
 } from "@hypertype/core";
 import {IAction, ModelStream} from "./model.stream";
-import {IActions} from "./model";
 import {IConnector} from "./child-window.connector";
 
-export class ModelProxy<TState, TActions extends IActions<TActions>> {
+export class ModelProxy<TState, TActions> {
 
   private static lastUpdate: string;
   private ActionSubject = new Subject();
@@ -41,19 +40,19 @@ export class ModelProxy<TState, TActions extends IActions<TActions>> {
     return this.stream.Action(action);
   }
 
-  public Actions: TActions = new Proxy({} as TActions, {
-    get: (target: TActions, key: keyof TActions, receiver) => {
+  public Actions: TActions = new Proxy({}, {
+    get: (target: TActions, key: string, receiver) => {
       // для примитивов
       if (typeof key !== "string")
         return () => null;
       if (key === "then") // работает await, тут надо сообщить, что нет метода .then
         return undefined;
-      return target[key] || (target[key] = (async (...args) => {
+      return target[key] || (target[key as keyof TActions] = (async (...args) => {
         try {
           ModelProxy.lastUpdate = Fn.ulid();
           const res = await this.stream.Action({
             path: this.path,
-            method: key,
+            method: key as (keyof TActions) & string,
             args: args,
             lastUpdate: ModelProxy.lastUpdate,
           });
@@ -68,7 +67,7 @@ export class ModelProxy<TState, TActions extends IActions<TActions>> {
   constructor(protected stream: ModelStream<TState, TActions>, private path = []) {
   }
 
-  protected GetSubProxy<UState, UActions extends IActions<UActions>>(constructor: any = ModelProxy, path: keyof TState, ...paths: any[]): ModelProxy<UState, UActions> {
+  protected GetSubProxy<UState, UActions>(constructor: any = ModelProxy, path: keyof TState, ...paths: any[]): ModelProxy<UState, UActions> {
     return new constructor(this.stream.SubStream<UState, UActions>(), [
       ...this.path,
       path,

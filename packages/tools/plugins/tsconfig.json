@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "Node",
+    "target": "ES2019",
+    "composite": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "experimentalDecorators": true,
+    "checkJs": false,
+    "outDir": "../dist/esm",
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true ,
+    "noEmitHelpers": true,
+    "declarationDir": "../dist/typings",
+    "declaration": true,
+    "types": [
+      "@hypertype/tools"
+    ],
+    "lib": [
+      "ESNext",
+      "dom"
+    ],
+    "plugins": [
+      {
+        "transform": "@hypertype/tools/plugins/absolute/absolute-plugin.cjs",
+        "after": true
+      },
+      //       Transform paths in output .js files
+//      {
+//        "transform": "typescript-transform-paths"
+//      },
+      //       Transform paths in output .d.ts files (Include this line if you output declarations files)
+//      {
+//        "transform": "typescript-transform-paths",
+//        "afterDeclarations": true
+//      }
+    ]
+  },
+  "exclude": [
+    "../node_modules",
+    "dist"
+  ]
+}

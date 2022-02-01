@@ -45,7 +45,7 @@ export const serverBundler = (opt: IOptions) => {
           {from: /./, to: join(publicPath, 'index.html')},
         ]
       }
-    }, compiler);
+    }, compiler as any);
     onProcessExit(() => devServer.close());
     devServer.startCallback(() => {
       logAction(`listen on ${host}:${port}`);

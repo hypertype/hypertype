@@ -15,6 +15,11 @@ export interface IInvoker<TActions> {
   (action: IAction<TActions>): any;
 }
 
+// export type BaseAction = {
+//   [key: string]: (...args: any[]) => Promise<any> | Promise<void> | void;
+// };
+
+
 export type IAction<TActions> = {
   path: any[],
   method: (keyof TActions) & string,

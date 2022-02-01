@@ -16,7 +16,7 @@ function isTransferable(value): boolean {
   if (isNotJustObject(value))
     return false;
   return (
-    (hasOffscreenCanvas && value instanceof OffscreenCanvas) ||
+    (hasOffscreenCanvas && value instanceof globalThis.OffscreenCanvas) ||
     (hasImageBitmap && value instanceof ImageBitmap) ||
     (hasArrayBuffer && value instanceof ArrayBuffer) ||
     (hasReadableStream && value instanceof ReadableStream) ||

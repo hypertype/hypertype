@@ -28,7 +28,7 @@ export abstract class Model<TState, TActions> implements IModel<TState, TActions
    */
   protected useLastUpdate = false;
 
-  private InvokeSubject$ = new Subject<{ action: IAction<any>, resolve: Function, reject: Function }>();
+  private InvokeSubject$ = new Subject<{ action: IAction<TActions>, resolve: Function, reject: Function }>();
   private Invoke$ = this.InvokeSubject$.pipe(
     /**
      * Идея в сериализации а-ля ReadCommitted:
@@ -39,18 +39,19 @@ export abstract class Model<TState, TActions> implements IModel<TState, TActions
      *      => Get использует неконсистентное состояние.
      *      Поэтому все Get должны в начале прочесть все нужные данные, а уже потом делать дела
      */
-    concatMap(async ({action, resolve, reject}) => {
+    concatMap(async ({action, resolve, reject}: {action: IAction<TActions>, resolve: Function, reject: Function}) => {
       // console.log('action start', action.path, action.method, action.args);
       try {
+        const subActions = this.GetSubActions<TActions>(...(action.path || []))[action.method] as any;
         if (!action.method.startsWith('Get')) {
-          const result: any = await this.GetSubActions(...(action.path || []))[action.method](...action.args);
+          const result: any = await subActions(...action.args);
           resolve(result);
           if (this.useLastUpdate) {
             this.lastUpdate = action.lastUpdate;
           }
           this.Update();
         } else {
-          const promiseOrResult = this.GetSubActions(...(action.path || []))[action.method](...action.args);
+          const promiseOrResult = subActions(...action.args);
           if (promiseOrResult instanceof Promise) {
             promiseOrResult.then(x => resolve(x)).catch(x => reject(x));
           } else {
@@ -85,8 +86,8 @@ export abstract class Model<TState, TActions> implements IModel<TState, TActions
     return model;
   }
 
-  private GetSubActions(...path: any[]): IActions<TActions> {
-    return this.GetSubModel(...path) as unknown as IActions<TActions>;
+  private GetSubActions<UActions>(...path: any[]): UActions {
+    return this.GetSubModel(...path) as unknown as UActions;
   }
 
   private GetSubState(state, ...path) {
@@ -107,7 +108,3 @@ export type IModel<TState, TActions> = {
   ToJSON(): TState;
   FromJSON(state: TState);
 };
-
-export type IActions<TActions> = {
-  [key in keyof TActions]: (...args) => void;
-}

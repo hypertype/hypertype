@@ -21,11 +21,11 @@ export const OPTIONS_MAP_FIELD_NAME = 'hypertype';
 export const PKG = require(PKG_FILE);
 export const OPTIONS_MAP = PKG[OPTIONS_MAP_FIELD_NAME];
 export const OVERRIDE_CONFIG = existsSync(OVERRIDE_CONFIG_FILE) ? require(OVERRIDE_CONFIG_FILE) : null;
-
-if (!OPTIONS_MAP || !Object.keys(OPTIONS_MAP).length) {
-  logBundlerErr(`To run the bundler, specify an object with options in field "${OPTIONS_MAP_FIELD_NAME}" of the file package.json`);
-  throw '';
-}
+//
+// if (!OPTIONS_MAP || !Object.keys(OPTIONS_MAP).length) {
+//   logBundlerErr(`To run the bundler, specify an object with options in field "${OPTIONS_MAP_FIELD_NAME}" of the file package.json`);
+//   throw '';
+// }
 
 //endregion
 

@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.optionalArgsStr = exports.findArg = exports.excludeBase = exports.relativeToBase = exports.needStats = exports.needToWatch = exports.needToRun = exports.ARGS = exports.OVERRIDE_CONFIG = exports.OPTIONS_MAP = exports.PKG = exports.OPTIONS_MAP_FIELD_NAME = exports.OVERRIDE_CONFIG_FILE = exports.PKG_FILE = exports.DOTENV_FILE = exports.DIST_DIR = exports.SRC_DIR = exports.BASE_DIR = void 0;
 const path_1 = require("path");
 const fs_1 = require("fs");
-const log_1 = require("./log");
 //region File paths
 exports.BASE_DIR = process.cwd();
 exports.SRC_DIR = relativeToBase('src');
@@ -16,11 +15,12 @@ exports.OVERRIDE_CONFIG_FILE = relativeToBase('webpack.config.js');
 exports.OPTIONS_MAP_FIELD_NAME = 'hypertype';
 exports.PKG = require(exports.PKG_FILE);
 exports.OPTIONS_MAP = exports.PKG[exports.OPTIONS_MAP_FIELD_NAME];
-exports.OVERRIDE_CONFIG = fs_1.existsSync(exports.OVERRIDE_CONFIG_FILE) ? require(exports.OVERRIDE_CONFIG_FILE) : null;
-if (!exports.OPTIONS_MAP || !Object.keys(exports.OPTIONS_MAP).length) {
-    log_1.logBundlerErr(`To run the bundler, specify an object with options in field "${exports.OPTIONS_MAP_FIELD_NAME}" of the file package.json`);
-    throw '';
-}
+exports.OVERRIDE_CONFIG = (0, fs_1.existsSync)(exports.OVERRIDE_CONFIG_FILE) ? require(exports.OVERRIDE_CONFIG_FILE) : null;
+//
+// if (!OPTIONS_MAP || !Object.keys(OPTIONS_MAP).length) {
+//   logBundlerErr(`To run the bundler, specify an object with options in field "${OPTIONS_MAP_FIELD_NAME}" of the file package.json`);
+//   throw '';
+// }
 //endregion
 //region Arguments
 const [nodePath, runFilePath, ...args] = process.argv;
@@ -31,7 +31,7 @@ exports.needStats = findArg('--stats');
 //endregion
 //region Support
 function relativeToBase(...paths) {
-    return path_1.join(exports.BASE_DIR, ...paths);
+    return (0, path_1.join)(exports.BASE_DIR, ...paths);
 }
 exports.relativeToBase = relativeToBase;
 function excludeBase(value) {

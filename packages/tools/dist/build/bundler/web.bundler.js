@@ -8,14 +8,14 @@ const webpack_1 = __importDefault(require("webpack"));
 const webpack_config_1 = require("../webpack.config");
 const run_compiler_1 = require("../run.compiler");
 const webBundler = (opt) => {
-    const config = webpack_config_1.getConfig(opt);
-    const compiler = webpack_1.default({
+    const config = (0, webpack_config_1.getConfig)(opt);
+    const compiler = (0, webpack_1.default)({
         ...config,
         output: {
             ...config.output,
             libraryTarget: 'umd'
         }
     });
-    run_compiler_1.runCompiler(compiler);
+    (0, run_compiler_1.runCompiler)(compiler);
 };
 exports.webBundler = webBundler;

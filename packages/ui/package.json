@@ -34,7 +34,7 @@
     "@hypertype/core": "^3.4.1",
     "@hypertype/tools": "^3.4.1",
     "@types/node": "16",
-    "typescript": "4.1"
+    "typescript": "4.5"
   },
   "dependencies": {
     "uhtml": "^2"
@@ -43,7 +43,7 @@
     "@hypertype/core": "^3.7.12",
     "@hypertype/tools": "^3.7.12",
     "@types/node": "16",
-    "typescript": "4.1"
+    "typescript": "4.5"
   },
   "hypertype": {
     "lib": {

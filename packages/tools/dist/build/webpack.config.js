@@ -12,10 +12,10 @@ const params_1 = require("../util/params");
 const env_1 = require("../util/env");
 const log_1 = require("../util/log");
 const getConfig = ({ target, entry, outputPath, outputFilename, mainFields }) => {
-    const { isProduction } = env_1.runModeInfo();
+    const { isProduction } = (0, env_1.runModeInfo)();
     if (params_1.OVERRIDE_CONFIG)
-        log_1.logSuccess('Configuration for override:', params_1.OVERRIDE_CONFIG_FILE);
-    return webpack_merge_1.default({
+        (0, log_1.logSuccess)('Configuration for override:', params_1.OVERRIDE_CONFIG_FILE);
+    return (0, webpack_merge_1.default)({
         entry,
         output: {
             path: outputPath,
@@ -63,7 +63,7 @@ const getConfig = ({ target, entry, outputPath, outputFilename, mainFields }) =>
             ]
         },
         plugins: [
-            new webpack_1.DefinePlugin(env_1.stringifiedProcessEnv()),
+            new webpack_1.DefinePlugin((0, env_1.stringifiedProcessEnv)()),
             ...(params_1.needStats ? [new webpack_bundle_analyzer_1.BundleAnalyzerPlugin()] : [])
         ]
     }, params_1.OVERRIDE_CONFIG || {});

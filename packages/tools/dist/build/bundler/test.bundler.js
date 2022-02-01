@@ -12,18 +12,18 @@ const params_1 = require("../../util/params");
 const log_1 = require("../../util/log");
 const webpack_config_1 = require("../webpack.config");
 const testBundler = (opt) => {
-    const config = webpack_config_1.getConfig(opt);
+    const config = (0, webpack_config_1.getConfig)(opt);
     const { templatePath, host, port, publicPath } = opt;
     if (!templatePath) {
-        log_1.logBundlerErr(common_1.messageRunOptionErr('templatePath', templatePath, 'non empty string'));
+        (0, log_1.logBundlerErr)((0, common_1.messageRunOptionErr)('templatePath', templatePath, 'non empty string'));
         throw '';
     }
-    const compiler = webpack_1.default({
+    const compiler = (0, webpack_1.default)({
         ...config,
         externals: [],
         plugins: [
             new html_webpack_plugin_1.default({
-                template: params_1.relativeToBase(templatePath),
+                template: (0, params_1.relativeToBase)(templatePath),
                 base: publicPath
             }),
         ],
@@ -40,9 +40,9 @@ const testBundler = (opt) => {
             ]
         }
     }, compiler);
-    common_1.onProcessExit(() => devServer.close());
+    (0, common_1.onProcessExit)(() => devServer.close());
     devServer.startCallback(() => {
-        log_1.logAction(`listen on ${host}:${port}`);
+        (0, log_1.logAction)(`listen on ${host}:${port}`);
     });
 };
 exports.testBundler = testBundler;

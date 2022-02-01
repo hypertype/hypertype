@@ -4,16 +4,16 @@ exports.runCompiler = void 0;
 const log_1 = require("../util/log");
 const params_1 = require("../util/params");
 function runCompiler(compiler) {
-    log_1.logAction(`Compiling to ${compiler.options.output.path}`, false);
+    (0, log_1.logAction)(`Compiling to ${compiler.options.output.path}`, false);
     if (params_1.needToWatch) {
         compiler.watch({}, (err, stats) => {
             const info = stats.toJson("minimal");
             if (info.errors.length) {
-                log_1.logErr('Webpack watch stats error:', stats.toString());
+                (0, log_1.logErr)('Webpack watch stats error:', stats.toString());
                 return;
             }
             if (info.warnings.length) {
-                log_1.logWarn('Webpack watch stats warning:', ...info.warnings);
+                (0, log_1.logWarn)('Webpack watch stats warning:', ...info.warnings);
             }
             console.log(stats.toString()); // Done processing
         });
@@ -21,7 +21,7 @@ function runCompiler(compiler) {
     else {
         compiler.run((err, stats) => {
             if (err || stats.hasErrors()) {
-                log_1.logErr('Webpack stats error:', stats.toString());
+                (0, log_1.logErr)('Webpack stats error:', stats.toString());
             }
             // Done processing
         });

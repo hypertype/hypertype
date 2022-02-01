@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.cleanDir = exports.copySync = exports.onProcessExit = exports.arrToStr = exports.messageRunOptionErr = void 0;
 const fs_1 = require("fs");
 const path_1 = require("path");
-const messageRunOptionErr = (optionField, value, expected) => `Incorrect value of the "${optionField}" field : "${value}". Possible value(s): ${expected}`;
+const messageRunOptionErr = (optionField, value, expected) => `Incorrect value of the "${optionField}" option field: "${value}". Possible value(s): ${expected}`;
 exports.messageRunOptionErr = messageRunOptionErr;
 /**
  * ['hello', 'world', 123] => '"hello", "world", "123"'
@@ -20,33 +20,33 @@ function onProcessExit(callback) {
 }
 exports.onProcessExit = onProcessExit;
 function copySync(src, dest, allowedToCopyFilter) {
-    if (!fs_1.existsSync(src) || allowedToCopyFilter && !allowedToCopyFilter(src))
+    if (!(0, fs_1.existsSync)(src) || allowedToCopyFilter && !allowedToCopyFilter(src))
         return;
     if (isDirectory(src)) {
-        if (!fs_1.existsSync(dest))
-            fs_1.mkdirSync(dest);
-        let files = fs_1.readdirSync(src);
+        if (!(0, fs_1.existsSync)(dest))
+            (0, fs_1.mkdirSync)(dest);
+        let files = (0, fs_1.readdirSync)(src);
         if (allowedToCopyFilter)
             files = files.filter(allowedToCopyFilter);
         files.forEach(item => {
-            copySync(path_1.join(src, item), path_1.join(dest, item), allowedToCopyFilter);
+            copySync((0, path_1.join)(src, item), (0, path_1.join)(dest, item), allowedToCopyFilter);
         });
     }
     else
-        fs_1.copyFileSync(src, dest);
+        (0, fs_1.copyFileSync)(src, dest);
 }
 exports.copySync = copySync;
 function cleanDir(dir) {
-    if (!fs_1.existsSync(dir) || !isDirectory(dir))
+    if (!(0, fs_1.existsSync)(dir) || !isDirectory(dir))
         return;
-    fs_1.readdirSync(dir)
-        .map(item => path_1.join(dir, item))
-        .forEach(file => fs_1.rmSync(file, {
+    (0, fs_1.readdirSync)(dir)
+        .map(item => (0, path_1.join)(dir, item))
+        .forEach(file => (0, fs_1.rmSync)(file, {
         recursive: isDirectory(file),
         force: true
     }));
 }
 exports.cleanDir = cleanDir;
 function isDirectory(file) {
-    return fs_1.lstatSync(file).isDirectory();
+    return (0, fs_1.lstatSync)(file).isDirectory();
 }

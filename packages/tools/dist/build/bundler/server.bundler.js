@@ -14,13 +14,13 @@ const webpack_config_1 = require("../webpack.config");
 const params_1 = require("../../util/params");
 const run_compiler_1 = require("../run.compiler");
 const serverBundler = (opt) => {
-    const config = webpack_config_1.getConfig(opt);
+    const config = (0, webpack_config_1.getConfig)(opt);
     const { publicPath, assetPath, templatePath, host, port } = opt;
     if (!templatePath) {
-        log_1.logBundlerErr(common_1.messageRunOptionErr('templatePath', templatePath, 'non empty string'));
+        (0, log_1.logBundlerErr)((0, common_1.messageRunOptionErr)('templatePath', templatePath, 'non empty string'));
         throw '';
     }
-    const compiler = webpack_1.default({
+    const compiler = (0, webpack_1.default)({
         ...config,
         externals: [],
         output: {
@@ -37,7 +37,7 @@ const serverBundler = (opt) => {
         ],
     });
     if (params_1.needToRun) {
-        log_1.logAction(`starting web server...`, false);
+        (0, log_1.logAction)(`starting web server...`, false);
         const devServer = new webpack_dev_server_1.default({
             port,
             static: {
@@ -46,17 +46,17 @@ const serverBundler = (opt) => {
             },
             historyApiFallback: {
                 rewrites: [
-                    { from: /./, to: path_1.join(publicPath, 'index.html') },
+                    { from: /./, to: (0, path_1.join)(publicPath, 'index.html') },
                 ]
             }
         }, compiler);
-        common_1.onProcessExit(() => devServer.close());
+        (0, common_1.onProcessExit)(() => devServer.close());
         devServer.startCallback(() => {
-            log_1.logAction(`listen on ${host}:${port}`);
+            (0, log_1.logAction)(`listen on ${host}:${port}`);
         });
     }
     else {
-        run_compiler_1.runCompiler(compiler);
+        (0, run_compiler_1.runCompiler)(compiler);
     }
 };
 exports.serverBundler = serverBundler;

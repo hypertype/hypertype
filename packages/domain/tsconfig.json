@@ -9,8 +9,8 @@
     "moduleResolution": "node",
     "target": "es2018",
     "lib": [
-      "WebWorker",
-      "ESNext"
+      "dom",
+      "ESNext",
     ]
   },
   "include": [
