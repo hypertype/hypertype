@@ -20,6 +20,10 @@ if (arg1 === 'new' && arg2 === 'component') {
 } else if (arg1 === 'compile') {
   compile(...ARGS.slice(1));
 } else {
+    if (!OPTIONS_MAP || !Object.keys(OPTIONS_MAP).length) {
+        logBundlerErr(`To run the bundler, specify an object with options in package.json -> field "${OPTIONS_MAP_FIELD_NAME}"`);
+        throw '';
+    }
     const runOpt = OPTIONS_MAP[arg1] as IRunOptions;
     if (!runOpt) {
         logBundlerErr(`Can't find options for key "${arg1}". Check it in package.json -> field "${OPTIONS_MAP_FIELD_NAME}"`);
