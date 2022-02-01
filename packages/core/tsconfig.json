@@ -7,7 +7,9 @@
     "moduleResolution": "node",
     "declarationDir": "./dist/typings",
     "noEmitOnError": true,
-    "types": []
+    "types": [
+      "node"
+    ]
   },
   "include": [
     "**/*.ts"

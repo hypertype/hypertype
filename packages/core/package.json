@@ -1,10 +1,10 @@
 {
-  "name": "@hypertype/core",
-  "version": "3.7.17",
-  "description": "",
-  "main": "dist/esm/index.js",
-  "bundle": "dist/bundle/index.js",
-  "typings": "dist/typings/index.d.ts",
+	"name": "@hypertype/core",
+	"version": "3.7.17",
+	"description": "",
+	"main": "dist/index.js",
+	"bundle": "dist/index.js",
+	"typings": "dist/typings/index.d.ts",
   "scripts": {
     "build": "tsc -b --watch",
     "bundle": "hypertype lib",
@@ -14,59 +14,53 @@
     "deploy": "npm version patch && npm publish",
     "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hypertype/core.git"
-  },
-  "files": [
-    "dist",
-    "tsconfig.json"
-  ],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hypertype/core/issues"
-  },
-  "homepage": "https://github.com/hypertype/core#readme",
-  "directories": {
-    "test": "tests"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.(t|j)sx?$": "ts-jest"
-    },
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tests/tsconfig.json",
-        "diagnostics": false
-      }
-    }
-  },
-  "bundledDependencies": [
-    "rxjs",
-    "crc-32",
-    "reflect-metadata",
-    "ulid"
-  ],
-  "peerDependencies": {
-    "luxon": "^1.12.1"
-  },
-  "devDependencies": {
-    "@hypertype/tools": "^3.7.17",
-    "@types/luxon": "^1.12.0",
-    "@types/node": "16",
-    "crc-32": "*",
-    "reflect-metadata": "^0.1.13",
-    "rxjs": "6.6.3",
-    "symbol-observable": "^1.2.0",
-    "ts-jest": "^26.4.1",
-    "ulid": "^2.3.0"
-  },
-  "hypertype": {
-    "lib": {
-      "bundler": "node",
-      "entryPoint": "dist/esm/index.js"
-    }
-  },
-  "gitHead": "9151a37757c75a5b80836c57de97db2bf7158fa0"
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hypertype/core.git"
+	},
+	"files": [
+		"dist",
+		"tsconfig.json"
+	],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/hypertype/core/issues"
+	},
+	"homepage": "https://github.com/hypertype/core#readme",
+	"directories": {
+		"test": "tests"
+	},
+	"jest": {
+		"transform": {
+			"^.+\\.(t|j)sx?$": "ts-jest"
+		},
+		"globals": {
+			"ts-jest": {
+				"tsConfig": "tests/tsconfig.json",
+				"diagnostics": false
+			}
+		}
+	},
+	"bundledDependencies": [],
+	"peerDependencies": {
+		"luxon": "^1.12.1"
+	},
+	"devDependencies": {
+		"crc-32": "*",
+		"reflect-metadata": "^0.1.13",
+		"rxjs": "6.6.3",
+		"ulid": "^2.3.0",
+    "msgpackr": "1.x.x",
+    "symbol-observable": "4.x.x",
+    "@types/node": "16.x.x",
+    "@hypertype/tools": "^3.7.17"
+	},
+	"hypertype": {
+		"lib": {
+			"bundler": "node",
+			"entryPoint": "dist/esm/index.js"
+		}
+	},
+	"gitHead": "9151a37757c75a5b80836c57de97db2bf7158fa0"
 }
