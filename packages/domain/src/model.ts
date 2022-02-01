@@ -42,16 +42,16 @@ export abstract class Model<TState, TActions> implements IModel<TState, TActions
     concatMap(async ({action, resolve, reject}: {action: IAction<TActions>, resolve: Function, reject: Function}) => {
       // console.log('action start', action.path, action.method, action.args);
       try {
-        const subActions = this.GetSubActions<TActions>(...(action.path || []))[action.method] as any;
+        const model = this.GetSubActions<TActions>(...(action.path || [])) as any;
         if (!action.method.startsWith('Get')) {
-          const result: any = await subActions(...action.args);
+          const result: any = await model[action.method](...action.args);
           resolve(result);
           if (this.useLastUpdate) {
             this.lastUpdate = action.lastUpdate;
           }
           this.Update();
         } else {
-          const promiseOrResult = subActions(...action.args);
+          const promiseOrResult = model[action.method](...action.args);
           if (promiseOrResult instanceof Promise) {
             promiseOrResult.then(x => resolve(x)).catch(x => reject(x));
           } else {
