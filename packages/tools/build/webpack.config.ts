@@ -11,6 +11,8 @@ export const getConfig = ({target, entry, outputPath, outputFilename, mainFields
   const {isProduction} = runModeInfo();
   if (OVERRIDE_CONFIG)
     logSuccess('Configuration for override:', OVERRIDE_CONFIG_FILE);
+  const useTs = Object.values(entry).some(x => x.endsWith('.ts') || x.endsWith('.tsx'));
+  logSuccess(useTs ? 'bundle typescript' : 'bundle javascript only')
   return merge({
     entry,
     output: {
@@ -27,9 +29,9 @@ export const getConfig = ({target, entry, outputPath, outputFilename, mainFields
     resolve: {
       extensions: ['.ts', '.js', '.html', '.json'],
       mainFields,
-      plugins: [
+      plugins: useTs ? [
         new TsconfigPathsPlugin({mainFields})
-      ],
+      ] : [],
       fallback: {
         crypto: false,
         stream: false,
