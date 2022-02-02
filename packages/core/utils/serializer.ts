@@ -1,36 +1,40 @@
-import {addExtension, Packr } from 'msgpackr/pack';
+import * as p from 'A:\\hypertype\\node_modules\\msgpackr\\pack.js';
 import {utc} from "./utc";
 import {DateTime, Duration} from "./luxon";
 
-const packr = new Packr({
-    structuredClone: true,
+const packr = new p.Packr({
+  structuredClone: true,
+  saveStructures: console.log,
+  getStructures(){
+    return [];
+  }
 });
 
 export function registerSerializer<T, U>(type: number, classFunction: Function, write: (value: T) => U, read: (value: U) => T) {
-    addExtension({
-        Class: classFunction,
-        write: write,
-        read: read,
-        type: type
-    })
+  p.addExtension({
+    Class: classFunction,
+    write: write,
+    read: read,
+    type: type
+  })
 }
 
 export function serialize(data: any) {
-    return packr.encode(data);
+  // return packr.encode(data);
 }
 
 export function deserialize(bytes: Uint8Array) {
-    return packr.decode(bytes);
+  return packr.decode(bytes);
 }
 
 registerSerializer<DateTime, number>(1, DateTime,
-    x => x.toMillis(),
-    millis => utc(millis)
+  x => x.toMillis(),
+  millis => utc(millis)
 );
 
 registerSerializer<Duration, number>(2, Duration,
-    x => x.toMillis(),
-    millis => Duration.fromMillis(millis)
+  x => x.toMillis(),
+  millis => Duration.fromMillis(millis)
 );
 //
 // registerSerializer<Map<any, any>, ReadonlyArray<[number, number]>>(100,

@@ -31,8 +31,14 @@
 			}
 		}
 	},
+  "peerDependencies": {
+    "@hypertype/core": "^3.7.17",
+    "@hypertype/ui": "^3.7.17"
+  },
 	"bundledDependencies": [],
 	"devDependencies": {
+    "@hypertype/core": "^3.7.17",
+    "@hypertype/ui": "^3.7.17",
 		"redux": "4.0.5",
 		"router5": "8.0.1",
 		"router5-plugin-browser": "8.0.1"

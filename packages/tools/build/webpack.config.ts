@@ -31,7 +31,9 @@ export const getConfig = ({target, entry, outputPath, outputFilename, mainFields
         new TsconfigPathsPlugin({mainFields})
       ],
       fallback: {
-        crypto: false
+        crypto: false,
+        stream: false,
+        module: false
       }
     },
     resolveLoader: {
