@@ -1,19 +1,19 @@
 {
 	"name": "@hypertype/core",
-	"version": "3.7.17",
+	"version": "3.7.19",
 	"description": "",
 	"main": "dist/index.js",
 	"bundle": "dist/index.js",
 	"typings": "dist/typings/index.d.ts",
-  "scripts": {
-    "build": "tsc -b --watch",
-    "bundle": "hypertype lib",
-    "prod": "hypertype lib --prod",
-    "bundle:watch": "hypertype lib --watch",
-    "bundle:prod:stats": "hypertype lib --prod --stats",
-    "deploy": "npm version patch && npm publish",
-    "test": "jest"
-  },
+	"scripts": {
+		"build": "tsc -b --watch",
+		"bundle": "hypertype lib",
+		"prod": "hypertype lib --prod",
+		"bundle:watch": "hypertype lib --watch",
+		"bundle:prod:stats": "hypertype lib --prod --stats",
+		"deploy": "npm version patch && npm publish",
+		"test": "jest"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/hypertype/core.git"
@@ -47,14 +47,14 @@
 		"luxon": "^1.12.1"
 	},
 	"devDependencies": {
+		"@hypertype/tools": "^3.7.19",
+		"@types/node": "16.x.x",
 		"crc-32": "*",
+		"msgpackr": "1.x.x",
 		"reflect-metadata": "^0.1.13",
 		"rxjs": "6.6.3",
-		"ulid": "^2.3.0",
-    "msgpackr": "1.x.x",
-    "symbol-observable": "4.x.x",
-    "@types/node": "16.x.x",
-    "@hypertype/tools": "^3.7.17"
+		"symbol-observable": "4.x.x",
+		"ulid": "^2.3.0"
 	},
 	"hypertype": {
 		"lib": {

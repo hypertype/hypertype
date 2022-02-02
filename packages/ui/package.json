@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/ui",
-  "version": "3.7.18",
+  "version": "3.7.19",
   "description": "",
   "main": "dist/index.js",
   "browser": "dist/index.js",
@@ -31,15 +31,15 @@
   },
   "homepage": "https://github.com/hypertype/ui#readme",
   "peerDependencies": {
-    "@types/node": "16",
-    "@hypertype/core": "^3.7.17"
+    "@hypertype/core": "^3.7.17",
+    "@types/node": "16"
   },
   "dependencies": {
     "uhtml": "^2"
   },
   "devDependencies": {
-    "@hypertype/core": "^3.7.17",
-    "@hypertype/tools": "^3.7.17",
+    "@hypertype/core": "^3.7.19",
+    "@hypertype/tools": "^3.7.19",
     "@types/node": "16.x.x",
     "typescript": "4.5.x"
   },
