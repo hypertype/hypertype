@@ -13,6 +13,7 @@
     "skipDefaultLibCheck": true,
     "allowJs": true,
     "resolveJsonModule": true,
+    "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true ,
     "noEmitHelpers": true,

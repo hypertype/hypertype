@@ -31,8 +31,7 @@
   },
   "homepage": "https://github.com/hypertype/ui#readme",
   "peerDependencies": {
-    "@hypertype/core": "^3.7.17",
-    "@types/node": "16"
+    "@hypertype/core": "*"
   },
   "dependencies": {
     "uhtml": "^2"

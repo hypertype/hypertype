@@ -44,7 +44,7 @@
 	},
 	"bundledDependencies": [],
 	"peerDependencies": {
-		"luxon": "^1.12.1"
+		"luxon": "1.12.1"
 	},
 	"devDependencies": {
 		"@hypertype/tools": "^3.7.19",

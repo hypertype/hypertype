@@ -42,7 +42,7 @@
     }
   },
   "peerDependencies": {
-    "@hypertype/core": "^3.7.17"
+    "@hypertype/core": "*"
   },
   "devDependencies": {
     "@hypertype/core": "^3.7.19",

@@ -40,6 +40,10 @@
       }
     }
   },
+  "peerDependencies": {
+    "@hypertype/core": "*",
+    "@hypertype/infr": "*"
+  },
   "devDependencies": {
     "@hypertype/core": "^3.7.19",
     "@hypertype/infr": "^3.7.19",

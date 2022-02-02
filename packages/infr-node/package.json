@@ -44,6 +44,10 @@
     "@hypertype/tools": "^3.7.19",
     "@types/node": "16.x.x"
   },
+  "peerDependencies": {
+    "@hypertype/core": "*",
+    "@hypertype/infr": "*"
+  },
   "dependencies": {
     "eventsource": "*",
     "fetch": "*",
