@@ -1,6 +1,7 @@
 import {copyFileSync, existsSync, lstatSync, mkdirSync, readdirSync, rmSync} from 'fs';
-import {join} from 'path';
+import {basename, extname, join} from 'path';
 import {IRunOptions} from '../build/contract';
+import {logErr, logWarn} from './log';
 
 export const messageRunOptionErr = (optionField: keyof IRunOptions, value: any, expected: any): string =>
   `Incorrect value of the "${optionField}" option field: "${value}". Possible value(s): ${expected}`;
@@ -20,27 +21,42 @@ export function onProcessExit(callback: () => void): void {
 }
 
 export function copySync(
-  src: string,
-  dest: string,
-  allowedToCopyFilter?: (srcPath: string) => boolean
+  src: string, // absolute path From where copy
+  dst: string, // absolute path To copy
+  allowedToCopyFilter?: (srcFileName: string) => boolean
 ): void {
-  if (!existsSync(src) || allowedToCopyFilter && !allowedToCopyFilter(src))
+  if (!existsSync(src))
     return;
   if (isDirectory(src)) {
-    if (!existsSync(dest))
-      mkdirSync(dest);
-    let files = readdirSync(src);
+    if (!existsSync(dst))
+      mkdirSync(dst);
+    if (!isDirectory(dst)) {
+      logErr('Copy sync:', `Can't copy src dir "${src}" to dst file "${dst}"`);
+      throw '';
+    }
+    let fileNames = readdirSync(src);
     if (allowedToCopyFilter)
-      files = files.filter(allowedToCopyFilter);
-    files.forEach(item => {
+      fileNames = fileNames.filter(allowedToCopyFilter);
+    fileNames.forEach(fileName => {
       copySync(
-        join(src, item),
-        join(dest, item),
+        join(src, fileName),
+        join(dst, fileName),
         allowedToCopyFilter
       );
     });
-  } else
-    copyFileSync(src, dest);
+  } else {
+    const dstExt = extname(dst);
+    if (extname(src) !== dstExt) {
+      if (!dstExt && !existsSync(dst)) {
+        logWarn('Copy sync:', `I will assume that dst "${dst}" is a directory`);
+        mkdirSync(dst);
+      } else
+        logWarn('Copy sync:', `Different extensions for src file "${src}" and dst file "${dst}"`);
+    }
+    if (existsSync(dst) && isDirectory(dst))
+      dst = join(dst, basename(src));
+    copyFileSync(src, dst);
+  }
 }
 
 export function cleanDir(dir: string): void {
