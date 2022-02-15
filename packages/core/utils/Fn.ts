@@ -80,11 +80,11 @@ export const Fn = {
     else if(aIsArr || bIsArr)
       return false;
 
-    const asIsSet = a instanceof Set;
-    const bsIsSet = b instanceof Set;
-    if (asIsSet && bsIsSet)
+    const aIsSet = a instanceof Set;
+    const bIsSet = b instanceof Set;
+    if (aIsSet && bIsSet)
       return compareSets(a, b);
-    else if (asIsSet || bsIsSet)
+    else if (aIsSet || bIsSet)
       return false;
 
     const aIsMap = a instanceof Map;
