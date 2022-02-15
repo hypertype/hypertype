@@ -1,5 +1,6 @@
 import * as crc32 from "crc-32";
 import {ulid} from "ulid";
+import {retry} from "rxjs/operators";
 
 export const Fn = {
   I<T>(x: T): T {
@@ -118,19 +119,25 @@ function compareArraysOfPrimitives(a: any[], b: any[]): boolean {
 }
 
 function compareSets(a: Set<any>, b: Set<any>): boolean {
-  return a.size === b.size
-    && compareArrays(Array.from(a).sort(), Array.from(b).sort());
+  if (a.size !== b.size)
+    return false;
+  for (let x of a) {
+    if (!b.has(x))
+      return false;
+  }
+  return true;
 }
 
 function compareMaps(a: Map<any, any>, b: Map<any, any>): boolean {
   if (a.size !== b.size)
     return false;
-  const aKeys = Array.from(a.keys()).sort();
-  const bKeys = Array.from(b.keys()).sort();
-  return compareArrays(aKeys, bKeys)
-    && aKeys.every((aKey, i) =>
-      Fn.compare(a.get(aKey), b.get(bKeys[i]))
-    );
+  for (let key of a.keys()) {
+    if (!b.has(key))
+      return false;
+    if (!Fn.compare(a.get(key), b.get(key)))
+      return false;
+  }
+  return true;
 }
 
 //endregion
