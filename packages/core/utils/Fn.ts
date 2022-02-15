@@ -1,6 +1,5 @@
 import * as crc32 from "crc-32";
 import {ulid} from "ulid";
-import {retry} from "rxjs/operators";
 
 export const Fn = {
   I<T>(x: T): T {
@@ -75,10 +74,10 @@ export const Fn = {
       return a.equals(b);
 
     const aIsArr = Array.isArray(a);
-    const bIsArr =  Array.isArray(b);
+    const bIsArr = Array.isArray(b);
     if (aIsArr && bIsArr)
       return compareArrays(a, b);
-    else if(aIsArr || bIsArr)
+    else if (aIsArr || bIsArr)
       return false;
 
     const aIsSet = a instanceof Set;
@@ -94,12 +93,8 @@ export const Fn = {
       return compareMaps(a, b);
     else if (aIsMap || bIsMap)
       return false;
-
     if (typeof a === "object" && typeof b === "object") {
-      const aKeys = Object.getOwnPropertyNames(a);
-      const bKeys = Object.getOwnPropertyNames(b);
-      return compareArraysOfPrimitives(aKeys, bKeys)
-        && aKeys.every(key => compare(a[key], b[key]));
+      return compareObjects(a, b);
     }
     return false;
   }
@@ -123,6 +118,20 @@ function compareSets(a: Set<any>, b: Set<any>): boolean {
     return false;
   for (let x of a) {
     if (!b.has(x))
+      return false;
+  }
+  return true;
+}
+
+function compareObjects(a: object, b: object): boolean {
+  for (let key in a) {
+    if (!(key in b))
+      return false;
+    if (!Fn.compare(a[key], b[key]))
+      return false;
+  }
+  for (let key in b) {
+    if (!(key in a))
       return false;
   }
   return true;
