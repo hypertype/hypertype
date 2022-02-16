@@ -16,20 +16,20 @@
  */
 export function compare(a: any, b: any): boolean {
   switch (typeof a) {
-    case 'string':
-    case 'number':
-    case 'boolean':
-    case 'function':
-    case 'bigint':
-    case 'symbol':
-      return a === b;
+    case 'object':    // compare a{object | null | undefined} with b{any}
+    case 'undefined':
+      if (a == null && b == null) // ЕСЛИ и a и b равны null/undefined
+        return true;
+      if (a == null || b == null) // ЕСЛИ либо только a либо только b равен null/undefined
+        return false;
+      if (typeof b !== 'object')
+        return false; // compare a{object} with b{object | boolean | number | bigint | string | symbol | function}
+      break;
+    default:
+      return a === b; // compare a{boolean | number | bigint | string | symbol | function} with b{any}
   }
   if (a === b)
     return true;
-  if (a == null && b == null)
-    return true;
-  if (a == null || b == null)
-    return false;
   if (a.equals && b.equals)
     return a.equals(b);
 
@@ -54,10 +54,7 @@ export function compare(a: any, b: any): boolean {
   else if (aIsMap || bIsMap)
     return false;
 
-  if (typeof a === 'object' && typeof b === 'object') {
-    return compareObjects(a, b);
-  }
-  return false;
+  return compareObjects(a, b);
 }
 
 
