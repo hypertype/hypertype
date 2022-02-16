@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "3.8.0",
+  "version": "3.8.1",
   "description": "",
   "bin": {
     "hypertype": "bin.wrap.js"
@@ -35,12 +35,12 @@
     "raw-loader": "4.0.2",
     "ts-loader": "9.2.6",
     "tsconfig-paths-webpack-plugin": "3.5.2",
+    "ttypescript": "^1.5.10",
+    "typescript": "4.5.x",
     "webpack": "5.67.0",
     "webpack-bundle-analyzer": "4.5.0",
     "webpack-dev-server": "4.7.3",
-    "webpack-merge": "5.8.0",
-    "ttypescript": "^1.5.10",
-    "typescript": "4.5.x"
+    "webpack-merge": "5.8.0"
   },
   "devDependencies": {
     "@testdeck/jest": "*",
