@@ -27,6 +27,7 @@ export function compare(a: any, b: any): boolean {
     default:
       return a === b; // a{boolean | number | bigint | string | symbol | function} and b{any}
   }
+  // здесь и a и b это объекты
   if (a === b)
     return true;
   if (a.equals && b.equals)

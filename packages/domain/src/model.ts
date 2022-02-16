@@ -1,9 +1,5 @@
-import {concatMap, distinctUntilChanged, map, Observable, shareReplayRC, startWith, Subject} from "@hypertype/core";
+import {compare, concatMap, distinctUntilChanged, map, Observable, shareReplayRC, startWith, Subject} from "@hypertype/core";
 import {IAction, IInvoker} from "./model.stream";
-import {Fn} from "@hypertype/core";
-
-/* @obsolete use Fn.compare from core package*/
-export const compare = Fn.compare;
 
 export abstract class Model<TState, TActions> implements IModel<TState, TActions> {
 
