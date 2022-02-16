@@ -10,18 +10,7 @@
       "nohoist": [
         "redux",
         "router5",
-        "router5-plugin-browser",
-        "rxjs",
-        "crc-32",
-        "reflect-metadata",
-        "ulid",
-        "angular-template",
-        "body-parser",
-        "bufferutil",
-        "core-decorators",
-        "express",
-        "redis",
-        "utf-8-validate"
+        "router5-plugin-browser"
       ]
     }
   }

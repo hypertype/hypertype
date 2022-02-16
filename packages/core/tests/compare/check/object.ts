@@ -1,7 +1,7 @@
 import {DateTime, Duration} from 'luxon';
-import {TTask} from './tasks';
+import {TChecks} from '../checks';
 
-export function objectTasks(): TTask {
+export function object(): TChecks {
   const obj1 = {hello: '123', arr: [1, 'world', null]};
   const obj2 = {hello: '123', arr: [1, 'world', null]};
   const obj3 = {hello: '123', arr: ['world', null, 1]};

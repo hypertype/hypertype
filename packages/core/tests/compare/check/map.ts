@@ -1,6 +1,6 @@
-import {TTask} from './tasks';
+import {TChecks} from '../checks';
 
-export function mapTasks(): TTask {
+export function map(): TChecks {
   const m1 = new Map();
   // m1.set({hello: 123}, 1);
   m1.set('obj', {'k': 2});

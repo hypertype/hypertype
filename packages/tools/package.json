@@ -20,10 +20,6 @@
     "plugins",
     "typings.d.ts"
   ],
-  "peerDependencies": {
-    "ttypescript": "^1.5.10",
-    "typescript": "4.5.x"
-  },
   "typings": "typings.d.ts",
   "dependencies": {
     "chai": "4",
@@ -42,7 +38,9 @@
     "webpack": "5.67.0",
     "webpack-bundle-analyzer": "4.5.0",
     "webpack-dev-server": "4.7.3",
-    "webpack-merge": "5.8.0"
+    "webpack-merge": "5.8.0",
+    "ttypescript": "^1.5.10",
+    "typescript": "4.5.x"
   },
   "devDependencies": {
     "@testdeck/jest": "*",

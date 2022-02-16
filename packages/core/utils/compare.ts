@@ -1,6 +1,6 @@
 /**
  * Сравнивает на равенство два значения.
- * Поддерживается проверка объектов: встроенная проверка(метод 'equals'), array, Set, Map, любой object.
+ * Поддерживается проверка объектов: встроенное сравнение объектов(метод 'equals'), array, Set, Map, любой object.
  *
  * Ограничения для: array, Set, Map.
  * Корректное сравнение можно ожидать:
@@ -9,11 +9,9 @@
  *   - если ключи Map состоят только из примитивов.
  *
  * Важно!
- * Предполагается, что нет разницы между null и undefined:
+ * Предполагается, что нет разницы между null и undefined, т.е.:
  *   compare(null, undefined)      -> true
  *   compare(undefined, null)      -> true
- *   compare(undefined, undefined) -> true
- *   compare(null, null)           -> true
  */
 export function compare(a: any, b: any): boolean {
   switch (typeof a) {

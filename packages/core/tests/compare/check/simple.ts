@@ -1,4 +1,4 @@
-import {TTask} from './tasks';
+import {TChecks} from '../checks';
 
 const data = [
   [undefined] as undefined[],
@@ -16,24 +16,24 @@ const data = [
  * Каждое значение из data сравнивается с каждым значением из data
  * либо по === либо по ==.
  */
-export function simpleTasks(): TTask {
-  const result: TTask = [];
+export function simple(): TChecks {
+  const result: TChecks = [];
   for (const values of data) {
     values.forEach(value => {
-      result.push(...fillSimpleTask(value));
+      result.push(...fillSimpleCheck(value));
     });
   }
   return result;
 }
 
-function fillSimpleTask(targetValue: any): TTask {
-  const result: TTask = [];
+function fillSimpleCheck(targetValue: any): TChecks {
+  const result: TChecks = [];
   for (const values of data) {
     values.forEach(value => {
-      const check = isBothNullOrUndefined(targetValue, value)
+      const expectedResult = isBothNullOrUndefined(targetValue, value)
         ? true
         : targetValue === value;
-      result.push([targetValue, value, check]);
+      result.push([targetValue, value, expectedResult]);
     });
   }
   return result;

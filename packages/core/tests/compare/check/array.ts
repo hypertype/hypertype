@@ -1,6 +1,6 @@
-import {TTask} from './tasks';
+import {TChecks} from '../checks';
 
-export function arrayTasks(): TTask {
+export function array(): TChecks {
   return [
     [
       [undefined, null, true, false, -9.35, -7, -0, 0, 1, 7, 9.35, -15n, 0n, 7n, 'hello', '-1', '0', '', '1'],

@@ -1,7 +1,7 @@
 import {DateTime, Duration} from 'luxon';
-import {TTask} from './tasks';
+import {TChecks} from '../checks';
 
-export function luxonTasks(): TTask {
+export function luxon(): TChecks {
   const date1 = DateTime.local();
   const duration1 = Duration.fromObject({year: 2022, month: 2, day: 16});
 

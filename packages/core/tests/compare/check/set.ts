@@ -1,6 +1,6 @@
-import {TTask} from './tasks';
+import {TChecks} from '../checks';
 
-export function setTasks(): TTask {
+export function set(): TChecks {
   const s1 = new Set();
   const s2 = new Set();
   const s3 = new Set([1, 2, 3, 4, 5]);
