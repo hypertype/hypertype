@@ -1,5 +1,6 @@
 /**
- * Сравнивает два значения, учитывает: array, object, Set, Map, DateTime, Duration.
+ * Сравнивает на равенство два значения.
+ * Поддерживается проверка объектов: встроенная проверка(метод 'equals'), array, Set, Map, любой object.
  *
  * Ограничения для: array, Set, Map.
  * Корректное сравнение можно ожидать:
@@ -16,17 +17,17 @@
  */
 export function compare(a: any, b: any): boolean {
   switch (typeof a) {
-    case 'object':    // compare a{object | null | undefined} with b{any}
+    case 'object':    // a{object | null | undefined} and b{any}
     case 'undefined':
       if (a == null && b == null) // ЕСЛИ и a и b равны null/undefined
         return true;
       if (a == null || b == null) // ЕСЛИ либо только a либо только b равен null/undefined
         return false;
       if (typeof b !== 'object')
-        return false; // compare a{object} with b{object | boolean | number | bigint | string | symbol | function}
+        return false; // a{object} and b{boolean | number | bigint | string | symbol | function}
       break;
     default:
-      return a === b; // compare a{boolean | number | bigint | string | symbol | function} with b{any}
+      return a === b; // a{boolean | number | bigint | string | symbol | function} and b{any}
   }
   if (a === b)
     return true;
