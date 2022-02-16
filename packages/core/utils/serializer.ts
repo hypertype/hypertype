@@ -33,7 +33,7 @@ registerSerializer<DateTime, number>(1, DateTime,
 );
 
 registerSerializer<Duration, number>(2, Duration,
-  x => x.toMillis(),
+  x => x.milliseconds,
   millis => Duration.fromMillis(millis)
 );
 //
