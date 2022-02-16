@@ -11,4 +11,3 @@ export {utc, utcToday} from "./utils/utc";
 export {DateTime, Duration} from "./utils/luxon";
 
 export {Fn} from "./utils/Fn";
-// export {deserialize, registerSerializer, serialize} from "./utils/serializer";
