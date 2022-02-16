@@ -1,5 +1,6 @@
 import {switchThrottle} from "../../frp";
-import {expect, suite, test} from "@hypertype/tools/dist/test";
+import {suite, test} from "@testdeck/jest";
+import {expect} from "@jest/globals";
 import {delayAsync} from "../../frp/delay-async";
 
 @suite
@@ -30,6 +31,6 @@ export class SwitchThrottleSpec {
 
   @switchThrottle(500, {leading: false, trailing: true})
   private testFunc(args){
-    console.log(args, 'at', performance.now() - this.start);
+    // console.log(args, 'at', performance.now() - this.start);
   }
 }

@@ -32,9 +32,10 @@
 		"test": "tests"
 	},
 	"jest": {
-		"transform": {
-			"^.+\\.(t|j)sx?$": "ts-jest"
-		},
+    "preset": "ts-jest",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist/"
+    ],
 		"globals": {
 			"ts-jest": {
 				"tsConfig": "tests/tsconfig.json",

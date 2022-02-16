@@ -1,5 +1,6 @@
 import {Container} from "../di/container";
-import {expect, suite, test} from "@hypertype/tools/dist/test";
+import {suite, test} from "@testdeck/jest";
+import {expect} from "@jest/globals";
 
 @suite
 export class ContainerSpec {
@@ -9,8 +10,8 @@ export class ContainerSpec {
         const container = new Container();
         const child = new Container();
         child.provide(container);
-        expect(child.get(Container)).to.be.equal(child);
-        expect(container.get(Container)).to.be.equal(container);
-        expect(container.get(Container)).to.be.equal(container);
+        expect(child.get(Container)).toEqual(child);
+        expect(container.get(Container)).toEqual(container);
+        expect(container.get(Container)).toEqual(container);
     }
 }

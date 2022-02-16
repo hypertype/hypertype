@@ -1,21 +1,27 @@
 import {utc} from "../../";
-import {expect, suite, test} from "@hypertype/tools/dist/test";
+import {suite, test} from "@testdeck/jest";
+import {expect} from "@jest/globals";
 
 @suite
 export class UtcSpec {
 
-    @test
-    now(){
-        const now = utc();
-        expect(now).to.be.not.null;
+  @test
+  now() {
+    const now = utc();
+    expect(now).not.toBeNull();
 
-    }
+  }
 
 
-    @test
-    nowByNumber(){
-        const now = utc(+new Date());
-        expect(now).to.be.not.null;
+  @test
+  nowByNumber() {
+    const now = utc(+new Date());
+    expect(now).not.toBeNull();
+  }
 
-    }
+  @test
+  nowByString() {
+    const now = utc(new Date().toISOString());
+    expect(now).not.toBeNull();
+  }
 }
