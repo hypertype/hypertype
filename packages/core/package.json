@@ -49,17 +49,17 @@
 	},
 	"devDependencies": {
 		"@hypertype/tools": "^3.8.2",
-		"@types/jest": "^27.4.0",
+		"@types/jest": "27.x.x",
 		"@types/luxon": "1.15.2",
 		"@types/node": "16.x.x",
 		"crc-32": "*",
-		"jest": "^27.5.1",
+		"jest": "27.x.x",
 		"luxon": "1.12.1",
 		"msgpackr": "1.x.x",
 		"reflect-metadata": "^0.1.13",
 		"rxjs": "6.6.3",
 		"symbol-observable": "4.x.x",
-		"ts-jest": "^27.1.3",
+		"ts-jest": "27.x.x",
 		"ulid": "^2.3.0"
 	},
 	"hypertype": {
