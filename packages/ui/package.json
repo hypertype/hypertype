@@ -3,13 +3,11 @@
   "version": "3.8.2",
   "description": "",
   "main": "dist/index.js",
-  "browser": "dist/index.js",
-  "es6": "dist/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
     "build": "tsc -b --watch",
     "bundle": "hypertype lib",
-    "bundle:watch": "hypertype lib --watch",
+    "bundle:watch": "cmmn bundle --watch",
     "prod": "hypertype lib --prod",
     "build:es5": "tsc -b --watch tsconfig.es5.json",
     "bundle:es5": "hypertype es5 --watch",
@@ -34,14 +32,23 @@
     "@hypertype/core": "*"
   },
   "dependencies": {
-    "uhtml": "^2"
   },
   "devDependencies": {
+    "@cmmn/ui": "^1.4.2",
+    "@cmmn/uhtml": "^1.4.2",
     "@hypertype/core": "^3.8.2",
     "@hypertype/tools": "^3.8.2",
     "@types/node": "16.x.x",
-    "typescript": "4.5.x"
+    "typescript": "4.4.3"
   },
+  "cmmn": {
+    "index": {
+      "input": "./dist/esm/index.js",
+      "external": ["@hypertype", "@cmmn", "cellx"],
+      "module": "es"
+    }
+  },
+  "type": "module",
   "hypertype": {
     "lib": {
       "bundler": "node",

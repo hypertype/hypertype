@@ -1,71 +1,15 @@
-import {Container, map, merge, Observable, Subject, shareReplayRC} from "@hypertype/core";
-import {fromEvent, takeUntil} from "@hypertype/core";
-import {getTransferable} from './transferable';
+import {Model as CmmnModel, WorkerEntry} from "@cmmn/domain/worker";
+import {Container} from "@hypertype/core";
 import {Model} from "./model";
+import {RootFactory} from "./root.factory";
+
 
 export class SimpleWebWorkerEntry {
 
-    private Responses$ = new Subject();
+  static Start(self, container: Container) {
 
-    public Output$: Observable<any> = merge(
-        this.model.State$.pipe(map(d => ({state: d}))),
-        this.Responses$.asObservable()
-    ).pipe(
-        shareReplayRC(1)
-    );
+    const aggregate = container.get<Model<any, any>>(Model);
+    const entry = new WorkerEntry(new RootFactory(aggregate));
+  }
 
-    constructor(private model: Model<any, any>) {
-
-    }
-
-    static Start(self, container: Container) {
-
-        const aggregate = container.get<Model<any, any>>(Model);
-
-        const service = new SimpleWebWorkerEntry(aggregate);
-        if (self.postMessage) {
-            self.addEventListener('message', service.onMessage);
-
-            // => из Worker отправляю ответ -> в Browser Main
-            service.Output$.subscribe(d => {
-                try {
-                    self.postMessage(d, getTransferable(d))
-                } catch (e) {
-                    console.error(`Failed to sent via web worker [structured-clone]`, d, e);
-                }
-            });
-        }
-
-        // shared worker
-        if ('onconnect' in self) {
-            self['onconnect'] = function (e) {
-                const port = e.ports[0];
-                port.addEventListener('message', service.onMessage);
-                service.Output$.pipe(
-                  takeUntil(fromEvent(self, 'disconnect'))
-                ).subscribe(d => {
-                  try {
-                      port.postMessage(d, getTransferable(d));
-                  } catch (e) {
-                      console.error(`Failed to sent via shared worker [structured-clone]`, d, e);
-                  }
-                });
-                port.start();
-            };
-        }
-    }
-
-    // => из Browser Main пришла задача -> в Worker
-    public onMessage = (e: MessageEvent) => {
-        const request = e.data;
-        this.model.Invoke(e.data)
-            .then(result => this.Responses$.next({
-                response: result,
-                requestId: request._id
-            }))
-            .catch(e => this.Responses$.next({
-                error: e,
-                requestId: request._id
-            }));
-    };
 }

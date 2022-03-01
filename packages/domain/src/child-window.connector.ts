@@ -10,10 +10,10 @@ import {
   switchMap,
   takeUntil
 } from "@hypertype/core";
-import {IAction} from "./model.stream";
+import {WorkerAction} from "@cmmn/domain/proxy"
 
 export interface IConnector<TState, TActions> {
-  Actions$: Observable<IAction<TActions>>;
+  Actions$: Observable<WorkerAction>;
 
   isDisconnected: PromiseLike<void>;
 
@@ -53,7 +53,7 @@ export class ChildWindowConnector<TState, TActions> implements IConnector<TState
   // public isDisconnectedSubj = new Subject();
   public isDisconnected = new ResolvablePromise();
 
-  public Actions$: Observable<IAction<any>> = fromEvent<MessageEvent>(globalThis, 'message').pipe(
+  public Actions$: Observable<WorkerAction> = fromEvent<MessageEvent>(globalThis, 'message').pipe(
     filter(event => event.origin == globalThis.origin),
     map(event => event.data),
     filter(Fn.Ib),

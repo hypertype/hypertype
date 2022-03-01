@@ -1,4 +1,4 @@
-import {html,svg, render} from "uhtml";
+import {html,svg, render} from "@cmmn/uhtml";
 import {Observable, ReplaySubject, Subject, takeUntil} from "@hypertype/core";
 import {UI} from "./ui";
 import {importStyle} from "./import-styles";

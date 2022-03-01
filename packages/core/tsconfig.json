@@ -1,12 +1,6 @@
 {
-  "extends": "../../config/tsconfig.base",
+  "extends": "@cmmn/tools/compile/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "./dist/esm",
-    "target": "es2018",
-    "moduleResolution": "node",
-    "declarationDir": "./dist/typings",
-    "noEmitOnError": true,
     "types": [
       "node"
     ]

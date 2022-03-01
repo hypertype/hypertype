@@ -4,14 +4,6 @@
 //    "**/*.ts"
   ],
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "outDir": "dist/esm",
-    "baseUrl": ".",
-    "composite": true,
-    "target": "es5",
-    "paths": {
-
-    }
   },
   "references": [
     { "path": "./packages/core" },

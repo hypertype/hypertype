@@ -1,6 +1,5 @@
 import {filter, first, Fn, fromEvent, map, Observable, share, shareReplayRC, Subject, switchMap, tap} from '@hypertype/core';
 import {IChildWindowMetadata, TChildWindowRequest} from './contract';
-import {ModelStream} from './model.stream';
 
 export const EMPTY_PARENT_WINDOW_STREAM_PROXY = 'empty' as any;
 
@@ -10,7 +9,7 @@ export class ParentWindowStreamProxy {
   private modelStreamState$: Observable<any>;
   public enabledToInformAboutRemove = true;
 
-  constructor(private modelStream: ModelStream<any, any>) {
+  constructor(private modelStream: any) {
     this.modelStreamState$ = this.modelStream.State$.pipe(shareReplayRC(1));
     this.modelStreamState$.subscribe();
 

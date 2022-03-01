@@ -1,86 +1,28 @@
 import {
-  distinctUntilChanged,
-  filter,
-  Fn,
-  from,
+  from, fromEvent,
   map,
-  Observable,
   shareReplayRC,
-  startWith,
   Subject,
-  switchMap,
-  takeUntil
+  takeUntil,
+  tap
 } from "@hypertype/core";
-import {IAction, ModelStream} from "./model.stream";
+import {ModelPath, ModelProxy as CmmnModelProxy, Action, Stream} from "@cmmn/domain/proxy";
 import {IConnector} from "./child-window.connector";
+import {ModelAction} from "@cmmn/domain/worker";
 
-export class ModelProxy<TState, TActions> {
+export class ModelProxy<TState, TActions extends ModelAction> extends CmmnModelProxy<TState, TActions> {
 
-  private static lastUpdate: string;
-  private ActionSubject = new Subject();
-
-  private ShareState$ = this.stream.State$.pipe(
-    shareReplayRC(1)
-  );
-
-  public State$: Observable<TState> = this.ActionSubject.pipe(
-    startWith(null),
-    switchMap(_ => this.ShareState$),
-    distinctUntilChanged(),
-    map(state => this.GetSubState(state, this.path)),
-    filter(state => {
-      if (!state || !state.lastUpdate)
-        return true;
-      return state.lastUpdate >= ModelProxy.lastUpdate;
-    }),
+  public State$ = fromEvent<any>(this.$state, "change").pipe(
+    map(event => event.data.value),
     shareReplayRC(1),
-  );
+  )
 
-  public InvokeAction(action: IAction<TActions>) {
-    return this.stream.Action(action);
+  constructor(stream: Stream, path: ModelPath = []) {
+    super(stream, path);
   }
 
-  public Actions: TActions = new Proxy({}, {
-    get: (target: TActions, key: string, receiver) => {
-      // для примитивов
-      if (typeof key !== "string")
-        return () => null;
-      if (key === "then") // работает await, тут надо сообщить, что нет метода .then
-        return undefined;
-      return target[key] || (target[key as keyof TActions] = (async (...args) => {
-        try {
-          ModelProxy.lastUpdate = Fn.ulid();
-          const res = await this.stream.Action({
-            path: this.path,
-            method: key as (keyof TActions) & string,
-            args: args,
-            lastUpdate: ModelProxy.lastUpdate,
-          });
-          return res;
-        } catch (e) {
-          return Promise.reject(e);
-        }
-      }) as any);
-    }
-  }) as any as TActions;
-
-  constructor(protected stream: ModelStream<TState, TActions>, private path = []) {
-  }
-
-  protected GetSubProxy<UState, UActions>(constructor: any = ModelProxy, path: keyof TState, ...paths: any[]): ModelProxy<UState, UActions> {
-    return new constructor(this.stream.SubStream<UState, UActions>(), [
-      ...this.path,
-      path,
-      ...paths
-    ]);
-  }
-
-  private GetSubState(state, path) {
-    if (!path.length || !state)
-      return state;
-    if (Array.isArray(state))
-      return this.GetSubState(state.find(s => s.Id == path[0]), path.slice(1));
-    return this.GetSubState(state[path[0]], path.slice(1));
+  protected GetSubProxy<UState, UActions extends ModelAction>(constructor: any = ModelProxy, path: keyof TState, ...paths: any[]): ModelProxy<UState, UActions> {
+    return new constructor(this.stream, [...this.path, path, ...paths]);
   }
 
   public Connect(connector: IConnector<TState, TActions>) {
@@ -88,12 +30,13 @@ export class ModelProxy<TState, TActions> {
       takeUntil(from(connector.isDisconnected)),
     ).subscribe(state => connector.Send({state}));
     connector.Actions$.subscribe(async action => {
-      const result = await this['stream'].Action({
-        ...action,
+      const result = await this.stream.Invoke({
+        action: action.action,
+        args: action.args,
         path: [...this.path, ...action.path]
       });
       connector.Send({
-        requestId: action._id,
+        requestId: action.actionId,
         response: result
       });
     });

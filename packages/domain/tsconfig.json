@@ -1,17 +1,6 @@
 {
-  "extends": "../../config/tsconfig.base",
+  "extends": "@cmmn/tools/compile/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "./dist/esm",
-    "declarationDir": "./dist/typings",
-    "declaration": true,
-    "noEmitOnError": true,
-    "moduleResolution": "node",
-    "target": "es2018",
-    "lib": [
-      "dom",
-      "ESNext",
-    ]
   },
   "include": [
     "**/*.ts"

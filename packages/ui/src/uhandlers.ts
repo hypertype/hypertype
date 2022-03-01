@@ -1,4 +1,4 @@
-import {setter, useCustomHandler} from "uhandlers";
+import {setter, useCustomHandler} from "@cmmn/uhtml";
 import { propertySymbol } from "./component";
 
 useCustomHandler(component);

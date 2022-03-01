@@ -1,13 +1,7 @@
 {
-  "extends": "../../config/tsconfig.base",
+  "extends": "@cmmn/tools/compile/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "./dist/esm",
-    "declarationDir": "./dist/typings",
-    "allowJs": true,
-    "noEmitOnError": true,
-    "target": "es2018",
-    "types": []
   },
   "include": [
     "**/*.ts",

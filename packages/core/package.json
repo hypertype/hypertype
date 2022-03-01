@@ -6,7 +6,7 @@
 	"bundle": "dist/index.js",
 	"typings": "dist/typings/index.d.ts",
 	"scripts": {
-		"build": "tsc -b --watch",
+		"build": "cmmn compile -b --watch",
 		"bundle": "hypertype lib",
 		"prod": "hypertype lib --prod",
 		"bundle:watch": "hypertype lib --watch",
@@ -47,6 +47,9 @@
 		"@types/luxon": "1.15.2",
 		"luxon": "1.12.1"
 	},
+  "dependencies": {
+    "@cmmn/core": "^1.4.2"
+  },
 	"devDependencies": {
 		"@hypertype/tools": "^3.8.2",
 		"@types/jest": "27.x.x",
@@ -68,5 +71,11 @@
 			"entryPoint": "dist/esm/index.js"
 		}
 	},
+  "cmmn": {
+    "index": {
+      "input": "dist/esm/index.js",
+      "external": ["@cmmn"]
+    }
+  },
 	"gitHead": "9151a37757c75a5b80836c57de97db2bf7158fa0"
 }
