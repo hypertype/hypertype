@@ -1,6 +1,6 @@
 {
 	"name": "@hypertype/core",
-	"version": "3.8.2",
+	"version": "4.0.1-cmmn",
 	"description": "",
 	"main": "dist/index.js",
 	"bundle": "dist/index.js",
@@ -47,11 +47,11 @@
 		"@types/luxon": "1.15.2",
 		"luxon": "1.12.1"
 	},
-  "dependencies": {
-    "@cmmn/core": "^1.4.2"
-  },
+	"dependencies": {
+		"@cmmn/core": "^1.4.2"
+	},
 	"devDependencies": {
-		"@hypertype/tools": "^3.8.2",
+		"@hypertype/tools": "^4.0.1-cmmn",
 		"@types/jest": "27.x.x",
 		"@types/luxon": "1.15.2",
 		"@types/node": "16.x.x",
@@ -71,11 +71,13 @@
 			"entryPoint": "dist/esm/index.js"
 		}
 	},
-  "cmmn": {
-    "index": {
-      "input": "dist/esm/index.js",
-      "external": ["@cmmn"]
-    }
-  },
+	"cmmn": {
+		"index": {
+			"input": "dist/esm/index.js",
+			"external": [
+				"@cmmn"
+			]
+		}
+	},
 	"gitHead": "9151a37757c75a5b80836c57de97db2bf7158fa0"
 }

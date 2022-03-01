@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/domain",
-  "version": "3.8.2",
+  "version": "4.0.1-cmmn",
   "description": "",
   "main": "dist/index.js",
   "typings": "dist/typings/index.d.ts",
@@ -45,19 +45,23 @@
     "@hypertype/core": "*"
   },
   "devDependencies": {
-    "@hypertype/core": "^3.8.2",
-    "@hypertype/infr": "^3.8.2",
-    "@hypertype/tools": "^3.8.2",
     "@cmmn/core": "^1.4.2",
     "@cmmn/domain": "^1.4.2",
     "@cmmn/tools": "^1.4.1",
+    "@hypertype/core": "^4.0.1-cmmn",
+    "@hypertype/infr": "^4.0.1-cmmn",
+    "@hypertype/tools": "^4.0.1-cmmn",
     "@types/node": "16.x.x",
     "typescript": "4.4.3"
   },
   "cmmn": {
     "index": {
       "input": "./dist/esm/index.js",
-      "external": ["@hypertype", "@cmmn", "cellx"],
+      "external": [
+        "@hypertype",
+        "@cmmn",
+        "cellx"
+      ],
       "module": "es,cjs"
     }
   },
