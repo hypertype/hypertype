@@ -9,5 +9,5 @@ DateTime.prototype.equals = function (other) {
 }
 
 export {DateTime};
-export {Duration, Interval, Settings} from 'luxon';
+export {Duration} from 'luxon';
 
