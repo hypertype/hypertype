@@ -1,5 +1,6 @@
 import {ARGS, findArg, optionalArgsStr, OPTIONS_MAP, OPTIONS_MAP_FIELD_NAME} from './util/params';
 import {ALL_BUNDLERS, IRunOptions, TPossibleBundlers} from './build/contract';
+import {reactBundler} from './build/bundler/react/react.bundler';
 import {normalizeOptions, printOptions} from './util/options';
 import {serverBundler} from './build/bundler/server.bundler';
 import {workerBundler} from './build/bundler/worker.bundler';
@@ -46,6 +47,7 @@ export function run() {
       node: nodeBundler,
       worker: workerBundler,
       server: serverBundler,
+      react: reactBundler,
     };
     const bundler = bundlers[runOpt.bundler];
     if (!bundler) {

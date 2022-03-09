@@ -1,7 +1,8 @@
 import {copyFileSync, existsSync, lstatSync, mkdirSync, readdirSync, rmSync} from 'fs';
 import {basename, extname, join} from 'path';
+import {OVERRIDE_CONFIG, OVERRIDE_CONFIG_FILE} from './params';
+import {logErr, logSuccess, logWarn} from './log';
 import {IRunOptions} from '../build/contract';
-import {logErr, logWarn} from './log';
 
 export const messageRunOptionErr = (optionField: keyof IRunOptions, value: any, expected: any): string =>
   `Incorrect value of the "${optionField}" option field: "${value}". Possible value(s): ${expected}`;
@@ -19,6 +20,9 @@ export function onProcessExit(callback: () => void): void {
     });
   });
 }
+
+
+//region File system
 
 export function copySync(
   src: string, // absolute path From where copy
@@ -74,4 +78,12 @@ export function cleanDir(dir: string): void {
 
 function isDirectory(file: string): boolean {
   return lstatSync(file).isDirectory();
+}
+
+//endregion File system
+
+
+export function printConfigOverrideInfo(): void {
+  if (OVERRIDE_CONFIG)
+    logSuccess('Configuration for override:', OVERRIDE_CONFIG_FILE);
 }

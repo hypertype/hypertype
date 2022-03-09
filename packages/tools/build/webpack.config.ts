@@ -2,17 +2,17 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 import {Configuration, DefinePlugin} from 'webpack';
 import merge from 'webpack-merge';
-import {needStats, OVERRIDE_CONFIG, OVERRIDE_CONFIG_FILE, PKG} from '../util/params';
 import {runModeInfo, stringifiedProcessEnv} from '../util/env';
+import {needStats, OVERRIDE_CONFIG, PKG} from '../util/params';
+import {printConfigOverrideInfo} from '../util/common';
 import {logSuccess} from '../util/log';
 import {IOptions} from './contract';
 
 export const getConfig = ({target, entry, outputPath, outputFilename, mainFields}: IOptions) => {
-  const {isProduction} = runModeInfo();
-  if (OVERRIDE_CONFIG)
-    logSuccess('Configuration for override:', OVERRIDE_CONFIG_FILE);
+  printConfigOverrideInfo();
   const useTs = Object.values(entry).some(x => x.endsWith('.ts') || x.endsWith('.tsx'));
   logSuccess(useTs ? 'bundle typescript' : 'bundle javascript only')
+  const {isProduction} = runModeInfo();
   return merge({
     entry,
     output: {
@@ -61,7 +61,10 @@ export const getConfig = ({target, entry, outputPath, outputFilename, mainFields
         },
         {
           test: /\.ts/,
-          loader: 'ts-loader'
+          loader: 'ts-loader',
+          options: {
+            logLevel: 'info',
+          }
         },
       ]
     },
