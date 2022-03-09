@@ -1,5 +1,6 @@
 import {copyFileSync, existsSync, lstatSync, mkdirSync, readdirSync, rmSync} from 'fs';
 import {basename, extname, join} from 'path';
+import {Stats} from 'webpack';
 import {OVERRIDE_CONFIG, OVERRIDE_CONFIG_FILE} from './params';
 import {logErr, logSuccess, logWarn} from './log';
 import {IRunOptions} from '../build/contract';
@@ -86,4 +87,15 @@ function isDirectory(file: string): boolean {
 export function printConfigOverrideInfo(): void {
   if (OVERRIDE_CONFIG)
     logSuccess('Configuration for override:', OVERRIDE_CONFIG_FILE);
+}
+
+export function callbackWebpack(err?: Error, stats?: Stats): void {
+  const message = stats?.toString() || 'none';
+  if (err || stats?.hasErrors()) {
+    logErr('Bundle error:', err?.toString() || 'none');
+    logErr('Webpack stats error:', message);
+  } else if (stats?.hasWarnings()) {
+    logWarn('Webpack stats warning:', message);
+  } else
+    logSuccess('', message);
 }
