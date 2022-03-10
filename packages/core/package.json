@@ -1,6 +1,6 @@
 {
 	"name": "@hypertype/core",
-	"version": "3.8.4",
+	"version": "3.8.5",
 	"description": "",
 	"main": "dist/index.js",
 	"bundle": "dist/index.js",
@@ -48,7 +48,7 @@
 		"luxon": "1.12.1"
 	},
 	"devDependencies": {
-		"@hypertype/tools": "^3.8.3",
+		"@hypertype/tools": "^3.8.5",
 		"@types/jest": "27.x.x",
 		"@types/luxon": "1.15.2",
 		"@types/node": "16.x.x",

@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "3.8.3",
+  "version": "3.8.5",
   "description": "",
   "bin": {
     "hypertype": "bin.wrap.js"
@@ -25,13 +25,21 @@
     "chai": "4",
     "colors": "1.4.0",
     "css-loader": "6.5.1",
+    "css-minimizer-webpack-plugin": "3.3.1",
     "dotenv": "10.0.0",
     "dotenv-expand": "5.1.0",
     "html-webpack-plugin": "5.5.0",
     "less": "4.1.2",
     "less-loader": "10.2.0",
+    "mini-css-extract-plugin": "2.4.5",
     "node-libs-browser": "2.2.1",
+    "postcss": "8.4.5",
+    "postcss-flexbugs-fixes": "5.0.2",
+    "postcss-loader": "6.2.1",
+    "postcss-normalize": "10.0.1",
+    "postcss-preset-env": "7.2.0",
     "raw-loader": "4.0.2",
+    "style-loader": "3.3.1",
     "ts-loader": "9.2.6",
     "tsconfig-paths-webpack-plugin": "3.5.2",
     "ttypescript": "^1.5.10",
@@ -39,15 +47,7 @@
     "webpack": "5.67.0",
     "webpack-bundle-analyzer": "4.5.0",
     "webpack-dev-server": "4.7.3",
-    "webpack-merge": "5.8.0",
-    "style-loader": "3.3.1",
-    "postcss": "8.4.5",
-    "postcss-loader": "6.2.1",
-    "postcss-preset-env": "7.2.0",
-    "postcss-normalize": "10.0.1",
-    "postcss-flexbugs-fixes": "5.0.2",
-    "mini-css-extract-plugin": "2.4.5",
-    "css-minimizer-webpack-plugin": "3.3.1"
+    "webpack-merge": "5.8.0"
   },
   "devDependencies": {
     "@testdeck/jest": "*",
