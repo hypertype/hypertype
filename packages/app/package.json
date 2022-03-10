@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/app",
-  "version": "3.8.5",
+  "version": "3.8.6",
   "description": "",
   "main": "dist/index.js",
   "bundle": "dist/index.js",
@@ -53,7 +53,7 @@
     "@hypertype/ui": "*"
   },
   "devDependencies": {
-    "@hypertype/tools": "^3.8.5",
+    "@hypertype/tools": "^3.8.6",
     "@types/node": "16.x.x",
     "@types/redux": "latest",
     "@types/router5": "latest",
