@@ -1,8 +1,8 @@
 import {existsSync} from 'fs';
 import webpack from 'webpack';
-import {callbackWebpack, cleanDir, copySync} from '../../../util/common';
+import {callbackWebpack, cleanDir, copySync, messageRunOptionErr} from '../../../util/common';
+import {logAction, logBundlerErr} from '../../../util/log';
 import {getProductionConfig} from './config/config';
-import {logAction} from '../../../util/log';
 import {IOptions} from '../../contract';
 
 export function productionReactBundler(opt: IOptions): void {
@@ -11,8 +11,14 @@ export function productionReactBundler(opt: IOptions): void {
   logAction('Preparing the output directory...', false);
   if (existsSync(outputPath))
     cleanDir(outputPath);
-  if (assetPath)
+
+  if (assetPath) {
+    if (assetPath === outputPath) {
+      logBundlerErr(messageRunOptionErr('assetPath', assetPath, 'must be different from outputPath'));
+      throw '';
+    }
     copySync(assetPath, outputPath, srcPath => srcPath !== templatePath);
+  }
 
   webpack(getProductionConfig(opt), callbackWebpack);
 

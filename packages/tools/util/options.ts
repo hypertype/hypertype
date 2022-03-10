@@ -40,8 +40,10 @@ export const normalizeOptions = (
     entry = {main: entryPoint};
 
   outputPath = outputPath ? relativeToBase(outputPath) : DIST_DIR;
-  if (isProduction)
-    outputPath = join(outputPath, 'prod');
+  if (bundler !== 'react') {
+    if (isProduction)
+      outputPath = join(outputPath, 'prod');
+  }
 
   if (!outputFilename) {
     if (bundler === 'worker')
