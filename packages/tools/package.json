@@ -5,6 +5,7 @@
   },
   "version": "3.8.5",
   "description": "",
+  "main": "dist/index.js",
   "bin": {
     "hypertype": "bin.wrap.js"
   },
@@ -14,7 +15,6 @@
   },
   "author": "",
   "license": "ISC",
-  "main": "dist/index.js",
   "files": [
     "dist",
     "bin.wrap.js",
