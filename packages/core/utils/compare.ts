@@ -10,8 +10,8 @@
  *
  * Важно!
  * Предполагается, что нет разницы между null и undefined, т.е.:
- *   compare(null, undefined)      -> true
- *   compare(undefined, null)      -> true
+ *   compare(null, undefined) -> true
+ *   compare(undefined, null) -> true
  */
 export function compare(a: any, b: any): boolean {
   switch (typeof a) {
