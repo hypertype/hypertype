@@ -6,6 +6,7 @@
   "version": "3.8.6",
   "description": "",
   "main": "dist/index.js",
+  "typings": "typings.d.ts",
   "bin": {
     "hypertype": "bin.wrap.js"
   },
@@ -21,7 +22,6 @@
     "plugins",
     "typings.d.ts"
   ],
-  "typings": "typings.d.ts",
   "dependencies": {
     "chai": "4",
     "colors": "1.4.0",
