@@ -44,12 +44,14 @@
   "peerDependencies": {
     "@hypertype/core": "*"
   },
-  "devDependencies": {
+  "dependencies": {
     "@cmmn/core": "^1.4.2",
     "@cmmn/domain": "^1.4.2",
-    "@cmmn/tools": "^1.4.1",
     "@hypertype/core": "^4.0.1-cmmn",
-    "@hypertype/infr": "^4.0.1-cmmn",
+    "@hypertype/infr": "^4.0.1-cmmn"
+  },
+  "devDependencies": {
+    "@cmmn/tools": "^1.4.1",
     "@hypertype/tools": "^4.0.1-cmmn",
     "@types/node": "16.x.x",
     "typescript": "4.4.3"

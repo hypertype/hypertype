@@ -1,6 +1,6 @@
 import {
   from, fromEvent,
-  map,
+  map, Observable,
   shareReplayRC,
   Subject,
   takeUntil,
@@ -12,7 +12,7 @@ import {ModelAction} from "@cmmn/domain/worker";
 
 export class ModelProxy<TState, TActions extends ModelAction> extends CmmnModelProxy<TState, TActions> {
 
-  public State$ = fromEvent<any>(this.$state, "change").pipe(
+  public State$: Observable<TState> = fromEvent<any>(this.$state, "change").pipe(
     map(event => event.data.value),
     shareReplayRC(1),
   )

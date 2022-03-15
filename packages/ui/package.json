@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/ui",
-  "version": "4.0.1-cmmn",
+  "version": "4.0.1-cmmn2",
   "description": "",
   "main": "dist/index.js",
   "typings": "dist/typings/index.d.ts",
