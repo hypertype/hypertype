@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/ui",
-  "version": "4.0.2-cmmn",
+  "version": "4.0.3-cmmn",
   "description": "",
   "main": "dist/index.js",
   "typings": "dist/typings/index.d.ts",
@@ -34,8 +34,8 @@
   "devDependencies": {
     "@cmmn/uhtml": "^1.4.2",
     "@cmmn/ui": "^1.4.2",
-    "@hypertype/core": "^4.0.2-cmmn",
-    "@hypertype/tools": "^4.0.2-cmmn",
+    "@hypertype/core": "^4.0.3-cmmn",
+    "@hypertype/tools": "^4.0.3-cmmn",
     "@types/node": "16.x.x",
     "typescript": "4.4.3"
   },

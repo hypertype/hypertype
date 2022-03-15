@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "4.0.2-cmmn",
+  "version": "4.0.3-cmmn",
   "description": "",
   "bin": {
     "hypertype": "bin.wrap.js"
