@@ -1,4 +1,4 @@
-import {DateTime, Duration} from 'luxon';
+import {DateTime, Duration} from '../../../index';
 import {TChecks} from '../checks';
 
 export function builtinEquals(): TChecks {

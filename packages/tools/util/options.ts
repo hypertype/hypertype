@@ -33,13 +33,17 @@ export const normalizeOptions = (
     throw '';
   }
   entryPoint = relativeToBase(entryPoint);
-  let entry: { [key in string]: string } = {index: entryPoint};
+  let entry: IOptions['entry'] = {index: entryPoint};
   if (bundler === 'worker')
     entry = {worker: entryPoint};
+  else if (bundler === 'react')
+    entry = {main: entryPoint};
 
   outputPath = outputPath ? relativeToBase(outputPath) : DIST_DIR;
-  if (isProduction)
-    outputPath = join(outputPath, 'prod');
+  if (bundler !== 'react') {
+    if (isProduction)
+      outputPath = join(outputPath, 'prod');
+  }
 
   if (!outputFilename) {
     if (bundler === 'worker')
@@ -77,51 +81,48 @@ export const normalizeOptions = (
 }
 
 export function printOptions(opt: IOptions): void {
-  const unset = '--';
-  const result: { [key: number]: [keyof IOptions, string] } = {};
+  const result: [keyof IOptions, string][] = [];
 
-  for (let [option, value] of Object.entries(opt)) {
+  for (const [option, value] of Object.entries(opt)) {
     switch (option as keyof IOptions) {
       case 'target':
-        result[1] = ['target', value];
+        result.push(['target', value]);
         break;
       case 'entry':
         const value2 = Object
           .entries<string>(value)
-          .reduce<{ [key in string]: string }>((acc, [k, v]) => {
+          .reduce((acc, [k, v]) => {
             acc[k] = excludeBase(v);
             return acc;
           }, {});
-        result[2] = ['entry', JSON.stringify(value2)];
+        result.push(['entry', JSON.stringify(value2)]);
         break;
       case 'outputPath':
-        result[3] = ['outputPath', excludeBase(value)];
+        result.push(['outputPath', excludeBase(value)]);
         break;
       case 'outputFilename':
-        result[4] = ['outputFilename', value];
+        result.push(['outputFilename', valueOrUnset(value)]);
         break;
       case 'assetPath':
-        value = value || unset;
-        result[5] = ['assetPath', excludeBase(value)];
+        result.push(['assetPath', valueOrUnset(excludeBase(value))]);
         break;
       case 'templatePath':
-        value = value || unset;
-        result[6] = ['templatePath', excludeBase(value)];
+        result.push(['templatePath', valueOrUnset(excludeBase(value))]);
         break;
       case 'svgLoaderType':
-        result[7] = ['svgLoaderType', value];
+        result.push(['svgLoaderType', value]);
         break;
       case 'host':
-        result[8] = ['host', value];
+        result.push(['host', value]);
         break;
       case 'port':
-        result[9] = ['port', value];
+        result.push(['port', value]);
         break;
       case 'publicPath':
-        result[10] = ['publicPath', value];
+        result.push(['publicPath', value]);
         break;
       case 'mainFields':
-        result[11] = ['mainFields', arrToStr(value)];
+        result.push(['mainFields', arrToStr(value)]);
         break;
       default:
         logBundlerErr(`Print unknown option "${option}"`);
@@ -129,7 +130,11 @@ export function printOptions(opt: IOptions): void {
     }
   }
   logAction('Bundler options:');
-  for (const [, [option, value]] of Object.entries(result))
+  for (const [option, value] of result)
     logOption(option, value);
   console.log(' ');
+}
+
+function valueOrUnset(value: any) {
+  return value || '--';
 }
