@@ -75,7 +75,7 @@
 		"index": {
 			"input": "dist/esm/index.js",
 			"external": [
-				"@cmmn"
+				"@cmmn", "luxon"
 			]
 		}
 	},

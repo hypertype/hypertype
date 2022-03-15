@@ -1,7 +1,7 @@
 /**
  * Created by xamidylin on 2017-01-23.
  */
-import {DateTime} from './luxon';
+import {DateTime} from 'luxon';
 
 export function utc(d: (Date | number | string) = undefined): DateTime {
     if (typeof d === "string") {
