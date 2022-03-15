@@ -16,6 +16,13 @@ export function utc(d: (Date | number | string) = undefined): DateTime {
     return DateTime.utc();
 }
 
+DateTime.prototype.equals = function (other) {
+  return (
+    this.isValid &&
+    other.isValid &&
+    this.valueOf() === other.valueOf()
+  );
+}
 
 export function utcToday() {
     return utc().startOf('day');
