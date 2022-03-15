@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/infr-node",
-  "version": "4.0.3-cmmn",
+  "version": "4.0.4-cmmn",
   "description": "",
   "module": "dist/esm/index.js",
   "main": "dist/index.js",
@@ -39,9 +39,9 @@
     }
   },
   "devDependencies": {
-    "@hypertype/core": "^4.0.3-cmmn",
-    "@hypertype/infr": "^4.0.3-cmmn",
-    "@hypertype/tools": "^4.0.3-cmmn",
+    "@hypertype/core": "^4.0.4-cmmn",
+    "@hypertype/infr": "^4.0.4-cmmn",
+    "@hypertype/tools": "^4.0.4-cmmn",
     "@types/node": "16.x.x"
   },
   "peerDependencies": {

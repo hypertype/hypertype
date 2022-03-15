@@ -1,6 +1,6 @@
 {
 	"name": "@hypertype/domain",
-	"version": "4.0.3-cmmn",
+	"version": "4.0.4-cmmn",
 	"description": "",
 	"main": "dist/index.js",
 	"typings": "dist/typings/index.d.ts",
