@@ -15,7 +15,7 @@ export * from "rxjs/internal/operators/mapTo";
 export * from "rxjs/internal/operators/startWith";
 export * from "rxjs/internal/operators/scan";
 export * from "rxjs/internal/operators/tap";
-export * from "rxjs/internal/observable/never";
+export {NEVER} from "rxjs/internal/observable/never";
 export * from "rxjs/internal/observable/of";
 export * from "rxjs/internal/operators/buffer";
 export * from "rxjs/internal/operators/bufferTime";
@@ -33,7 +33,9 @@ export * from "rxjs/internal/operators/take";
 export * from "rxjs/internal/operators/takeUntil";
 export * from "rxjs/internal/operators/throttle";
 export * from "rxjs/internal/observable/fromEvent";
-export * from "rxjs/internal/scheduler/animationFrame";
+export {
+  animationFrame
+} from "rxjs/internal/scheduler/animationFrame";
 export {
   asyncScheduler, async
 } from "rxjs/internal/scheduler/async";
