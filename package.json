@@ -3,6 +3,7 @@
   "version": "2.1.0",
   "main": "index.js",
   "scripts": {
+    "leaveOnlySrc": "dwfeFs cleanDirs --dirPaths=\";packages/*\" --fileNames=\"dist;node_modules;package-lock.json\"",
     "bootstrap": "lerna bootstrap --hoist",
     "build": "cmmn compile -b --watch",
     "bundle": "lerna run bundle",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "lerna": "4.x.x",
     "@cmmn/tools": "^1.4.1",
+    "@do-while-for-each/fs": "1.2.16",
     "typescript": "4.x.x"
   },
   "dependencies": {
