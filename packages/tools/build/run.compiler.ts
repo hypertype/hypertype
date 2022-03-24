@@ -24,7 +24,12 @@ export function runCompiler(compiler) {
             if (err || stats.hasErrors()) {
                 logErr('Webpack stats error:', stats.toString());
             }
-            // Done processing
+          console.log(stats.toString({
+            builtAt: true,
+            version: false,
+            colors: true,
+            warnings: false,
+          })); // Done processing
         })
     }
 }
