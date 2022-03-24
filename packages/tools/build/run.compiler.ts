@@ -13,7 +13,11 @@ export function runCompiler(compiler) {
             if (info.warnings.length) {
                 logWarn('Webpack watch stats warning:', ...info.warnings);
             }
-            console.log(stats.toString()); // Done processing
+            console.log(stats.toString({
+              builtAt: true,
+              version: false,
+              colors: true
+            })); // Done processing
         })
     } else {
         compiler.run((err, stats) => {
