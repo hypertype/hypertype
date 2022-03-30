@@ -1,62 +1,77 @@
 {
-	"name": "@hypertype/domain",
-	"version": "4.0.4-cmmn",
-	"description": "",
-	"main": "dist/index.js",
-	"typings": "dist/typings/index.d.ts",
-	"type": "module",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/hypertype/infr.git"
-	},
-	"files": [
-		"dist",
-		"tsconfig.json"
-	],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/hypertype/infr/issues"
-	},
-	"homepage": "https://github.com/hypertype/infr#readme",
-	"directories": {
-		"test": "tests"
-	},
-	"jest": {
-		"preset": "ts-jest",
-		"testEnvironment": "node",
-		"globals": {
-			"ts-jest": {
-				"tsConfig": "tests/tsconfig.json"
-			}
-		}
-	},
-	"peerDependencies": {
-		"@hypertype/core": "*"
-	},
+  "name": "@hypertype/domain",
+  "version": "4.0.3-cmmn",
+  "description": "",
+  "main": "dist/index.js",
+  "typings": "dist/typings/index.d.ts",
+  "scripts": {
+    "build": "cmmn compile -b --watch",
+    "bundle": "cmmn bundle",
+    "prod": "hypertype lib --prod",
+    "bundle:watch": "cmmn bundle --watch",
+    "bundle:prod:stats": "hypertype lib --prod --stats",
+    "deploy": "npm version patch && npm publish",
+    "manual": "tsc -b && hypertype lib && hypertype lib --prod",
+    "test": "jest"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hypertype/infr.git"
+  },
+  "files": [
+    "dist",
+    "tsconfig.json"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hypertype/infr/issues"
+  },
+  "homepage": "https://github.com/hypertype/infr#readme",
+  "directories": {
+    "test": "tests"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tests/tsconfig.json"
+      }
+    }
+  },
+  "peerDependencies": {
+    "@hypertype/core": "*"
+  },
   "dependencies": {
-    "@cmmn/domain": "^1.4.13",
-    "cellx": "1.x.x"
+    "@cmmn/core": "^1.4.2",
+    "@cmmn/domain": "^1.4.2",
+    "@hypertype/core": "^4.0.3-cmmn",
+    "@hypertype/infr": "^4.0.3-cmmn"
   },
   "devDependencies": {
-		"typescript": "4.x.x"
-	},
-	"cmmn": {
-		"index": {
-			"input": "./dist/esm/index.js",
-			"external": [
-				"@hypertype",
-				"@cmmn",
-				"cellx"
-			],
-			"module": "es,cjs"
-		}
-	},
-	"hypertype": {
-		"lib": {
-			"bundler": "node",
-			"entryPoint": "dist/esm/index.js"
-		}
-	},
-	"gitHead": "9151a37757c75a5b80836c57de97db2bf7158fa0"
+    "@cmmn/tools": "^1.4.1",
+    "@hypertype/tools": "^4.0.3-cmmn",
+    "@types/node": "16.x.x",
+    "typescript": "4.x.x"
+  },
+  "cmmn": {
+    "index": {
+      "input": "./dist/esm/index.js",
+      "external": [
+        "@hypertype",
+        "@cmmn",
+        "cellx"
+      ],
+      "module": "es,cjs"
+    }
+  },
+  "hypertype": {
+    "lib": {
+      "bundler": "node",
+      "entryPoint": "dist/esm/index.js"
+    }
+  },
+  "gitHead": "9151a37757c75a5b80836c57de97db2bf7158fa0"
 }
