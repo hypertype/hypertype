@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "4.0.4-cmmn",
+  "version": "4.0.5-cmmn",
   "description": "",
   "main": "dist/index.js",
   "typings": "typings.d.ts",
