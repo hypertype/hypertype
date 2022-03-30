@@ -34,7 +34,11 @@
 	"peerDependencies": {
 		"@hypertype/core": "*"
 	},
-	"devDependencies": {
+  "dependencies": {
+    "@cmmn/domain": "^1.4.13",
+    "cellx": "1.x.x"
+  },
+  "devDependencies": {
 		"typescript": "4.x.x"
 	},
 	"cmmn": {

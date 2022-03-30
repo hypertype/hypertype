@@ -20,7 +20,10 @@
 	"peerDependencies": {
 		"@hypertype/core": "*"
 	},
-	"devDependencies": {
+  "dependencies": {
+    "@cmmn/uhtml": "^1.4.2"
+  },
+  "devDependencies": {
 		"typescript": "4.x.x"
 	},
 	"cmmn": {
