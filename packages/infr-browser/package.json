@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/infr-browser",
-  "version": "4.0.6-cmmn",
+  "version": "4.0.7-cmmn",
   "description": "",
   "main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
@@ -41,7 +41,7 @@
     "@hypertype/infr": "*"
   },
   "devDependencies": {
-    "@hypertype/tools": "^4.0.6-cmmn",
+    "@hypertype/tools": "^4.0.7-cmmn",
     "@types/node": "16.x.x"
   },
   "hypertype": {
