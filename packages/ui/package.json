@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/hypertype/ui#readme",
   "peerDependencies": {
-    "@hypertype/core": "^4.0.4-cmmn"
+    "@hypertype/core": "*"
   },
   "devDependencies": {
     "@cmmn/uhtml": "^1.4.2",

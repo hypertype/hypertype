@@ -36,9 +36,9 @@
 		}
 	},
 	"peerDependencies": {
-		"@hypertype/core": "^4.0.4-cmmn",
-		"@hypertype/infr": "^4.0.4-cmmn",
-		"@hypertype/ui": "^4.0.4-cmmn"
+		"@hypertype/core": "*",
+		"@hypertype/infr": "*",
+		"@hypertype/ui": "*"
 	},
 	"devDependencies": {
 		"redux": "4.0.5",

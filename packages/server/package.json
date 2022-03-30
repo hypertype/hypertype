@@ -17,9 +17,9 @@
 		"node-loader.js"
 	],
 	"peerDependencies": {
-		"@hypertype/core": "^4.0.4-cmmn",
-		"@hypertype/infr": "^4.0.4-cmmn",
-		"@hypertype/infr-node": "^4.0.4-cmmn"
+		"@hypertype/core": "*",
+		"@hypertype/infr": "*",
+		"@hypertype/infr-node": "*"
 	},
 	"dependencies": {
 		"angular-template": "^2.4.0",

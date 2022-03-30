@@ -40,8 +40,8 @@
     "@types/node": "16.x.x"
   },
   "peerDependencies": {
-    "@hypertype/core": "^4.0.4-cmmn",
-    "@hypertype/infr": "^4.0.4-cmmn"
+    "@hypertype/core": "*",
+    "@hypertype/infr": "*"
   },
   "dependencies": {
     "eventsource": "*",
