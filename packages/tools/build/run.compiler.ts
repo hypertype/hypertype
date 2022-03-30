@@ -1,6 +1,14 @@
 import {logAction, logErr, logWarn} from '../util/log';
 import {needToWatch} from '../util/params';
 
+const statsOpt = {
+  preset: 'minimal',
+  builtAt: true,
+  version: false,
+  colors: true,
+  warnings: false,
+};
+
 export function runCompiler(compiler) {
     logAction(`Compiling to ${compiler.options.output.path}`, false);
     if (needToWatch) {
@@ -13,14 +21,14 @@ export function runCompiler(compiler) {
             if (info.warnings.length) {
                 logWarn('Webpack watch stats warning:', ...info.warnings);
             }
-            console.log(stats.toString()); // Done processing
+            console.log(stats.toString(statsOpt)); // Done processing
         })
     } else {
         compiler.run((err, stats) => {
             if (err || stats.hasErrors()) {
                 logErr('Webpack stats error:', stats.toString());
             }
-            // Done processing
+            console.log(stats.toString(statsOpt)); // Done processing
         })
     }
 }

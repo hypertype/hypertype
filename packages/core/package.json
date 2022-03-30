@@ -44,8 +44,8 @@
 		}
 	},
 	"peerDependencies": {
-		"@types/luxon": "1.15.2",
-		"luxon": "1.12.1"
+		"@types/luxon": "2.x.x",
+		"luxon": "2.x.x"
 	},
 	"dependencies": {
 		"@cmmn/core": "^1.4.2"
@@ -53,11 +53,11 @@
 	"devDependencies": {
 		"@hypertype/tools": "^4.0.4-cmmn",
 		"@types/jest": "27.x.x",
-		"@types/luxon": "1.15.2",
+		"@types/luxon": "2.x.x",
 		"@types/node": "16.x.x",
 		"crc-32": "*",
 		"jest": "27.x.x",
-		"luxon": "1.12.1",
+		"luxon": "2.x.x",
 		"msgpackr": "1.x.x",
 		"reflect-metadata": "^0.1.13",
 		"rxjs": "6.6.3",

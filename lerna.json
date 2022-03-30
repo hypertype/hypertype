@@ -4,14 +4,5 @@
     "packages/*"
   ],
   "hoist": "**",
-  "npmClient": "npm",
-  "command": {
-    "bootstrap": {
-      "nohoist": [
-        "redux",
-        "router5",
-        "router5-plugin-browser"
-      ]
-    }
-  }
+  "npmClient": "npm"
 }
