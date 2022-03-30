@@ -1,17 +1,11 @@
 {
   "name": "@hypertype/domain",
-  "version": "4.0.3-cmmn",
+  "version": "4.0.4-cmmn",
   "description": "",
   "main": "dist/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
-    "build": "cmmn compile -b --watch",
-    "bundle": "cmmn bundle",
-    "prod": "hypertype lib --prod",
-    "bundle:watch": "cmmn bundle --watch",
-    "bundle:prod:stats": "hypertype lib --prod --stats",
     "deploy": "npm version patch && npm publish",
-    "manual": "tsc -b && hypertype lib && hypertype lib --prod",
     "test": "jest"
   },
   "type": "module",
@@ -42,17 +36,17 @@
     }
   },
   "peerDependencies": {
-    "@hypertype/core": "*"
+    "@hypertype/core": "^4.0.4-cmmn"
   },
   "dependencies": {
     "@cmmn/core": "^1.4.2",
     "@cmmn/domain": "^1.4.2",
-    "@hypertype/core": "^4.0.3-cmmn",
-    "@hypertype/infr": "^4.0.3-cmmn"
+    "@hypertype/infr": "^4.0.4-cmmn",
+    "cellx": "1.x.x"
   },
   "devDependencies": {
     "@cmmn/tools": "^1.4.1",
-    "@hypertype/tools": "^4.0.3-cmmn",
+    "@hypertype/tools": "^4.0.4-cmmn",
     "@types/node": "16.x.x",
     "typescript": "4.x.x"
   },

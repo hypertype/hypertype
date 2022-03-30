@@ -8,15 +8,19 @@
 	"module": "./dist/esm/index.js",
 	"main": "./dist/index.js",
 	"typings": "./dist/typings/index.d.ts",
+  "scripts": {
+    "deploy": "npm version patch && npm publish",
+    "test": "jest"
+  },
 	"files": [
 		"dist",
 		"node-loader.js"
 	],
 	"peerDependencies": {
-		"@hypertype/core": "*",
-		"@hypertype/infr": "*",
-		"@hypertype/infr-node": "*"
-	},
+    "@hypertype/core": "^4.0.4-cmmn",
+    "@hypertype/infr": "^4.0.4-cmmn",
+    "@hypertype/infr-node": "^4.0.4-cmmn"
+  },
 	"dependencies": {
 		"angular-template": "^2.4.0",
 		"body-parser": "^1.19.0",

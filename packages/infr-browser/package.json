@@ -7,10 +7,6 @@
   "bundle": "dist/bundle/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
-    "build": "tsc -b --watch",
-    "bundle": "hypertype lib",
-    "watch": "hypertype lib --watch",
-    "prod": "hypertype lib --prod",
     "deploy": "npm version patch && npm publish",
     "test": "jest"
   },
@@ -45,8 +41,6 @@
     "@hypertype/infr": "*"
   },
   "devDependencies": {
-    "@hypertype/core": "^4.0.4-cmmn",
-    "@hypertype/infr": "^4.0.4-cmmn",
     "@hypertype/tools": "^4.0.4-cmmn",
     "@types/node": "16.x.x"
   },

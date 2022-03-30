@@ -6,9 +6,8 @@
     "leaveOnlySrc": "dwfeFs cleanDirs --dirPaths=\";packages/*\" --fileNames=\"dist;node_modules;package-lock.json\"",
     "bootstrap": "lerna bootstrap --hoist",
     "build": "cmmn compile -b --watch",
-    "bundle": "lerna run bundle",
+    "bundle": "cmmn bundle -b",
     "bundle:watch": "cmmn bundle -b --watch",
-    "prod": "tsc -b && lerna run prod",
     "publish": "lerna publish patch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

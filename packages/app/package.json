@@ -6,10 +6,6 @@
 	"bundle": "dist/index.js",
 	"typings": "dist/typings/index.d.ts",
   "scripts": {
-    "build": "tsc -b --watch",
-    "bundle": "hypertype lib",
-    "bundle:watch": "hypertype lib --watch",
-    "prod": "hypertype lib --prod",
     "deploy": "npm version patch && npm publish",
     "test": "jest"
   },
@@ -40,9 +36,9 @@
 		}
 	},
 	"peerDependencies": {
-		"@hypertype/core": "*",
-		"@hypertype/infr": "*",
-		"@hypertype/ui": "*"
+		"@hypertype/core": "^4.0.4-cmmn",
+		"@hypertype/infr": "^4.0.4-cmmn",
+		"@hypertype/ui": "^4.0.4-cmmn"
 	},
 	"devDependencies": {
 		"redux": "4.0.5",
