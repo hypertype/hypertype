@@ -2,9 +2,8 @@
   "name": "@hypertype/infr",
   "version": "4.0.8-cmmn",
   "description": "",
-  "main": "dist/esm/index.js",
-  "module": "dist/esm/index.js",
-  "bundle": "dist/bundle/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
     "deploy": "npm version patch && npm publish",
@@ -45,10 +44,10 @@
     "@hypertype/tools": "^4.0.8-cmmn",
     "@types/node": "16.x.x"
   },
-  "hypertype": {
-    "lib": {
-      "bundler": "node",
-      "entryPoint": "dist/esm/index.js"
+  "cmmn": {
+    "index": {
+      "input": "./dist/esm/index.js",
+      "external": ["@hypertype"]
     }
   },
   "gitHead": "9151a37757c75a5b80836c57de97db2bf7158fa0"

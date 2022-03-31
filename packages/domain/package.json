@@ -39,13 +39,13 @@
     "@hypertype/core": "*"
   },
   "dependencies": {
-    "@cmmn/core": "^1.4.2",
-    "@cmmn/domain": "^1.4.2",
+    "@cmmn/core": "1.4.16",
+    "@cmmn/domain": "1.4.16",
     "@hypertype/infr": "^4.0.8-cmmn",
     "cellx": "1.x.x"
   },
   "devDependencies": {
-    "@cmmn/tools": "^1.4.1",
+    "@cmmn/tools": "1.4.16",
     "@hypertype/tools": "^4.0.8-cmmn",
     "@types/node": "16.x.x",
     "typescript": "4.x.x"
