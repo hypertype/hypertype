@@ -1,6 +1,6 @@
 {
 	"name": "@hypertype/app",
-	"version": "4.0.8-cmmn",
+	"version": "4.0.9-cmmn",
 	"description": "",
 	"main": "dist/index.js",
 	"bundle": "dist/index.js",
@@ -50,9 +50,9 @@
 	"cmmn": {
 		"index": {
 			"input": "./dist/esm/index.js",
-      "external": [
-        "@hypertype"
-      ]
+			"external": [
+				"@hypertype"
+			]
 		}
 	},
 	"gitHead": "9151a37757c75a5b80836c57de97db2bf7158fa0"
