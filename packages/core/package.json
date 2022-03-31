@@ -1,13 +1,13 @@
 {
 	"name": "@hypertype/core",
-	"version": "4.0.7-cmmn",
+	"version": "4.0.8-cmmn",
 	"description": "",
 	"main": "dist/index.js",
 	"bundle": "dist/index.js",
 	"typings": "dist/typings/index.d.ts",
 	"scripts": {
-    "build": "cmmn compile --watch",
-    "bundle": "cmmn bundle --watch",
+		"build": "cmmn compile --watch",
+		"bundle": "cmmn bundle --watch",
 		"deploy": "npm version patch && npm publish",
 		"test": "jest"
 	},
@@ -48,7 +48,7 @@
 		"@cmmn/core": "^1.4.2"
 	},
 	"devDependencies": {
-		"@hypertype/tools": "^4.0.7-cmmn",
+		"@hypertype/tools": "^4.0.8-cmmn",
 		"@types/jest": "27.x.x",
 		"@types/luxon": "2.x.x",
 		"@types/node": "16.x.x",

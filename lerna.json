@@ -1,5 +1,5 @@
 {
-  "version": "4.0.7-cmmn",
+  "version": "4.0.8-cmmn",
   "packages": [
     "packages/*"
   ],

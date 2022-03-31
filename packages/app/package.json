@@ -1,6 +1,6 @@
 {
 	"name": "@hypertype/app",
-	"version": "4.0.7-cmmn",
+	"version": "4.0.8-cmmn",
 	"description": "",
 	"main": "dist/index.js",
 	"bundle": "dist/index.js",
@@ -17,7 +17,7 @@
 		"dist",
 		"tsconfig.json"
 	],
-  "type": "module",
+	"type": "module",
 	"author": "",
 	"license": "ISC",
 	"bugs": {
