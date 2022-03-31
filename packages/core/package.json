@@ -6,6 +6,8 @@
 	"bundle": "dist/index.js",
 	"typings": "dist/typings/index.d.ts",
 	"scripts": {
+    "build": "cmmn compile --watch",
+    "bundle": "cmmn bundle --watch",
 		"deploy": "npm version patch && npm publish",
 		"test": "jest"
 	},
@@ -68,7 +70,7 @@
 	},
 	"cmmn": {
 		"index": {
-			"input": "dist/esm/index.js",
+			"input": "./dist/esm/index.js",
 			"external": [
 				"@cmmn",
 				"luxon"

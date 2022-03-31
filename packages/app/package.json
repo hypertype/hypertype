@@ -17,6 +17,7 @@
 		"dist",
 		"tsconfig.json"
 	],
+  "type": "module",
 	"author": "",
 	"license": "ISC",
 	"bugs": {
