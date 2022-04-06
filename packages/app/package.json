@@ -1,9 +1,9 @@
 {
 	"name": "@hypertype/app",
-	"version": "4.0.9-cmmn",
+	"version": "4.0.9-cmmn1",
 	"description": "",
-	"main": "dist/index.js",
-	"bundle": "dist/index.js",
+	"main": "dist/index.cjs",
+	"bundle": "dist/index.cjs",
 	"typings": "dist/typings/index.d.ts",
 	"scripts": {
 		"deploy": "npm version patch && npm publish",

@@ -24,7 +24,7 @@
     "@hypertype/core": "*"
   },
   "devDependencies": {
-    "@cmmn/ui": "1.4.16",
+    "@cmmn/ui": "1.4.x",
     "@hypertype/tools": "^4.0.9-cmmn",
     "@types/node": "16.x.x",
     "typescript": "4.x.x"
