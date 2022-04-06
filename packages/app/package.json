@@ -1,6 +1,6 @@
 {
 	"name": "@hypertype/app",
-	"version": "4.0.9-cmmn1",
+	"version": "4.0.10-cmmn",
 	"description": "",
 	"main": "dist/index.cjs",
 	"bundle": "dist/index.cjs",

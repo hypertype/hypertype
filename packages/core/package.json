@@ -1,6 +1,6 @@
 {
 	"name": "@hypertype/core",
-	"version": "4.0.9-cmmn",
+	"version": "4.0.10-cmmn",
 	"description": "",
 	"main": "dist/index.js",
 	"bundle": "dist/index.js",
@@ -48,7 +48,7 @@
 		"@cmmn/core": "1.4.x"
 	},
 	"devDependencies": {
-		"@hypertype/tools": "^4.0.9-cmmn",
+		"@hypertype/tools": "^4.0.10-cmmn",
 		"@types/jest": "27.x.x",
 		"@types/luxon": "2.x.x",
 		"@types/node": "16.x.x",
