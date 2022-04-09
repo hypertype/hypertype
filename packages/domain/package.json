@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/domain",
-  "version": "4.0.10-cmmn",
+  "version": "4.0.11-cmmn",
   "description": "",
   "main": "dist/index.js",
   "typings": "dist/typings/index.d.ts",
@@ -39,14 +39,14 @@
     "@hypertype/core": "*"
   },
   "dependencies": {
-    "@cmmn/core": "1.5.x",
     "@cmmn/cell": "1.5.x",
+    "@cmmn/core": "1.5.x",
     "@cmmn/domain": "1.5.x",
-    "@hypertype/infr": "^4.0.10-cmmn"
+    "@hypertype/infr": "^4.0.11-cmmn"
   },
   "devDependencies": {
     "@cmmn/tools": "1.5.x",
-    "@hypertype/tools": "^4.0.10-cmmn",
+    "@hypertype/tools": "^4.0.11-cmmn",
     "@types/node": "16.x.x",
     "typescript": "4.x.x"
   },
