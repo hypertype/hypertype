@@ -1,17 +1,12 @@
 {
+  "extends": "@cmmn/tools/compile/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "./dist/esm",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "target": "es2018",
-    "moduleResolution": "node",
-    "declaration": true,
-    "declarationDir": "./dist/typings",
-    "noEmitOnError": false,
-    "types": []
   },
+  "include": [
+    "**/*.ts"
+  ],
   "exclude": [
+    "tests",
     "node_modules",
     "dist"
   ]

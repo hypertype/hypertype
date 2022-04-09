@@ -9,7 +9,7 @@ export {BaseWebSocketService} from "./src/base-web-socket.service";
 
 export * from './src/api.service';
 export * from './src/request.service';
-export * from './src/i-web-socket.service';
+export {IWebSocketService} from './src/i-web-socket.service';
 export * from './src/state.logger';
 export * from './logger/index';
 

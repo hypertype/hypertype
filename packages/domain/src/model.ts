@@ -1,5 +1,5 @@
 import {Model as CmmnModel, ModelAction, ModelPath} from "@cmmn/domain/worker";
-import {cellx} from "cellx";
+import {Cell} from "@cmmn/cell";
 
 export abstract class Model<TState, TActions extends ModelAction> extends CmmnModel<TState, TActions> implements IModel<TState, TActions> {
 
@@ -7,7 +7,7 @@ export abstract class Model<TState, TActions extends ModelAction> extends CmmnMo
     super();
   }
 
-  $state = cellx(null as TState);
+  $state = new Cell(null as TState);
 
   public get State(): TState{
     return this.ToJSON();
@@ -21,7 +21,7 @@ export abstract class Model<TState, TActions extends ModelAction> extends CmmnMo
   public abstract FromJSON(state: TState);
 
   Update = () => {
-    this.$state(this.ToJSON());
+    this.$state.set(this.ToJSON());
   };
 
   Actions = new Proxy(this, {

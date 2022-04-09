@@ -45,7 +45,7 @@
 		"luxon": "2.x.x"
 	},
 	"dependencies": {
-		"@cmmn/core": "1.4.x"
+		"@cmmn/core": "1.5.x"
 	},
 	"devDependencies": {
 		"@hypertype/tools": "^4.0.10-cmmn",

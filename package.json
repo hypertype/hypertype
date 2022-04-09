@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "lerna": "4.x.x",
-    "@cmmn/tools": "1.4.x",
+    "@cmmn/tools": "1.5.x",
     "@do-while-for-each/fs": "1.2.16",
     "typescript": "4.x.x"
   },
