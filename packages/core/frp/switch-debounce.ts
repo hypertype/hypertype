@@ -1,23 +1,30 @@
-import {async, debounceTime, first, ReplaySubject, switchMap} from "./operators";
-import {shareReplayRC} from './share-replay-rc';
+import {async, debounceTime, first, of, share, Subject, switchMap} from './operators';
 
-export function switchDebounce(time: number) {
-    return (target, key, decorator) => {
-        const requestSymbol = Symbol('request');
-        const responseSymbol = Symbol('response');
-        const fn = target[key];
-        Object.defineProperty(target, key, {
-            value(...args) {
-                const requests$: ReplaySubject<Function> = this[requestSymbol] = this[requestSymbol]
-                    || new ReplaySubject<Function>(0);
-                const response$ = this[responseSymbol] = this[responseSymbol] || requests$.pipe(
-                    debounceTime(time, async),
-                    switchMap(fn => fn()),
-                    shareReplayRC(1)
-                );
-                requests$.next(() => fn.apply(this, args));
-                return response$.pipe(first()).toPromise();
-            }
-        })
+function switchDebounce(time: number) {
+  return (target, key, descriptor) => {
+    const requestSymbol = Symbol('request');
+    const responseSymbol = Symbol('response');
+    const fn = descriptor.value;
+    if (typeof fn !== 'function')
+      throw new Error('Decorator "switchDebounce" is only available for functions');
+    descriptor.value = function (...args) {
+      const requests$: Subject<Function> = this[requestSymbol] = (this[requestSymbol] || new Subject<Function>());
+      const response$ = this[responseSymbol] = (this[responseSymbol] || requests$.pipe(
+        debounceTime(time, async),
+        switchMap(fn => {
+          const result = fn();
+          if (typeof result === 'object' && result !== null
+            && result.then)
+            return result as Promise<any>;
+          return of(result);
+        }),
+        share(),
+      ));
+      const valuePromise = response$.pipe(first()).toPromise();
+      requests$.next(() => fn.apply(this, args));
+      return valuePromise;
     }
+    return descriptor;
+  }
 }
+
