@@ -1,6 +1,6 @@
 {
   "name": "@hypertype/infr",
-  "version": "4.0.11-cmmn",
+  "version": "4.0.12-cmmn",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -41,7 +41,7 @@
     "@hypertype/core": "*"
   },
   "devDependencies": {
-    "@hypertype/tools": "^4.0.11-cmmn",
+    "@hypertype/tools": "^4.0.12-cmmn",
     "@types/node": "16.x.x"
   },
   "cmmn": {
